@@ -1,2 +1,2 @@
 # soen341
-SOEN 341 Project
+SOEN 341 PROJECT

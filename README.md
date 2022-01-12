@@ -1,5 +1,6 @@
-# soen341
+# SOEN 341
 SOEN 341 PROJECT
+Jan 2022 - Apr 2022
 
 ## Team Members
 - Khalid Sadat - 40177334

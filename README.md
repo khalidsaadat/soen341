@@ -4,7 +4,7 @@ SOEN 341 PROJECT
 Jan 2022 - Apr 2022
 
 ## Team Members
-- Khalid Sadat - 40177334
+- Khalid Sadat - 40177334 - github.com/khalidsaadat
 - Anum Siddiqui - 40129811
 - Jiayi Chen - 40110997
 - Shabia Saeed - 40154081

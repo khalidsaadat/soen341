@@ -11,7 +11,7 @@ Jan 2022 - Apr 2022
 - Aminata LO - 40163325 
 - Pavithra Sivagnanasuntharam - 40117356
 - Asha Islam - 40051511
-- Zayneb Mehdi - 40109417
+- Zayneb Mehdi - 40109417 - github.com/BrainOverfl0w
 
 ## What is this repository for?
 

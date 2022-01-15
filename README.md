@@ -9,7 +9,7 @@ Jan 2022 - Apr 2022
 - Jiayi Chen - 40110997 - github.com/JIAYI615
 - Shabia Saeed - 40154081 - github.com/shabiasaeed
 - Aminata LO - 40163325 - github.com/programer653
-- Pavithra Sivagnanasuntharam - 40117356
+- Pavithra Sivagnanasuntharam - 40117356 - github.com/pavithrasiv
 - Asha Islam - 40051511
 - Zayneb Mehdi - 40109417 - github.com/BrainOverfl0w
 

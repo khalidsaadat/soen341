@@ -5,7 +5,7 @@ Jan 2022 - Apr 2022
 
 ## Team Members
 - Khalid Sadat - 40177334 - github.com/khalidsaadat
-- Anum Siddiqui - 40129811
+- Anum Siddiqui - 40129811 - github.com/AnumSidd
 - Jiayi Chen - 40110997
 - Shabia Saeed - 40154081 - github.com/shabiasaeed
 - Aminata LO - 40163325 

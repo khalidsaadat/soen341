@@ -7,6 +7,7 @@ Jan 2022 - Apr 2022
 - Khalid Sadat - 40177334 - github.com/khalidsaadat
 - Anum Siddiqui - 40129811 - github.com/AnumSidd
 - Jiayi Chen - 40110997 - github.com/JIAYI615
+- Shabia Saeed - 40154081 - github.com/shabiasaeed
 - Aminata LO - 40163325 
 - Pavithra Sivagnanasuntharam - 40117356
 - Asha Islam - 40051511

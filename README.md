@@ -14,7 +14,10 @@ Jan 2022 - Apr 2022
 - Zayneb Mehdi - 40109417 - github.com/BrainOverfl0w
 
 ## What is this repository for?
+TBD
 
 ## Technologies Used
+TBD
 
 ## How to run this project?
+TBD

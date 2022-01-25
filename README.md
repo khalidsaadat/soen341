@@ -10,7 +10,7 @@ Jan 2022 - Apr 2022
 - Shabia Saeed - 40154081 - github.com/shabiasaeed
 - Aminata LO - 40163325 - github.com/programer653
 - Pavithra Sivagnanasuntharam - 40117356 - github.com/pavithrasiv
-- Asha Islam - 40051511
+- Asha Islam - 40051511 - github.com/asha97
 - Zayneb Mehdi - 40109417 - github.com/BrainOverfl0w
 
 ## What is this repository for?

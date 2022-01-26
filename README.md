@@ -19,6 +19,9 @@ This repository is going to be used to gather all relevant information regarding
 ## Technologies Used
 For the front-end, we are going to be using HTML, CSS and JavaScript. For the back-end, we are going to be using PHP and SQL. 
 
+## Description, Objective and Core Features of the Project
+
+
 ## How to run this project?
 This project is built with PHP; hence, it needs an Apache system, such as XAMPP. Follow these steps to successfully run this project in your system:
  - Install XAMPP through the following link:

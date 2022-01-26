@@ -20,7 +20,11 @@ This repository is going to be used to gather all relevant information regarding
 For the front-end, we are going to be using HTML, CSS and JavaScript. For the back-end, we are going to be using PHP and SQL. 
 
 ## Description, Objective and Core Features of the Project
+The project consists of creating an online shopping website which resembles to the Amazon shopping website. 
 
+The objective of this project is to create a user-friendly website to shop.
+
+The core features are for a user to be able to browse the website, add items to their cart, and checkout their purchases.
 
 ## How to run this project?
 This project is built with PHP; hence, it needs an Apache system, such as XAMPP. Follow these steps to successfully run this project in your system:

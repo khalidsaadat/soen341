@@ -17,7 +17,7 @@ Jan 2022 - Apr 2022
 TBD
 
 ## Technologies Used
-TBD
+For the front-end, we are going to be using HTML, CSS and JavaScript. For the back-end, we are going to be using PHP and SQL.
 
 ## How to run this project?
 This project is built with PHP; hence, it needs an Apache system, such as XAMPP. Follow these steps to successfully run this project in your system:

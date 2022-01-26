@@ -28,8 +28,6 @@ This project is built with PHP; hence, it needs an Apache system, such as XAMPP.
 - Wait until all servers' status is `Running`. Make sure that `Apache Web Server`'s status is `Running` for this project to run.
 - Open your browswer and enter `localhost` to open XAMPP's default homepage.
     -  The content of `localhost` is presented inside `htdocs` folder under `XAMPP` folder.
-- Open your and clone this project by entering the following line in your terminal:
-    -  The content of `localhost` is presented inside folder under `XAMPP` folder.
 - Open your terminal and clone this project by entering the following line in your terminal:
     - `git clone https://github.com/khalidsaadat/soen341.git`
 - Open the cloned folder and open `soen341` folder and copy its contents into `htdocs` folder inside `XAMPP` folder.

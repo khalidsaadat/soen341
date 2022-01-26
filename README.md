@@ -14,7 +14,7 @@ Jan 2022 - Apr 2022
 - Zayneb Mehdi - 40109417 - github.com/BrainOverfl0w
 
 ## What is this repository for?
-TBD
+This repository is going to be used to gather all relevant information regarding our website. This includes the information about the teammates, any codes that were written for the website, sprints following the agile methodology, and any other important documents.  
 
 ## Technologies Used
 For the front-end, we are going to be using HTML, CSS and JavaScript. For the back-end, we are going to be using PHP and SQL. 

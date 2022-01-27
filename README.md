@@ -1,23 +1,22 @@
 # SOEN 341
-SOEN 341 PROJECT
+[![Generic badge](https://img.shields.io/badge/SOEN341-Project-<BLUE>.svg)](https://shields.io/)
 
-Jan 2022 - Apr 2022
+[![Generic badge](https://img.shields.io/badge/VERSION-Sprint1-<BLUE>.svg)](https://shields.io/)
 
-## What is this repository for?
-This repository is going to be used to gather all relevant information regarding our website. This includes the information about the teammates, any codes that were written for the website, sprints following the agile methodology, and any other important documents.  
 
-## Technologies Used
-For the front-end, we are going to be using HTML, CSS and JavaScript. For the back-end, we are going to be using PHP and SQL. 
+## :bulb:Objective
+The objective of this project is to implement a simplified version of Amazon (online shopping website) that will provide customers with the convenience of 24/7 shopping from anywhere. This repository is going to be used to gather all relevant information regarding our website. This includes the information about the teammates, any codes that were written for the website, sprints following the agile methodology, and any other important documents.
 
-## Objective
-The objective of this project is to implement a simplified version of Amazon (online shopping website).
+## :mag_right:Description
+Advancements in technology and the growth of available marketplaces have made it easier than ever to buy and sell online. As businesses came online during the COVID-19 pandemic, the global trend toward digitization surged ahead at lightning speed. While there are many ways to sell to consumers over the internet, the main advantage of online selling is that you can sell to consumers anywhere, anytime.
 
-## Core Features
+
+## :memo:Core Features
 - Browsing items
 - Adding products to the cart
 - Checking out
 
-## Team Members
+## :busts_in_silhouette:Team Members
 - Khalid Sadat - 40177334 - github.com/khalidsaadat
 - Anum Siddiqui - 40129811 - github.com/AnumSidd
 - Jiayi Chen - 40110997 - github.com/JIAYI615
@@ -27,7 +26,23 @@ The objective of this project is to implement a simplified version of Amazon (on
 - Asha Islam - 40051511 - github.com/asha97
 - Zayneb Mehdi - 40109417 - github.com/BrainOverfl0w
 
-## How to run this project?
+## :dizzy:Technologies Used
+
+_<h3>Front-end:</h3>_
+
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+
+_<h3>Back-end:</h3>_
+
+![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white)
+
+![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
+
+## :computer:How to run this project?
 This project is built with PHP; hence, it needs an Apache system, such as XAMPP. Follow these steps to successfully run this project in your system:
  - Install XAMPP through the following link:
     - `https://www.apachefriends.org/index.html`

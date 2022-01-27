@@ -3,6 +3,20 @@ SOEN 341 PROJECT
 
 Jan 2022 - Apr 2022
 
+## What is this repository for?
+This repository is going to be used to gather all relevant information regarding our website. This includes the information about the teammates, any codes that were written for the website, sprints following the agile methodology, and any other important documents.  
+
+## Technologies Used
+For the front-end, we are going to be using HTML, CSS and JavaScript. For the back-end, we are going to be using PHP and SQL. 
+
+## Objective
+The objective of this project is to implement a simplified version of Amazon (online shopping website).
+
+## Core Features
+- Browsing items
+- Adding products to the cart
+- Checking out
+
 ## Team Members
 - Khalid Sadat - 40177334 - github.com/khalidsaadat
 - Anum Siddiqui - 40129811 - github.com/AnumSidd
@@ -12,19 +26,6 @@ Jan 2022 - Apr 2022
 - Pavithra Sivagnanasuntharam - 40117356 - github.com/pavithrasiv
 - Asha Islam - 40051511 - github.com/asha97
 - Zayneb Mehdi - 40109417 - github.com/BrainOverfl0w
-
-## What is this repository for?
-This repository is going to be used to gather all relevant information regarding our website. This includes the information about the teammates, any codes that were written for the website, sprints following the agile methodology, and any other important documents.  
-
-## Technologies Used
-For the front-end, we are going to be using HTML, CSS and JavaScript. For the back-end, we are going to be using PHP and SQL. 
-
-## Description, Objective and Core Features of the Project
-The project consists of creating an online shopping website which resembles to the Amazon shopping website. 
-
-The objective of this project is to create a user-friendly website to shop.
-
-The core features are for a user to be able to browse the website, add items to their cart, and checkout their purchases.
 
 ## How to run this project?
 This project is built with PHP; hence, it needs an Apache system, such as XAMPP. Follow these steps to successfully run this project in your system:

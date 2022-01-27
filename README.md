@@ -94,3 +94,6 @@ This project is built with PHP; hence, it needs an Apache system, such as XAMPP.
     - `git clone https://github.com/khalidsaadat/soen341.git`
 - Open the cloned folder and open `soen341` folder and copy its contents into `htdocs` folder inside `XAMPP` folder.
 
+## Version
+v.1.0
+

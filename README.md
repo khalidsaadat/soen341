@@ -17,14 +17,53 @@ Advancements in technology and the growth of available marketplaces have made it
 - Checking out
 
 ## :busts_in_silhouette:Team Members
-- Khalid Sadat - 40177334 - github.com/khalidsaadat
-- Anum Siddiqui - 40129811 - github.com/AnumSidd
-- Jiayi Chen - 40110997 - github.com/JIAYI615
-- Shabia Saeed - 40154081 - github.com/shabiasaeed
-- Aminata LO - 40163325 - github.com/programer653
-- Pavithra Sivagnanasuntharam - 40117356 - github.com/pavithrasiv
-- Asha Islam - 40051511 - github.com/asha97
-- Zayneb Mehdi - 40109417 - github.com/BrainOverfl0w
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Student ID</th>
+    <th>GitHub Username</th>
+  </tr>
+ <tr>
+    <td>Khalid Sadat</td>
+    <td>40177334</td>
+  <td><a href="https://github.com/khalidsaadat" target="_blank">github.com/khalidsaadat</a></td>
+  </tr>
+  <tr>
+    <td>Anum Siddiqui</td>
+    <td>40129811</td>
+    <td><a href="https://github.com/AnumSidd" target="_blank">github.com/AnumSidd</a></td>
+ </tr>
+  <tr>
+    <td>Shabia Saeed</td>
+    <td>40154081</td>
+    <td><a href="https://github.com/shabiasaeed" target="_blank">github.com/shabiasaeed</a></td>
+  </tr>
+  <tr>
+    <td>Jiayi Chen</td>
+    <td>40110997</td>
+    <td><a href="https://github.com/JIAYI615" target="_blank">github.com/JIAYI615</a></td>
+  </tr>
+  <tr>
+    <td>Aminata LO</td>
+    <td>40163325</td>
+    <td><a href="https://github.com/programer653" target="_blank">github.com/programer653</a></td>
+  </tr>
+  <tr>
+    <td>Pavithra Sivagnanasuntharam</td>
+    <td>40117356</td>
+    <td><a href="https://github.com/pavithrasiv" target="_blank">github.com/pavithrasiv</a></td>
+  </tr>
+   <tr>
+    <td>Asha Islam</td>
+    <td>40051511</td>
+    <td><a href="https://github.com/asha97" target="_blank">github.com/asha97</a></td>
+  </tr>
+   <tr>
+    <td>Zayneb Mehdi</td>
+    <td>40109417</td>
+    <td><a href="https://github.com/BrainOverfl0w" target="_blank">github.com/BrainOverfl0w</a></td>
+  </tr>
+</table>
 
 ## :dizzy:Technologies Used
 

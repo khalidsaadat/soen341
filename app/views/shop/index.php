@@ -12,7 +12,7 @@
                                     <li><a href="./about.html">About Us</a></li>
                                     <li><a href="./shop-details.html">Shop Details</a></li>
                                     <li><a href="./shopping-cart.html">Shopping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
+                                    <li><a href="/shop/checkout">Check Out</a></li>
                                     <li><a href="./blog-details.html">Blog Details</a></li>
                                 </ul>
                             </li>
@@ -25,7 +25,7 @@
                     <div class="header__nav__option">
                         <a href="#" class="search-switch"><img src="/assets/img/icon/search.png" alt=""></a>
                         <a href="#"><img src="/assets/img/icon/heart.png" alt=""></a>
-                        <a href="#"><img src="/assets/img/icon/cart.png" alt=""> <span>0</span></a>
+                        <a href="/shop/checkout"><img src="/assets/img/icon/cart.png" alt=""> <span>0</span></a>
                         <div class="price">$0.00</div>
                     </div>
                 </div>

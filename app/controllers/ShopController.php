@@ -17,7 +17,7 @@ class ShopController extends Controller{
 	}
 
 	public function checkout() {
-		
+		$this->view('shop/checkout');
 	}
 
 }

@@ -28,9 +28,10 @@ class User extends Model{
     }
 
     public function insert(){
-	    $stmt = self::$_connection->prepare("INSERT INTO user(username, password) VALUES(:username, :password)");
+	    $stmt = self::$_connection->prepare("INSERT INTO user(username, password, role) VALUES(:username, :password, :role)");
         $stmt->execute(['username'=>$this->username,
-                        'password'=>$this->password]);
+                        'password'=>$this->password,
+                        'role'=>$this->role]);
         $_SESSION['lastInsertId_UserId'] = self::$_connection->lastInsertId(); // store the new user's id in a session.
     }
 
@@ -40,9 +41,11 @@ class User extends Model{
     }
 
     public function update(){
-        $stmt = self::$_connection->prepare("UPDATE user SET username = :username, password = :password WHERE user_id = :user_id");
+        $stmt = self::$_connection->prepare("UPDATE user SET username = :username, password = :password, role = :role WHERE user_id = :user_id");
         $stmt->execute(['username'=>$this->username,
-         'password'=>$this->password, 'user_id'=>$this->user_id]);
+                        'password'=>$this->password, 
+                        'role'=>$this->role, 
+                        'user_id'=>$this->user_id]);
     }
 
 }

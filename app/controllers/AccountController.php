@@ -10,6 +10,11 @@ class AccountController extends Controller{
 
 	public function signup() {
 
+		// if the user is logged-in, redirect them to homepage
+		if(isset($_SESSION['user_id'])) {
+			return header('location:/');
+		}
+
 		// if the signup button is clicked 
 		if(!isset($_POST['signup'])) {
 			$this->view('account/signup');
@@ -23,6 +28,7 @@ class AccountController extends Controller{
 			$confirm_password = $_POST['confirm_password'];
 
 			$proceed_flag = 0;
+			$super_code_flag = 0;
 
 			// check if there is a user with the same email address; if so, give error and terminate.
 			$existed_user = $this->model('User')->findByUsername($email);
@@ -60,7 +66,8 @@ class AccountController extends Controller{
 							$proceed_flag = 1;
 							$new_user->role = 'admin';
 
-							// change that super code's status to used (1) in the db
+							// assigned the super code to the user who used it and change its status to used (1) in the db
+							$super_code_flag = 1;
 							$checked_super_code->status = 1;
 							$checked_super_code->updateStatus();
 						}
@@ -69,8 +76,6 @@ class AccountController extends Controller{
 						$new_user->role = 'user';
 					}
 					
-					
-
 					if($proceed_flag == 1) {
 						
 						// save new user's info into user table
@@ -91,8 +96,16 @@ class AccountController extends Controller{
 						// save new user profile's info into profile table
 						$new_profile->insert();
 
-						// // successfull redirect to user account page
-						header('location:/');
+						// super code table
+						if($super_code_flag == 1) {
+							
+							$checked_super_code->user_id = $inserted_user_id;
+							$checked_super_code->updateUserId();
+						}
+
+						// // successfull redirect to login page
+						$_SESSION['successful_account_creation_msg'] = "Account created successfully. Please login to complete your profile.";
+						header('location:/account/login');
 					}
 
 
@@ -108,6 +121,12 @@ class AccountController extends Controller{
 
 	public function login() {
 
+		// if the user is logged-in, redirect them to homepage
+		if(isset($_SESSION['user_id'])) {
+			return header('location:/');
+		}
+
+
 		// if the login button is not clicked
 		if(!isset($_POST['login'])) {
 			$this->view('account/login');
@@ -119,10 +138,33 @@ class AccountController extends Controller{
 			// // check if the user exists in the db
 			$user = $this->model('User')->findByUsername($email);
 			
-			if($user == false) {
+			if($user == false || $user == null) {
 				$this->view('account/login', ['error'=>'Account does not exist with this email!']);
 			}
+			elseif($user != null && password_verify($password, $user->password)) {
+				// successfull login
+				$_SESSION['user_id'] = $user->user_id; // global user id session to be used across
+
+				// remove the $_SESSION['successful_account_creation_msg'] session.
+				unset($_SESSION['successful_account_creation_msg']);
+
+				header('location:/');
+			}
+			else {
+				// remove the $_SESSION['successful_account_creation_msg'] session.
+				unset($_SESSION['successful_account_creation_msg']);
+
+				$this->view('account/login', ['error'=>'Wrong username or password!']);
+			}
+
 		}
+	}
+
+	public function signout() {
+		session_destroy();
+
+		header('location:/account/login');
+
 	}
 
 }

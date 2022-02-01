@@ -38,5 +38,11 @@ class SuperCode extends Model{
                         'super_code'=>$this->super_code]);
     }
 
+    public function updateUserId(){
+        $stmt = self::$_connection->prepare("UPDATE super_code SET user_id = :user_id WHERE super_code = :super_code");
+        $stmt->execute(['user_id'=>$this->user_id,
+                        'super_code'=>$this->super_code]);
+    }
+
 }
 ?>

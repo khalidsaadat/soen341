@@ -1,7 +1,7 @@
 <?php
     $this->view('include/header');
 ?>
-<title>Sign Up</title>
+<title>Login</title>
 
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
@@ -54,6 +54,15 @@
                                     echo "
                                         <div class='form_error'>
                                             $error_msg
+                                        </div>
+                                    ";
+                                }
+
+                                if(isset($_SESSION['successful_account_creation_msg'])) {
+                                    $msg = $_SESSION['successful_account_creation_msg'];
+                                    echo "
+                                        <div class='form_success'>
+                                            $msg
                                         </div>
                                     ";
                                 }

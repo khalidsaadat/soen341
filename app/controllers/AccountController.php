@@ -104,7 +104,7 @@ class AccountController extends Controller{
 						}
 
 						// // successfull redirect to login page
-						$_SESSION['successful_account_creation_msg'] = "Account created successfully. Please login to complete your profile.";
+						$_SESSION['successful_account_creation_msg'] = "Account created successfully. Please login to complete your profile!";
 						header('location:/account/login');
 					}
 

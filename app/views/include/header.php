@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/custom_style.css?version=1.3" type="text/css">
 </head>
 
 <body>
@@ -35,7 +36,7 @@
     <div class="offcanvas-menu-wrapper">
         <div class="offcanvas__option">
             <div class="offcanvas__links">
-                <a href="#">Sign in</a>
+                <a href="/account/login">My Account</a>
             </div>
             
         </div>
@@ -65,7 +66,7 @@
                     <div class="col-lg-6 col-md-5">
                         <div class="header__top__right">
                             <div class="header__top__links">
-                                <a href="#">Sign in</a>
+                                <a href="/account/login">My Account</a>
                             </div>
                         </div>
                     </div>

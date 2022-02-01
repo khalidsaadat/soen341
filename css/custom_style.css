@@ -1,0 +1,29 @@
+.authentication_form input {
+    color: black;
+}
+
+.to_lower_case {
+    text-transform: none;
+}
+
+.form_error {
+    color: #a10707;
+    font-size: 14px;
+    border-top: 2px solid #77b527;
+    background: #f5f5f5;
+    padding: 8px 10px 8px;
+    margin-bottom: 20px;
+}
+
+.text_with_href {
+    margin-top: 10px;
+}
+
+.text_with_href a {
+    color: #050361;
+    text-decoration: underline;
+}
+
+.text_center {
+    text-align: center;
+}

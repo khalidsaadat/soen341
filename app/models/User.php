@@ -20,10 +20,18 @@ class User extends Model{
         return $stmt->fetch();
     }
 
+    public function findByUsername($username) {
+        $stmt = self::$_connection->prepare("SELECT * FROM user WHERE username = :username");
+        $stmt->execute(['username'=>$username]);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
+        return $stmt->fetch();
+    }
+
     public function insert(){
 	    $stmt = self::$_connection->prepare("INSERT INTO user(username, password) VALUES(:username, :password)");
         $stmt->execute(['username'=>$this->username,
-         'password'=>$this->password]);
+                        'password'=>$this->password]);
+        $_SESSION['lastInsertId_UserId'] = self::$_connection->lastInsertId(); // store the new user's id in a session.
     }
 
     public function delete(){

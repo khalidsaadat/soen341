@@ -36,3 +36,42 @@
 .text_center {
     text-align: center;
 }
+
+.spad-t-30 {
+    padding-top: 30px !important;
+}
+
+/* admin dashbaord */
+.panel {
+    border-radius: 0.3rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+.panel.panel-1 {
+    border: 1px solid #14A2B8;
+    background-color: #14A2B8;
+    color: #fff;
+}
+.panel.panel-2 {
+    border: 1px solid #218CFF;
+    background-color: #218CFF;
+    color: #fff;
+}
+.panel.panel-3 {
+    border: 1px solid #1DAA47;
+    background-color: #1DAA47;
+    color: #fff;
+}
+.panel .heading {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.panel .static_number {
+    font-weight: bold;
+    font-size: 28px;
+}
+
+.panel .static_percentage {
+    font-weight: bold;
+}

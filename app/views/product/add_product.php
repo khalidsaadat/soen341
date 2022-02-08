@@ -1,7 +1,7 @@
 <?php
     $this->view('include/header');
 ?>
-<title>Sign Up</title>
+<title>Add a Product</title>
 
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
@@ -45,9 +45,7 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
                             
-                            <h6 class="checkout__title">Create an account
-                                <p class="to_lower_case">You can complete your profile once you finish creating your account.</p>
-                            </h6>
+                            <h6 class="checkout__title">Add a new product</h6>
 
                             <?php
                                 // if there is an error message from the server
@@ -64,7 +62,7 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
-                                        <p>Fist Name<span>*</span></p>
+                                        <p>Name<span>*</span></p>
                                         <input type="text" name="first_name" id="first_name" required>
                                     </div>
                                 </div>

@@ -109,6 +109,9 @@
                                         <div class="col-sm-4">
                                             <h2 class="font-weight-bold">Products</h2>
                                         </div>
+                                        <div class="col-sm-8">						
+                                            <a href="#" class="btn btn-primary"><i class="material-icons">&#xe145;</i> <span>Add a Product</span></a>
+                                        </div>
                                     </div>
                                 </div>
                               

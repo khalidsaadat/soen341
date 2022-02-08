@@ -67,7 +67,7 @@
                                         14
                                     </div>
                                     <div>
-                                        <span class="static_percentage">+25%</span> from last month
+                                        <span class="static_percentage"><span class="font-weight-bold arrow_up"></span> 25%</span> from last month
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                                         14
                                     </div>
                                     <div>
-                                        <span class="static_percentage">+25%</span> from last month
+                                        <span class="static_percentage"><span class="font-weight-bold arrow_down"></span> 25%</span> from last month
                                     </div>
                                 </div>
                             </div>
@@ -93,13 +93,89 @@
                                         14
                                     </div>
                                     <div>
-                                        <span class="static_percentage">+25%</span> from last month
+                                        <span class="static_percentage"><span class="font-weight-bold arrow_up"></span> 25%</span> from last month
                                     </div>
                                 </div>
                             </div>     
                         </div>
                     </div>
                     <hr>
+
+                    <div class="container" style="padding-right: 0px; padding-left: 0px;">
+                        <div class="table-responsive">
+                            <div class="table-wrapper">
+                                <div class="table-title">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <h2 class="font-weight-bold">Products</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                              
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Brand</th>
+                                            <th>Price</th>						
+                                            <th>Quantity</th>						
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td><a href="#"><img src="/assets/img/product/product-1.jpg" class="avatar" alt="Avatar"> Michael Holz</a></td>
+                                            <td>Brand X</td>
+                                            <td>$25.99</td>                        
+                                            <td>254</td>
+                                            <td><span class="status text-success">&bull;</span> In Stock</td>
+                                            <td><a href="#" class="view" title="View Details" data-toggle="tooltip"><i class="material-icons">&#xE5C8;</i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td><a href="#"><img src="/assets/img/product/product-3.jpg" class="avatar" alt="Avatar"> Paula Wilson</a></td>
+                                            <td>Brand Y</td>                       
+                                            <td>$25.99</td>
+                                            <td>1,260</td>
+                                            <td><span class="status text-success">&bull;</span> In Stock</td>
+                                            <td><a href="#" class="view" title="View Details" data-toggle="tooltip"><i class="material-icons">&#xE5C8;</i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td><a href="#"><img src="/assets/img/product/product-5.jpg" class="avatar" alt="Avatar"> Antonio Moreno</a></td>
+                                            <td>Brand Z</td>
+                                            <td>$25.99</td>
+                                            <td>350</td>
+                                            <td><span class="status text-success">&bull;</span> In Stock</td>
+                                            <td><a href="#" class="view" title="View Details" data-toggle="tooltip"><i class="material-icons">&#xE5C8;</i></a></td>                        
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td><a href="#"><img src="/assets/img/product/product-9.jpg" class="avatar" alt="Avatar"> Mary Saveley</a></td>
+                                            <td>Brand A</td>
+                                            <td>$25.99</td>						
+                                            <td>1,572</td>
+                                            <td><span class="status text-success">&bull;</span> In Stock</td>
+                                            <td><a href="#" class="view" title="View Details" data-toggle="tooltip"><i class="material-icons">&#xE5C8;</i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td><a href="#"><img src="/assets/img/product/product-13.jpg" class="avatar" alt="Avatar"> Martin Sommer</a></td>
+                                            <td>Brand B</td>
+                                            <td>$25.99</td>
+                                            <td>0</td>
+                                            <td><span class="status text-warning">&bull;</span> Out of Stock</td>
+                                            <td><a href="#" class="view" title="View Details" data-toggle="tooltip"><i class="material-icons">&#xE5C8;</i></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                
+                            </div>
+                        </div>        
+                    </div>  
                 </div>
                
                 

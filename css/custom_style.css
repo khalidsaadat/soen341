@@ -283,3 +283,16 @@ img.avatar {
 	margin-top: 10px;
 	font-size: 13px;
 }  
+
+.product_creation .txt-black .filter-option-inner-inner {
+	color: #000 !important;
+	height: 39px;
+}
+
+.product_creation .bootstrap-select {
+	width: 100% !important;
+}
+
+.label-sub {
+	font-size: 14px;
+}

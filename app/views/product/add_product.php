@@ -40,7 +40,7 @@
     <!-- Checkout Section Begin -->
     <section class="checkout spad">
         <div class="container">
-            <div class="checkout__form authentication_form">
+            <div class="checkout__form authentication_form product_creation">
                 <form method="post">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
-                                        <p>Last Name<span>*</span></p>
+                                        <p>Brand<span>*</span></p>
                                         <input type="text" name="last_name" id="last_name" required>
                                     </div>
                                 </div>
@@ -77,13 +77,13 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
-                                        <p>Phone<span>*</span></p>
+                                        <p>Price<span>*</span></p>
                                         <input type="text" name="phone_number" id="phone_number" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
-                                        <p>Email<span>*</span></p>
+                                        <p>Quantity<span>*</span></p>
                                         <input type="text" name="email" id="email" required>
                                     </div>
                                 </div>
@@ -91,29 +91,53 @@
 
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Password<span>*</span></p>
-                                        <input type="password" name="password" id="password" required>
-                                    </div>
+                                   <div class="row">
+                                       <div class="col-lg-6">
+                                            <div class="checkout__input">
+                                                <p>Size(s)<span>*</span></p>
+                                                <select class="selectpicker txt-black" multiple title=" ">
+                                                    <option>S</option>
+                                                    <option>M</option>
+                                                    <option>L</option>
+                                                    <option>XL</option>
+                                                </select>
+                                            </div>
+                                       </div>
+                                       <div class="col-lg-6">
+                                            <div class="checkout__input">
+                                                <p>Color(s)<span>*</span> <span class="label-sub">(Separate by comma)</span></p>
+                                                <input type="password" name="confirm_password" id="confirm_password" required>
+                                            </div>
+                                       </div>
+                                   </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Confirm Password<span>*</span></p>
-                                        <input type="password" name="confirm_password" id="confirm_password" required>
-                                    </div>
+                                    <div class="row">
+                                       <div class="col-lg-6">
+                                            <div class="checkout__input">
+                                                <p>Brand<span>*</span></p>
+                                                <select class="selectpicker txt-black" multiple data-live-search="true" data-max-options="1" title=" ">
+                                                    <option>S</option>
+                                                    <option>M</option>
+                                                    <option>L</option>
+                                                    <option>XL</option>
+                                                </select>
+                                            </div>
+                                       </div>
+                                       <div class="col-lg-6">
+                                            <div class="checkout__input">
+                                                <p>Color(s)<span>*</span> <span class="label-sub">(Separate by comma)</span></p>
+                                                <input type="password" name="confirm_password" id="confirm_password" required>
+                                            </div>
+                                       </div>
+                                   </div>
                                 </div>
                             </div>
 
-                            <h6 class="coupon__code"><span class="icon_profile">
-                                </span> Admin Account? Enter the super code:
-                                <input type="text" name="super_code" id="super_code">
-                            </h6>
-
-                            <button type="submit" name="signup" class="site-btn">Sign Up</button>
-                            
-                            <div class="text_with_href">
-                                Having an account? <a href="/account/login">Login</a>
-                            </div>
+                            <hr>
+                      
+                            <button type="submit" name="create" class="site-btn">Create</button>
+                   
                         </div>
 
                         

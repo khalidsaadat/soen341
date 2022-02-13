@@ -28,8 +28,9 @@ class ProductController extends Controller{
             if(!empty($fileNames)){ 
                 foreach($_FILES['images']['name'] as $key=>$val){ 
                     // File upload path 
+                    $unique_id = uniqid();
                     $extension = strtolower(pathinfo(basename($_FILES['images']['name'][$key]),PATHINFO_EXTENSION));
-                    $target_file_name = uniqid().'.'.$extension;
+                    $target_file_name = $unique_id.'.'.$extension;
 
                     // $fileName = basename($_FILES['images']['name'][$key]); 
                     $targetFilePath = $targetDir . $target_file_name; 
@@ -41,7 +42,7 @@ class ProductController extends Controller{
                         if(move_uploaded_file($_FILES["images"]["tmp_name"][$key], $targetFilePath)){ 
                             // Image db insert sql 
                             // $insertValuesSQL .= "('".$fileName."', NOW()),"; 
-                            $insertValuesSQL .= uniqid() . '.' . $fileType . ',';
+                            $insertValuesSQL .= $unique_id . '.' . $fileType . ',';
                         }else{ 
                             $errorUpload .= $_FILES['images']['name'][$key].' | '; 
                         } 

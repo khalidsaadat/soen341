@@ -56,8 +56,9 @@
     <?php
         $products = $model['products'];
         $promotions = $model['promotions'];
-        $promotions_count = sizeof($promotions);
-
+        $promotions_count = (sizeof($promotions) > 0) ? sizeof($promotions) : '0';
+        $new_products = $model['new_products'];
+        $new_products_count = (sizeof($new_products) > 0) ? sizeof($new_products) : '0';
     ?>
 
     <!-- Checkout Section Begin -->
@@ -84,7 +85,7 @@
                                 <div class="heading">New Products</div>
                                 <div class="text-right">
                                     <div class="static_number">
-                                        14
+                                        <?php echo $new_products_count; ?>
                                     </div>
                                     <div>
                                         <span class="static_percentage"><span class="font-weight-bold arrow_down"></span> 25%</span> from last month
@@ -97,7 +98,7 @@
                                 <div class="heading">On Sale</div>
                                 <div class="text-right">
                                     <div class="static_number">
-                                        14
+                                        <?php echo $promotions_count; ?>
                                     </div>
                                     <div>
                                         <span class="static_percentage"><span class="font-weight-bold arrow_up"></span> 25%</span> from last month
@@ -152,7 +153,7 @@
                                                         <td>1</td>
                                                         <td><a href='#'><img src='/assets/img/product/product-1.jpg' class='avatar' alt=''>$product_name</a></td>
                                                         <td class='text-center'>$brand_name</td>
-                                                        <td class='text-center'>$price</td>                        
+                                                        <td class='text-center'>$$price</td>                        
                                                         <td class='text-center'>$quantity</td>
                                                         <td  class='text-center'>$promotion</td>
                                                         <td><span class='status text-success'>&bull;</span> $status</td>

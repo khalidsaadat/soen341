@@ -1,7 +1,7 @@
 # SOEN 341
 [![Generic badge](https://img.shields.io/badge/SOEN341-Project-<BLUE>.svg)](https://shields.io/)
 
-[![Generic badge](https://img.shields.io/badge/VERSION-Sprint1-<BLUE>.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/VERSION-Sprint2-<BLUE>.svg)](https://shields.io/)
 
 
 ## :bulb:Objective
@@ -39,30 +39,6 @@ Advancements in technology and the growth of available marketplaces have made it
     <td><a href="https://github.com/shabiasaeed" target="_blank">github.com/shabiasaeed</a></td>
   </tr>
   <tr>
-    <td>Jiayi Chen</td>
-    <td>40110997</td>
-    <td><a href="https://github.com/JIAYI615" target="_blank">github.com/JIAYI615</a></td>
-  </tr>
-  <tr>
-    <td>Aminata LO</td>
-    <td>40163325</td>
-    <td><a href="https://github.com/programer653" target="_blank">github.com/programer653</a></td>
-  </tr>
-  <tr>
-    <td>Pavithra Sivagnanasuntharam</td>
-    <td>40117356</td>
-    <td><a href="https://github.com/pavithrasiv" target="_blank">github.com/pavithrasiv</a></td>
-  </tr>
-   <tr>
-    <td>Asha Islam</td>
-    <td>40051511</td>
-    <td><a href="https://github.com/asha97" target="_blank">github.com/asha97</a></td>
-  </tr>
-   <tr>
-    <td>Zayneb Mehdi</td>
-    <td>40109417</td>
-    <td><a href="https://github.com/BrainOverfl0w" target="_blank">github.com/BrainOverfl0w</a></td>
-  </tr>
 </table>
 
 ## :dizzy:Technologies Used

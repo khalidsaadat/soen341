@@ -144,6 +144,7 @@ class AccountController extends Controller{
 			elseif($user != null && password_verify($password, $user->password)) {
 				// successfull login
 				$_SESSION['user_id'] = $user->user_id; // global user id session to be used across
+				$_SESSION['role'] = $user->role;
 
 				// remove the $_SESSION['successful_account_creation_msg'] session.
 				unset($_SESSION['successful_account_creation_msg']);

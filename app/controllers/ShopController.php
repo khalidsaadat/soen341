@@ -1,4 +1,5 @@
 <?php
+// For normal user 
 class ShopController extends Controller{
 
 	// Function that shows the index page when you type 'localhost'

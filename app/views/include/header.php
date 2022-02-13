@@ -22,7 +22,16 @@
     <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
-    <link rel="stylesheet" href="/css/custom_style.css?version=1.3" type="text/css">
+    <link rel="stylesheet" href="/css/custom_style.css?version=1.8" type="text/css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 </head>
 
 <body>
@@ -76,9 +85,14 @@
                             <div class="header__top__links">
                                 
                                 <?php 
-                                    // if user is logged-in, show sign out button
+                                    // admin portal
+                                    $my_account_url = '/';
+                                    if((isset($_SESSION['role'])) && ($_SESSION['role'] == 'admin')) {
+                                        $my_account_url = '/admin/';
+                                    }
+                                    // if user is logged-in, show sign out button                                    
                                     if(isset($_SESSION['user_id'])) {
-                                        echo "<a href='/' style='margin-right: 8px;'>My Account</a>";
+                                        echo "<a href='$my_account_url' style='margin-right: 8px;'>My Account</a>";
                                         echo "<span style='color: white; margin-right: 8px;'>|</span>";
                                         echo "<a href='/account/signout'>Sign Out</a>";
                                     }

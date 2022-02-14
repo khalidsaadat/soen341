@@ -20,6 +20,20 @@ class Product extends Model{
         return $stmt->fetch();
     }
 
+    public function getAllPromotions() {
+        $stmt = self::$_connection->prepare("SELECT * FROM product where promotion = :promotion");
+        $stmt->execute(['promotion'=>'1']);
+    	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
+		return $stmt->fetchAll();
+    }
+
+    public function getAllNewProducts() {
+        $stmt = self::$_connection->prepare("SELECT * FROM product where date BETWEEN DATE_SUB(NOW(), INTERVAL 40 DAY) AND NOW()");
+        $stmt->execute();
+    	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
+		return $stmt->fetchAll();
+    }
+
     public function insert(){
 	    $stmt = self::$_connection->prepare("INSERT INTO product(name, brand_id, categories, price, quantity_available, size, colors, keywords, reward_point, promotion, images, description) 
                                             VALUES(:name, :brand_id, :categories, :price, :quantity_available, :size, :colors, :keywords, :reward_point, :promotion, :images, :description)");

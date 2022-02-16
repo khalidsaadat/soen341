@@ -1,5 +1,5 @@
 # GithHub Actions Workflow generated with Ghygen
-# Original configuration: https://ghygen.hi-folks.dev?code=f98f7e1b3799a7f6f8da76ff2835ce58
+# Original configuration: https://ghygen.hi-folks.dev?code=aaef54e16f7c6a919b0edf81914ddc99
 name: php.yml
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        operating-system: [macos-latest]
+        operating-system: [ubuntu-latest]
         php-versions: [ '8.1','8.0','7.4','7.3' ]
         dependency-stability: [ 'prefer-none' ]
 
@@ -24,6 +24,21 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '15.x'
+    - name: Cache node_modules directory
+      uses: actions/cache@v2
+      id: node_modules-cache
+      with:
+        path: node_modules
+        key: ${{ runner.OS }}-build-${{ hashFiles('**/package.json') }}-${{ hashFiles('**/package-lock.json') }}
+    - name: Install NPM packages
+      if: steps.node_modules-cache.outputs.cache-hit != 'true'
+      run: npm ci
+    - name: Build frontend
+      run: npm run development
     - name: Install PHP versions
       uses: shivammathur/setup-php@v2
       with:

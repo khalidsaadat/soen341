@@ -20,7 +20,7 @@
                             <li><a href="./contact.html">Contacts</a></li>
                         </ul>
                     </nav>
-                </div>
+                </div>f
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
                         <a href="#" class="search-switch"><img src="/assets/img/icon/search.png" alt=""></a>
@@ -53,6 +53,9 @@
     </section>
     <!-- Breadcrumb Section End -->
 
+
+
+
     <!-- Shop Section Begin -->
     <section class="shop spad">
         <div class="container">
@@ -75,7 +78,7 @@
                                         <div class="card-body">
                                             <div class="shop__sidebar__categories">
                                                 <ul class="nice-scroll">
-                                                    <li><a href="#">Men (20)</a></li>
+                                                    <!-- <li><a href="#">Men (20)</a></li>
                                                     <li><a href="#">Women (20)</a></li>
                                                     <li><a href="#">Bags (20)</a></li>
                                                     <li><a href="#">Clothing (20)</a></li>
@@ -83,7 +86,22 @@
                                                     <li><a href="#">Accessories (20)</a></li>
                                                     <li><a href="#">Kids (20)</a></li>
                                                     <li><a href="#">Kids (20)</a></li>
-                                                    <li><a href="#">Kids (20)</a></li>
+                                                    <li><a href="#">Kids (20)</a></li> -->
+
+                                                    <?php
+                                                        $categories = $model['categories'];
+
+                                                        foreach($categories as $test) {
+                                                            $category_name = $test->category_name;
+                                                          
+                                                            echo "
+                                                                <li><a href='#'>$category_name</a></li>
+                                                            ";
+                                                        }
+                                                    ?>
+
+
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -97,17 +115,30 @@
                                         <div class="card-body">
                                             <div class="shop__sidebar__brand">
                                                 <ul>
-                                                    <li><a href="#">Louis Vuitton</a></li>
+                                                    <!-- <li><a href="#">Louis Vuitton</a></li>
                                                     <li><a href="#">Chanel</a></li>
                                                     <li><a href="#">Hermes</a></li>
-                                                    <li><a href="#">Gucci</a></li>
+                                                    <li><a href="#">Gucci</a></li> -->
+
+                                                    <?php
+                                                        $brands = $model['brands'];
+
+                                                        foreach($brands as $test) {
+                                                            $brand_name = $test->brand_name;
+                                                          
+                                                            echo "
+                                                                <li><a href='#'>$brand_name</a></li>
+                                                            ";
+                                                        }
+                                                    ?>
+
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card">
-                                    <div class="card-heading">
+                                    <!-- <div class="card-heading">
                                         <a data-toggle="collapse" data-target="#collapseThree">Filter Price</a>
                                     </div>
                                     <div id="collapseThree" class="collapse show" data-parent="#accordionExample">
@@ -120,10 +151,11 @@
                                                     <li><a href="#">$150.00 - $200.00</a></li>
                                                     <li><a href="#">$200.00 - $250.00</a></li>
                                                     <li><a href="#">250.00+</a></li>
+
                                                 </ul>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="card">
                                     <div class="card-heading">
@@ -132,7 +164,7 @@
                                     <div id="collapseFour" class="collapse show" data-parent="#accordionExample">
                                         <div class="card-body">
                                             <div class="shop__sidebar__size">
-                                                <label for="xs">xs
+                                                <!-- <label for="xs">xs
                                                     <input type="radio" id="xs">
                                                 </label>
                                                 <label for="sm">s
@@ -155,7 +187,25 @@
                                                 </label>
                                                 <label for="4xl">4xl
                                                     <input type="radio" id="4xl">
-                                                </label>
+                                                </label> -->
+
+                                                <?php
+                                                 
+                                                    
+                                                    $all_si = $model['size'];
+                                                    foreach($all_si as $sizes) {
+                                                        echo "
+                                                            <label for='sm'>$sizes
+                                                                 <input type='radio' id='sm'>
+                                                            </label>
+                                                        ";
+                                                    }
+
+
+
+                                                ?>    
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -167,7 +217,7 @@
                                     <div id="collapseFive" class="collapse show" data-parent="#accordionExample">
                                         <div class="card-body">
                                             <div class="shop__sidebar__color">
-                                                <label class="c-1" for="sp-1">
+                                                <!-- <label class="c-1" for="sp-1">
                                                     <input type="radio" id="sp-1">
                                                 </label>
                                                 <label class="c-2" for="sp-2">
@@ -193,7 +243,24 @@
                                                 </label>
                                                 <label class="c-9" for="sp-9">
                                                     <input type="radio" id="sp-9">
-                                                </label>
+                                                </label> -->
+                                                
+                                                <?php
+                                                   
+                                                    
+                                                    $all_color = $model['colors'];
+                                                    foreach($all_color as $color) {
+                                                        echo "
+                                                            <label style='background: $color;' for='sp-2'>
+                                                                <input type='radio' id='sp-2'>
+                                                            </label>
+                                                        ";
+                                                    }
+
+                                                ?>    
+                                                
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -205,13 +272,28 @@
                                     <div id="collapseSix" class="collapse show" data-parent="#accordionExample">
                                         <div class="card-body">
                                             <div class="shop__sidebar__tags">
-                                                <a href="#">Product</a>
+                                                <!-- <a href="#">Product</a>
                                                 <a href="#">Bags</a>
                                                 <a href="#">Shoes</a>
                                                 <a href="#">Fashio</a>
                                                 <a href="#">Clothing</a>
                                                 <a href="#">Hats</a>
-                                                <a href="#">Accessories</a>
+                                                <a href="#">Accessories</a> -->
+
+                                                <?php
+                                                   
+                                                    
+                                                   $all_keyword = $model['keywords'];
+                                                   foreach($all_keyword as $keyword) {
+                                                       echo "
+                                                            <a href='#'>$keyword</a>
+                                                       ";
+                                                   }
+
+                                               ?>    
+
+
+
                                             </div>
                                         </div>
                                     </div>

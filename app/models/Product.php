@@ -20,6 +20,41 @@ class Product extends Model{
         return $stmt->fetch();
     }
 
+    // get all the colors of each product from the product table
+    public function getAllColors() {
+        $stmt = self::$_connection->prepare("SELECT colors FROM product");
+        $stmt->execute();
+    	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
+		return $stmt->fetchAll();
+    }
+
+    public function getAllSizes() {
+        $stmt = self::$_connection->prepare("SELECT size FROM product");
+        $stmt->execute();
+    	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
+		return $stmt->fetchAll();
+    }
+
+
+
+    public function getAllKeywords() {
+        $stmt = self::$_connection->prepare("SELECT keywords FROM product");
+        $stmt->execute();
+    	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
+		return $stmt->fetchAll();
+    }
+
+
+
+    public function getAllPrice() {
+        $stmt = self::$_connection->prepare("SELECT price FROM product");
+        $stmt->execute();
+    	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
+		return $stmt->fetchAll();
+    }
+
+
+
     public function insert(){
 	    $stmt = self::$_connection->prepare("INSERT INTO product(name, brand_id, categories, price, quantity_available, size, colors, keywords, reward_point, promotion, images, description) 
                                             VALUES(:name, :brand_id, :categories, :price, :quantity_available, :size, :colors, :keywords, :reward_point, :promotion, :images, :description)");

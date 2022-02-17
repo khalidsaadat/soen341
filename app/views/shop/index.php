@@ -250,11 +250,7 @@
                                 $price = $product->price;
 
                                 $colors_serialized = unserialize($product->colors);
-                                
                                 $colors_array = array_filter($colors_serialized);
-                                
-
-                                // $colors_name = implode(',', array_filter($colors));
                                 
                                 echo "
                                     <div class='col-lg-4 col-md-6 col-sm-6'>
@@ -269,14 +265,20 @@
                                                 </ul>
                                             </div>
                                             <div class='product__item__text'>
-                                                <h6>Product name</h6>
+                                                <h6>$name</h6>
                                                 <a href='#' class='add-cart'>+ Add To Cart</a>
                                                 
-                                                <h5>$$$</h5>
+                                                <h5>$$price</h5>
                                                 <div class='product__color__select'>
-                                                    <label for='pc-6' class='active' style='background:blue;' data-toggle='tooltip' data-placement='top' title='$color_name'>
-                                                        <input type='radio' id='pc-6'>
-                                                    </label>
+                                                    ";
+                                                    foreach($colors_array as $color) {
+                                                        echo "
+                                                            <label for='pc-6' class='active' style='background:$color;' data-toggle='tooltip' data-placement='top' title='$color'>
+                                                                <input type='radio' id='pc-6'>
+                                                            </label>
+                                                        ";
+                                                    }
+                                                    echo"
                                                 </div>
                                             </div>
                                         </div>

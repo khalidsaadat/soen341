@@ -35,6 +35,13 @@ class Product extends Model{
 		return $stmt->fetchAll();
     }
 
+    public function getAllBasicInfo() {
+        $stmt = self::$_connection->prepare("SELECT product_id, name, price, colors FROM product ORDER BY date DESC");
+        $stmt->execute();
+    	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
+		return $stmt->fetchAll();
+    }
+
     public function getAllNewProducts() {
         $stmt = self::$_connection->prepare("SELECT * FROM product where date BETWEEN DATE_SUB(NOW(), INTERVAL 40 DAY) AND NOW()");
         $stmt->execute();

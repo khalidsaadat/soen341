@@ -4,10 +4,13 @@ class ShopController extends Controller{
 
 	// Function that shows the index page when you type 'localhost'
 	public function index(){
-
+    
+		// get the products' basic information
+		$products_basic_info = $this->model('Product')->getAllBasicInfo();
 		$products = $this->model('Product')->getAllActive();
-		// Send the 'products' variable to the View for rendering it to the webpage.
-		$this->view('shop/index', ['products'=>$products]);
+    
+		$this->view('shop/index', ['products'=>$products, 'products_basic_info'=>$products_basic_info]);
+
 	}
 
     public function product($product_id) {

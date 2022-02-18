@@ -13,7 +13,7 @@ class Brand extends Model{
 		return $stmt->fetchAll();
     }
 
-    public function findByBrand($brand_id){
+    public function find($brand_id){
         $stmt = self::$_connection->prepare("SELECT * FROM brand WHERE brand_id = :brand_id");
         $stmt->execute(['brand_id'=>$brand_id]);
         $stmt->setFetchMode(PDO::FETCH_CLASS, 'Brand');

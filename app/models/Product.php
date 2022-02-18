@@ -7,10 +7,18 @@ class Product extends Model{
     }
 
 	public function getAll(){
-        $stmt = self::$_connection->prepare("SELECT * FROM product");
-        $stmt->execute();
-    	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
-		return $stmt->fetchAll();
+      $stmt = self::$_connection->prepare("SELECT * FROM product");
+      $stmt->execute();
+      $stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
+      return $stmt->fetchAll();
+    }
+
+    public function getAllActive()
+    {
+      $stmt = self::$_connection->prepare("SELECT * FROM product where status = :status" );
+      $stmt->execute(['status'=>'1']);
+      $stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
+      return $stmt->fetchAll();
     }
 
     public function find($product_id){
@@ -20,40 +28,56 @@ class Product extends Model{
         return $stmt->fetch();
     }
 
+
     // get all the colors of each product from the product table
     public function getAllColors() {
         $stmt = self::$_connection->prepare("SELECT colors FROM product");
         $stmt->execute();
-    	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
-		return $stmt->fetchAll();
+    	  $stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
+		  return $stmt->fetchAll();
     }
 
     public function getAllSizes() {
-        $stmt = self::$_connection->prepare("SELECT size FROM product");
-        $stmt->execute();
-    	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
-		return $stmt->fetchAll();
+      $stmt = self::$_connection->prepare("SELECT size FROM product");
+      $stmt->execute();
+      $stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
+      return $stmt->fetchAll();
     }
-
-
-
-    public function getAllKeywords() {
-        $stmt = self::$_connection->prepare("SELECT keywords FROM product");
-        $stmt->execute();
-    	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
-		return $stmt->fetchAll();
-    }
-    
   
+    public function getAllPromotions() {
+      $stmt = self::$_connection->prepare("SELECT * FROM product where promotion = :promotion");
+      $stmt->execute(['promotion'=>'1']);
+      $stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
+      return $stmt->fetchAll();
+    }
+  
+    public function getAllKeywords() {
+      $stmt = self::$_connection->prepare("SELECT keywords FROM product");
+      $stmt->execute();
+      $stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
+      return $stmt->fetchAll();
+    }
+  
+    public function getAllBasicInfo() {
+      $stmt = self::$_connection->prepare("SELECT product_id, name, price, colors FROM product ORDER BY date DESC");
+      $stmt->execute();
+      $stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
+      return $stmt->fetchAll();
+    }
 
     public function getAllPrice() {
-        $stmt = self::$_connection->prepare("SELECT price FROM product");
-        $stmt->execute();
-    	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
-		return $stmt->fetchAll();
+      $stmt = self::$_connection->prepare("SELECT price FROM product");
+      $stmt->execute();
+      $stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
+      return $stmt->fetchAll();
     }
 
-
+    public function getAllNewProducts() {
+      $stmt = self::$_connection->prepare("SELECT * FROM product where date BETWEEN DATE_SUB(NOW(), INTERVAL 40 DAY) AND NOW()");
+      $stmt->execute();
+      $stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
+      return $stmt->fetchAll();
+    }
 
     public function insert(){
 	    $stmt = self::$_connection->prepare("INSERT INTO product(name, brand_id, categories, price, quantity_available, size, colors, keywords, reward_point, promotion, images, description) 

@@ -70,7 +70,7 @@ class ProductController extends Controller{
                     $price = $_POST['price'];
                     $quantities = $_POST['quantity'];
                     $size = serialize($_POST['size']);
-
+                    // red, blue, yellow
                     $colors = array_map('trim', explode(',', $_POST['colors']));
                     $serialized_colors = serialize($colors);
                     

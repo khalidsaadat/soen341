@@ -1,7 +1,13 @@
 <?php
     $this->view('include/header');
+    $product = $model['product'];
+
+   $name = $product->name;
+   $price = $product->price;
+   $description = $product->description;
+
 ?>
-<title>Product Name - get from db</title>
+<title><?php echo $name; ?></title>
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
@@ -42,8 +48,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="product__details__breadcrumb">
-                            <a href="./index.html">Home</a>
-                            <a href="./shop.html">Shop</a>
+                            <a href="/">Home</a>
+                            <a href="/shop/">Shop</a>
                             <span>Product Details</span>
                         </div>
                     </div>
@@ -111,19 +117,12 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8">
                         <div class="product__details__text">
-                            <h4>Hooded thermal anorak</h4>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <span> - 5 Reviews</span>
-                            </div>
-                            <h3>$270.00 <span>70.00</span></h3>
-                            <p>Coat with quilted lining and an adjustable hood. Featuring long sleeves with adjustable
-                                cuff tabs, adjustable asymmetric hem with elastic side tabs and a front zip fastening
-                            with placket.</p>
+                            <h4><?php echo $name; ?></h4>
+                        
+                            <h3>$<?php echo $price; ?></h3>
+                            
+                            <?php echo html_entity_decode($description); ?>
+                            
                             <div class="product__details__option">
                                 <div class="product__details__option__size">
                                     <span>Size:</span>

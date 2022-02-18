@@ -124,7 +124,7 @@ class ProductController extends Controller{
     }
 
     public function edit_product($product_id) {
-
+        
     }
 
 

@@ -13,8 +13,11 @@ class ShopController extends Controller{
 
 	}
 
+	// product detail page
     public function product($product_id) {
-        $this->view('shop/product_detail');
+		$product = $this->model('Product')->find($product_id);
+		
+        $this->view('shop/product_detail', ['product'=>$product]);
     }
 
 	public function cart() {

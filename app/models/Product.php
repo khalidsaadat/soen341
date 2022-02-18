@@ -43,8 +43,8 @@ class Product extends Model{
     	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
 		return $stmt->fetchAll();
     }
-
-
+    
+  
 
     public function getAllPrice() {
         $stmt = self::$_connection->prepare("SELECT price FROM product");

@@ -20,7 +20,7 @@
                             <li><a href="./contact.html">Contacts</a></li>
                         </ul>
                     </nav>
-                </div>f
+                </div>
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
                         <a href="#" class="search-switch"><img src="/assets/img/icon/search.png" alt=""></a>

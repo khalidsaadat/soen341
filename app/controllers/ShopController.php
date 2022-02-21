@@ -16,8 +16,16 @@ class ShopController extends Controller{
 	// product detail page
     public function product($product_id) {
 		$product = $this->model('Product')->find($product_id);
+
+		// if product does not exist, show error 404 view; otherwise, show the product detail page
+		if($product == null) {
+			$this->view('EXCEPTIONS/error_404');
+		}
+		else {
+			$this->view('shop/product_detail', ['product'=>$product]);
+		}
 		
-        $this->view('shop/product_detail', ['product'=>$product]);
+        
     }
 
 	public function cart() {

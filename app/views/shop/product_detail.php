@@ -85,7 +85,7 @@
                                         echo "
                                             <li class='nav-item'>
                                                 <a class='nav-link' data-toggle='tab' href='#tabs-$counter' role='tab'>
-                                                    <div class='product__thumb__pic set-bg' data-setbg='/assets/products/images/$first_image'>
+                                                    <div class='product__thumb__pic set-bg' data-setbg='/assets/products/images/$image'>
                                                     </div>
                                                 </a>
                                             </li>
@@ -125,7 +125,7 @@
                                         echo "
                                             <div class='tab-pane' id='tabs-$counter' role='tabpanel'>
                                                 <div class='product__details__pic__item'>
-                                                    <img src='/assets/products/images/$first_image' alt=''>
+                                                    <img src='/assets/products/images/$image' alt=''>
                                                 </div>
                                             </div>
                                         ";

@@ -58,7 +58,7 @@ class ProductController extends Controller{
         
                 // // store each image in the db
                 if(!empty($insertValuesSQL)){ 
-                    $image_list_array = array_map('trim', explode(',', $insertValuesSQL));
+                    $image_list_array = array_map('trim', explode(',', $insertValuesSQL)); // string to array
                     $image_list_str = implode(', ', array_filter($image_list_array)); // this is string
                     
                     $images_name = explode(',', $image_list_str); // this is array
@@ -124,7 +124,7 @@ class ProductController extends Controller{
     }
 
     public function edit_product($product_id) {
-
+        
     }
 
 

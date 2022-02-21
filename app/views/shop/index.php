@@ -346,15 +346,20 @@
                                     echo "
                                         <div class='col-lg-4 col-md-6 col-sm-6'>
                                             <div class='product__item'>
-                                                <div class='product__item__pic set-bg' data-setbg='/assets/products/images/$image_name'>
-                                        
-                                                    <ul class='product__hover'>
-                                                        <li><a href='#'><img src='/assets/img/icon/heart.png' alt=''></a></li>
-                                                        <li><a href='#'><img src='/assets/img/icon/compare.png' alt=''> <span>Compare</span></a>
-                                                        </li>
-                                                        <!-- To do: make sure to change the product id of each item. Once you loop through the product, just print their id -->
-                                                        <li><a href='/shop/product/1'><img src='/assets/img/icon/search.png' alt=''></a></li>
-                                                    </ul>
+                                                ";
+                                                ?>
+                                                <div style="cursor: pointer;" onclick="location.href='/shop/product/<?php echo $product_id; ?>'">
+                                                    <?php
+                                                    echo "
+                                                    <div class='product__item__pic set-bg' data-setbg='/assets/products/images/$image_name'>
+                                                        <ul class='product__hover'>
+                                                            <li><a href='#'><img src='/assets/img/icon/heart.png' alt=''></a></li>
+                                                            <li><a href='#'><img src='/assets/img/icon/compare.png' alt=''> <span>Compare</span></a>
+                                                            </li>
+                                                            <!-- To do: make sure to change the product id of each item. Once you loop through the product, just print their id -->
+                                                            <li><a href='/shop/product/1'><img src='/assets/img/icon/search.png' alt=''></a></li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                                 
                                                 <div class='product__item__text'>

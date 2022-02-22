@@ -3,9 +3,19 @@ class AccountController extends Controller{
 
 	// Function that shows the index page when you type 'localhost'
 	public function index(){
+		// only admin users are allowed to visit this page
+		if($_SESSION['role'] != 'user') {
+			return header('location:/');
+		}
 
-		// Send the 'products' variable to the View for rendering it to the webpage.
-		$this->view('account/index');
+		// user detail
+		$user_profile = $this->model('Profile')->findByUserId($_SESSION['user_id']);
+		if(!isset($_POST['update-account'])) {
+			$this->view('user/index', ['user_profile'=>$user_profile]);
+		}
+		else {
+			// $this->view('user/index', ['user_profile'=>$user_profile]);
+		}
 	}
 
 	public function signup() {

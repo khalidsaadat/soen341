@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
-    <link rel="stylesheet" href="/css/custom_style.css?version=1.9" type="text/css">
+    <link rel="stylesheet" href="/css/custom_style.css?version=2.0" type="text/css">
 
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -94,6 +94,10 @@
                                     $my_account_url = '/';
                                     if((isset($_SESSION['role'])) && ($_SESSION['role'] == 'admin')) {
                                         $my_account_url = '/admin/';
+                                    }
+                                    // normal user account
+                                    else if((isset($_SESSION['role'])) && ($_SESSION['role'] == 'user')) {
+                                        $my_account_url = '/account/';
                                     }
                                     // if user is logged-in, show sign out button                                    
                                     if(isset($_SESSION['user_id'])) {

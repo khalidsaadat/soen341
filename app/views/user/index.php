@@ -89,18 +89,34 @@
                             <div class="tab-pane fade show active" id="account-detail" role="tabpanel" aria-labelledby="account-detail-tab">
                                 <div class="container-fluid">
                                     <h2 class="mb-3 font-weight-bold">Account Detail</h2>
+                                    <?php
+                                        // Show the message
+                                        if(isset($_SESSION['return-msg'])) {
+                                            $error_msg = $_SESSION['return-msg'];
+                                            echo "
+                                                <div class='form_error'>
+                                                    $error_msg
+                                                </div>
+                                            ";
+                                        }
+
+                                        // reset the msg session
+                                        unset($_SESSION['return-msg']);
+
+                                     
+                                    ?>
                                     <form method="post">
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="checkout__input">
                                                     <p>Name<span>*</span></p>
-                                                    <input type="text" name="full_name" id="full_name" >
+                                                    <input type="text" name="full_name" id="full_name" value="<?php echo $name; ?>">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="checkout__input">
                                                     <p>Email<span>*</span></p>
-                                                    <input type="email" name="email" id="email" >
+                                                    <input type="email" name="email" id="email" value="<?php echo $email; ?>" >
                                                 </div>
                                             </div>
                                         </div>
@@ -109,13 +125,13 @@
                                             <div class="col-lg-6">
                                                 <div class="checkout__input">
                                                     <p>Phone<span>*</span></p>
-                                                    <input type="text" name="phone_number" id="phone_number" >
+                                                    <input type="text" name="phone_number" id="phone_number" value="<?php echo $phone; ?>">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="checkout__input">
                                                     <p>Address<span>*</span></p>
-                                                    <input type="text" name="address" id="address" >
+                                                    <input type="text" name="address" id="address" value="<?php echo $address; ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -129,6 +145,85 @@
                                 <div class="container-fluid">
                                     <h2 class="mb-3 font-weight-bold">Orders</h2>
                                     
+                                    <div class="col-lg-12">
+                                        <div class="row" style="padding-bottom: 10px;">
+                                            <div class="col-lg-12" style="border: 1px solid #EFF2F2; border-radius: 5px;">
+                                                <div class="row" style="background: #EFF2F2; padding: 10px;">
+                                                    <div class="col-lg-6">
+                                                        <span><strong>Order #: </strong>1234x89b</span> 
+                                                        <span style="margin-left: 20px; margin-right: 20px;"> | </span>
+                                                        <span><strong>Total: </strong>$123.99</span> 
+                                                    </div>
+                                                    <div class="col-lg-6 text-right">
+                                                        <span><strong>Order Date: </strong>12 February, 2022</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="padding: 10px;">
+                                                    <div class="col-lg-2">
+                                                        <img src="/assets/products/images/620b5f66c9b0d.jpg" alt="" style="height: 110px;">
+                                                    </div>
+                                                    <div class="col-lg-7" style="padding-left: 0px;">
+                                                        <div style="font-size: 18px; font-weight: bold;">Product Name</div>
+                                                        <div>
+                                                            Size: M
+                                                        </div>
+                                                        <div>
+                                                            Color: Red
+                                                        </div>
+                                                        <div>
+                                                            Quantity: 2
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 text-right">
+                                                        <div style="font-weight: bold;"> Expected Delivery</div>
+                                                        <div style="font-size: 14px;">30 February, 2022 by 8pm</div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-12" style="border: 1px solid #EFF2F2; border-radius: 5px;">
+                                                <div class="row" style="background: #EFF2F2; padding: 10px;">
+                                                    <div class="col-lg-6">
+                                                        <span><strong>Order #: </strong>1234x89b</span> 
+                                                        <span style="margin-left: 20px; margin-right: 20px;"> | </span>
+                                                        <span><strong>Total: </strong>$123.99</span> 
+                                                    </div>
+                                                    <div class="col-lg-6 text-right">
+                                                        <span><strong>Order Date: </strong>12 February, 2022</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="padding: 10px;">
+                                                    <div class="col-lg-2">
+                                                        <img src="/assets/products/images/620c78e33d54f.jpg" alt="" style="height: 110px;">
+                                                    </div>
+                                                    <div class="col-lg-7" style="padding-left: 0px;">
+                                                        <div style="font-size: 18px; font-weight: bold;">Product Name</div>
+                                                        <div>
+                                                            Size: M
+                                                        </div>
+                                                        <div>
+                                                            Color: Red
+                                                        </div>
+                                                        <div>
+                                                            Quantity: 2
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 text-right">
+                                                        <div style="font-weight: bold;"> Expected Delivery</div>
+                                                        <div style="font-size: 14px;">30 February, 2022 by 8pm</div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    
+
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="wish-list" role="tabpanel" aria-labelledby="wish-list-tab">

@@ -10,11 +10,34 @@ class AccountController extends Controller{
 
 		// user detail
 		$user_profile = $this->model('Profile')->findByUserId($_SESSION['user_id']);
+		$profile_id = $user_profile->profile_id;
+
 		if(!isset($_POST['update-account'])) {
 			$this->view('user/index', ['user_profile'=>$user_profile]);
 		}
 		else {
-			// $this->view('user/index', ['user_profile'=>$user_profile]);
+			// get users information
+			$current_profile = $this->model('Profile')->find($user_profile->profile_id);
+
+			$full_name = $_POST['full_name'];
+			$phone_number = $_POST['phone_number'];
+			$email = $_POST['email'];
+			$address = $_POST['address'];
+
+			// update profile table
+			$current_profile->full_name = $full_name;
+			$current_profile->email = $email;
+			$current_profile->phone_number = $phone_number;
+			$current_profile->address = $address;
+
+			$current_profile->update();
+
+			// redirect with success msg
+			$_SESSION['return-msg'] = "Profile updated successfully";
+
+			return header('location:/account');
+
+
 		}
 	}
 

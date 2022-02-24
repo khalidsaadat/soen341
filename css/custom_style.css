@@ -468,3 +468,8 @@ img.avatar {
 	color: blue;
 	text-decoration: underline;
 }
+
+.modal-footer .site-btn {
+	font-size: 13px;
+	padding: 10px 10px;
+}

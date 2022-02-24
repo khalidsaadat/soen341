@@ -181,7 +181,6 @@
                                     <h2 class="mb-3 font-weight-bold">Orders</h2>
                                     
                                     <div class="col-lg-12">
-
                                         <div class="row" style="margin-bottom: 10px;">
                                             <div class="col-lg-12 order-item">
                                                 <div class="row order-header">
@@ -256,7 +255,7 @@
                                                         <div class="delivery-date">30 February, 2022 by 8pm</div>
                                                         <hr class="delivery-date-hr">
                                                         <div class="cancel-order">
-                                                            <a href="#">Cancel Order</a>
+                                                            <a href="#" data-toggle="modal" data-target="#cancel-order-modal">Cancel Order</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -266,6 +265,27 @@
 
                                         
 
+                                    </div>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="cancel-order-modal" tabindex="-1" role="dialog" aria-labelledby="cancel-order-modal-label" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title font-weight" id="cancel-order-modal-label">Product Name</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are you sure you want to cancel your order?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="site-btn" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="site-btn">Cancel Order</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     

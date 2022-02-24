@@ -439,6 +439,11 @@ img.avatar {
 	background: #EFF2F2; padding: 10px;
 }
 
+.order-item .order-footer {
+	border-top: 1px solid #EFF2F2;
+	background: #fcf9f9; padding: 10px;
+}
+
 .order-item .header-title-divider {
 	margin-left: 20px; margin-right: 20px;
 }

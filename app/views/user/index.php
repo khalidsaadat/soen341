@@ -181,48 +181,7 @@
                                     <h2 class="mb-3 font-weight-bold">Orders</h2>
                                     
                                     <div class="col-lg-12">
-                                        <div class="row" style="margin-bottom: 10px;">
-                                            <div class="col-lg-12 order-item">
-                                                <div class="row order-header">
-                                                    <div class="col-lg-6">
-                                                        <span><strong>Order #: </strong>1234x89b</span> 
-                                                        <span class="header-title-divider"> | </span>
-                                                        <span><strong>Total: </strong>$123.99</span> 
-                                                    </div>
-                                                    <div class="col-lg-6 text-right">
-                                                        <span><strong>Order Date: </strong>12 February, 2022</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row pd-10">
-                                                    <div class="col-lg-2">
-                                                        <img src="/assets/products/images/620b5f66c9b0d.jpg" alt="">
-                                                    </div>
-                                                    <div class="col-lg-7 pd-l-0">
-                                                        <div class="order-item-title">Product Name</div>
-                                                        <div>
-                                                            Size: M
-                                                        </div>
-                                                        <div>
-                                                            Color: Red
-                                                        </div>
-                                                        <div>
-                                                            Quantity: 2
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 text-right">
-                                                        <div class="font-weight-bold"> Expected Delivery</div>
-                                                        <div class="delivery-date">30 February, 2022 by 8pm</div>
-                                                        <hr class="delivery-date-hr">
-                                                        <div class="cancel-order">
-                                                            <a href="#">Cancel Order</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-
-                                        <div class="row pd-b-10">
+                                        <div class="row" style="margin-bottom: 15px;">
                                             <div class="col-lg-12 order-item">
                                                 <div class="row order-header">
                                                     <div class="col-lg-6">
@@ -254,6 +213,13 @@
                                                         <div class="font-weight-bold"> Expected Delivery</div>
                                                         <div class="delivery-date">30 February, 2022 by 8pm</div>
                                                         <hr class="delivery-date-hr">
+                                                        <div data-toggle="modal" data-target="#track-order-modal">
+                                                            <span style="font-weight: bold; cursor: pointer;"><img src="/assets/icons/delivery.png" alt="" style="height: 22px;"> Track Order</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row order-footer text-right">
+                                                    <div class="col-lg-12">
                                                         <div class="cancel-order">
                                                             <a href="#" data-toggle="modal" data-target="#cancel-order-modal">Cancel Order</a>
                                                         </div>
@@ -263,11 +229,109 @@
                                             </div>
                                         </div>
 
-                                        
+                                        <div class="row" style="margin-bottom: 15px;">
+                                            <div class="col-lg-12 order-item">
+                                                <div class="row order-header">
+                                                    <div class="col-lg-6">
+                                                        <span><strong>Order #: </strong>1234x89b</span> 
+                                                        <span class="header-title-divider"> | </span>
+                                                        <span><strong>Total: </strong>$123.99</span> 
+                                                    </div>
+                                                    <div class="col-lg-6 text-right">
+                                                        <span><strong>Order Date: </strong>12 February, 2022</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row pd-10">
+                                                    <div class="col-lg-2">
+                                                        <img src="/assets/products/images/620b5f66c9b0d.jpg" alt="">
+                                                    </div>
+                                                    <div class="col-lg-7 pd-l-0">
+                                                        <div class="order-item-title">Product Name</div>
+                                                        <div>
+                                                            Size: M
+                                                        </div>
+                                                        <div>
+                                                            Color: Red
+                                                        </div>
+                                                        <div>
+                                                            Quantity: 2
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 text-right">
+                                                        <div class="font-weight-bold"> Expected Delivery</div>
+                                                        <div class="delivery-date">30 February, 2022 by 8pm</div>
+                                                        <hr class="delivery-date-hr">
+                                                        <div data-toggle="modal" data-target="#track-order-modal">
+                                                            <span style="font-weight: bold; cursor: pointer;"><img src="/assets/icons/delivery.png" alt="" style="height: 22px;"> Track Order</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row order-footer text-right">
+                                                    <div class="col-lg-12">
+                                                        <div class="cancel-order">
+                                                            <a href="#" data-toggle="modal" data-target="#cancel-order-modal">Cancel Order</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
 
                                     </div>
 
-                                    <!-- Modal -->
+                                    <!-- Track Modal -->
+                                    <div class="modal fade" id="track-order-modal" tabindex="-1" role="dialog" aria-labelledby="track-order-modal-label" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    
+                                                    <ul class="steps">
+                                                        <li class="step step-success">
+                                                            <div class="step-content">
+                                                                <span class="step-circle">1</span>
+                                                                <span class="step-text">Received</span>
+                                                            </div>
+                                                        </li>
+                                                        <li class="step step-active">
+                                                            <div class="step-content">
+                                                                <span class="step-circle">2</span>
+                                                                <span class="step-text">Preparing</span>
+                                                            </div>
+                                                        </li>
+                                                        <li class="step">
+                                                            <div class="step-content">
+                                                                <span class="step-circle">3</span>
+                                                                <span class="step-text">Shipping</span>
+                                                            </div>
+                                                        </li>
+                                                        <li class="step">
+                                                            <div class="step-content">
+                                                                <span class="step-circle">4</span>
+                                                                <span class="step-text">Delivered</span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+
+                                                    <div>
+                                                        <hr>
+                                                        <div class="row" style="margin-left: 20px;">
+                                                            <ul>
+                                                                <li style="padding-bottom: 5px;"><strong>Order recieved</strong>: 20 February, 2022</li>
+                                                                <li><strong>Preparing</strong>: 22 February, 2022</li>
+                                                            </ul>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="site-btn" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Cancel Modal -->
                                     <div class="modal fade" id="cancel-order-modal" tabindex="-1" role="dialog" aria-labelledby="cancel-order-modal-label" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">

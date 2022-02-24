@@ -89,6 +89,7 @@
                             <div class="tab-pane fade show active" id="account-detail" role="tabpanel" aria-labelledby="account-detail-tab">
                                 <div class="container-fluid">
                                     <h2 class="mb-3 font-weight-bold">Account Detail</h2>
+                                    
                                     <?php
                                         // Show the message
                                         if(isset($_SESSION['return-msg'])) {
@@ -100,10 +101,18 @@
                                             ";
                                         }
 
+                                        if(isset($model['error_msg'])) {
+                                            $error_msg = $model['error_msg'];
+                                            echo "
+                                                <div class='form_error'>
+                                                    $error_msg
+                                                </div>
+                                            ";
+                                        }
+
                                         // reset the msg session
                                         unset($_SESSION['return-msg']);
 
-                                     
                                     ?>
                                     <form method="post">
                                         <div class="row">
@@ -136,8 +145,34 @@
                                             </div>
                                         </div>
 
+                                        <hr>
+                                        <h3 class="mb-3 font-weight">Security</h3>
+
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="checkout__input">
+                                                    <p>Current Password</p>
+                                                    <input type="password" name="current_pwd" id="current_pwd">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="checkout__input">
+                                                    <p>New Password</p>
+                                                    <input type="password" name="new_pwd" id="new_pwd">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="checkout__input">
+                                                    <p>Confirm New Password</p>
+                                                    <input type="password" name="confirm_new_pwd" id="confirm_new_pwd">
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <button type="submit" name="update-account" class="site-btn">UDPATE</button>
+                                        
                                     </form>
+
                                     
                                 </div>
                             </div>
@@ -146,24 +181,25 @@
                                     <h2 class="mb-3 font-weight-bold">Orders</h2>
                                     
                                     <div class="col-lg-12">
-                                        <div class="row" style="padding-bottom: 10px;">
-                                            <div class="col-lg-12" style="border: 1px solid #EFF2F2; border-radius: 5px;">
-                                                <div class="row" style="background: #EFF2F2; padding: 10px;">
+
+                                        <div class="row" style="margin-bottom: 10px;">
+                                            <div class="col-lg-12 order-item">
+                                                <div class="row order-header">
                                                     <div class="col-lg-6">
                                                         <span><strong>Order #: </strong>1234x89b</span> 
-                                                        <span style="margin-left: 20px; margin-right: 20px;"> | </span>
+                                                        <span class="header-title-divider"> | </span>
                                                         <span><strong>Total: </strong>$123.99</span> 
                                                     </div>
                                                     <div class="col-lg-6 text-right">
                                                         <span><strong>Order Date: </strong>12 February, 2022</span>
                                                     </div>
                                                 </div>
-                                                <div class="row" style="padding: 10px;">
+                                                <div class="row pd-10">
                                                     <div class="col-lg-2">
-                                                        <img src="/assets/products/images/620b5f66c9b0d.jpg" alt="" style="height: 110px;">
+                                                        <img src="/assets/products/images/620b5f66c9b0d.jpg" alt="">
                                                     </div>
-                                                    <div class="col-lg-7" style="padding-left: 0px;">
-                                                        <div style="font-size: 18px; font-weight: bold;">Product Name</div>
+                                                    <div class="col-lg-7 pd-l-0">
+                                                        <div class="order-item-title">Product Name</div>
                                                         <div>
                                                             Size: M
                                                         </div>
@@ -175,32 +211,36 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 text-right">
-                                                        <div style="font-weight: bold;"> Expected Delivery</div>
-                                                        <div style="font-size: 14px;">30 February, 2022 by 8pm</div>
+                                                        <div class="font-weight-bold"> Expected Delivery</div>
+                                                        <div class="delivery-date">30 February, 2022 by 8pm</div>
+                                                        <hr class="delivery-date-hr">
+                                                        <div class="cancel-order">
+                                                            <a href="#">Cancel Order</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-lg-12" style="border: 1px solid #EFF2F2; border-radius: 5px;">
-                                                <div class="row" style="background: #EFF2F2; padding: 10px;">
+                                        <div class="row pd-b-10">
+                                            <div class="col-lg-12 order-item">
+                                                <div class="row order-header">
                                                     <div class="col-lg-6">
                                                         <span><strong>Order #: </strong>1234x89b</span> 
-                                                        <span style="margin-left: 20px; margin-right: 20px;"> | </span>
+                                                        <span class="header-title-divider"> | </span>
                                                         <span><strong>Total: </strong>$123.99</span> 
                                                     </div>
                                                     <div class="col-lg-6 text-right">
                                                         <span><strong>Order Date: </strong>12 February, 2022</span>
                                                     </div>
                                                 </div>
-                                                <div class="row" style="padding: 10px;">
+                                                <div class="row pd-10">
                                                     <div class="col-lg-2">
-                                                        <img src="/assets/products/images/620c78e33d54f.jpg" alt="" style="height: 110px;">
+                                                        <img src="/assets/products/images/620c78e33d89f.jpg" alt="">
                                                     </div>
-                                                    <div class="col-lg-7" style="padding-left: 0px;">
-                                                        <div style="font-size: 18px; font-weight: bold;">Product Name</div>
+                                                    <div class="col-lg-7 pd-l-0">
+                                                        <div class="order-item-title">Product Name</div>
                                                         <div>
                                                             Size: M
                                                         </div>
@@ -212,13 +252,19 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 text-right">
-                                                        <div style="font-weight: bold;"> Expected Delivery</div>
-                                                        <div style="font-size: 14px;">30 February, 2022 by 8pm</div>
+                                                        <div class="font-weight-bold"> Expected Delivery</div>
+                                                        <div class="delivery-date">30 February, 2022 by 8pm</div>
+                                                        <hr class="delivery-date-hr">
+                                                        <div class="cancel-order">
+                                                            <a href="#">Cancel Order</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 
                                             </div>
                                         </div>
+
+                                        
 
                                     </div>
 

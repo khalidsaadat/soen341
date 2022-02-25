@@ -71,5 +71,5 @@ This project is built with PHP; hence, it needs an Apache system, such as XAMPP.
 - Open the cloned folder and open `soen341` folder and copy its contents into `htdocs` folder inside `XAMPP` folder.
 
 ## Version
-v.1.0
+v.2.0
 

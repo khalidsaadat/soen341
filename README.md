@@ -1,4 +1,6 @@
 # SOEN 341
+[![php-composer](https://github.com/khalidsaadat/soen341/actions/workflows/php.yml/badge.svg?branch=main)](https://github.com/khalidsaadat/soen341/actions/workflows/php.yml)
+
 [![Generic badge](https://img.shields.io/badge/SOEN341-Project-<BLUE>.svg)](https://shields.io/)
 
 [![Generic badge](https://img.shields.io/badge/VERSION-Sprint2-<BLUE>.svg)](https://shields.io/)

@@ -1,10 +1,6 @@
 # SOEN 341
 [![php-composer](https://github.com/khalidsaadat/soen341/actions/workflows/php.yml/badge.svg?branch=main)](https://github.com/khalidsaadat/soen341/actions/workflows/php.yml)
 
-[![Generic badge](https://img.shields.io/badge/SOEN341-Project-<BLUE>.svg)](https://shields.io/)
-
-[![Generic badge](https://img.shields.io/badge/VERSION-Sprint2-<BLUE>.svg)](https://shields.io/)
-
 
 ## :bulb:Objective
 The objective of this project is to implement a simplified version of Amazon (online shopping website) that will provide customers with the convenience of 24/7 shopping from anywhere. This repository is going to be used to gather all relevant information regarding our website. This includes the information about the teammates, any codes that were written for the website, sprints following the agile methodology, and any other important documents.

@@ -18,7 +18,7 @@ jobs:
       run: composer install
     
     - name: Run phpstan on Controller
-      run: vendor/bin/phpstan analylse app
+      run: vendor/bin/phpstan analyse app
       
     - name: Run phpstan on Views
       run: vendor/bin/phpstan analyse app/views

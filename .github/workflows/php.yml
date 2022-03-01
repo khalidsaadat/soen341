@@ -1,0 +1,24 @@
+name: PHP Composer
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+  
+    - name: Install Composer
+      run: composer install
+    
+    - name: Run phpstan on Controller
+      run: vendor/bin/phpstan analylse app
+      
+    - name: Run phpstan on Views
+      run: vendor/bin/phpstan analyse app/views

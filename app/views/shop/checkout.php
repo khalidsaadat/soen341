@@ -61,6 +61,7 @@
                 <form action="#">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
+                           
                             <h6 class="coupon__code"><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click
                             here</a> to enter your code</h6>
                             <h6 class="checkout__title">Billing Details</h6>
@@ -144,10 +145,72 @@
                                 <h4 class="order__title">Your order</h4>
                                 <div class="checkout__order__products">Product <span>Total</span></div>
                                 <ul class="checkout__total__products">
-                                    <li>01. Vanilla salted caramel <span>$ 300.0</span></li>
-                                    <li>02. German chocolate <span>$ 170.0</span></li>
-                                    <li>03. Sweet autumn <span>$ 170.0</span></li>
-                                    <li>04. Cluten free mini dozen <span>$ 110.0</span></li>
+                                    <li class="font-weight-bold">01. Vanilla salted caramel 
+                                        <span style="cursor: pointer;"> 
+                                            <span class="icon_heart" data-toggle='tooltip' data-placement='bottom' title='Add to wishlist' style="margin-left: 10px;"></span>
+                                            <span class="icon_pencil" data-toggle='tooltip' data-placement='bottom' title='Edit' onclick="location.href='/shop/edit_product_wrapper/19'"></span> 
+                                        </span>
+                                        <div>
+                                            <span style="float: left; font-style: italic; font-weight: normal;">$ 170.00</span> 
+                                            
+                                            <span style="float: left; margin-left: 10px; font-weight: normal;">|</span>
+                                            <span style="float: left; margin-left: 10px; font-weight: normal;">Qty: 2</span>
+
+                                            <span style="float: left; margin-left: 10px; font-weight: normal;">|</span>
+                                            <span style="float: left; margin-left: 10px; font-weight: normal;">Size: M</span>
+
+                                            <span style="float: left; margin-left: 10px; font-weight: normal;">|</span>
+                                            <span class="product__details__option__color checkout-color" style="float: left; margin-left: 10px; top: 2px; font-weight: normal;">
+                                                <label style='background: red; height: 21px; width: 21px;' for='sp-1' data-toggle='tooltip' data-placement='top' title='Red'>
+                                                    <input type='radio' id='sp-1'>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <hr>
+                                    <li class="font-weight-bold">02. German chocolate
+                                        <span style="cursor: pointer;"> 
+                                            <span class="icon_heart_alt" data-toggle='tooltip' data-placement='bottom' title='Add to wishlist' style="margin-left: 10px;"></span>
+                                            <span class="icon_pencil" data-toggle='tooltip' data-placement='bottom' title='Edit' onclick="location.href='/shop/edit_product_wrapper/19'"></span> 
+                                        </span>
+                                        <div>
+                                            <span style="float: left; font-style: italic; font-weight: normal;">$ 170.00</span> 
+                                            
+                                            <span style="float: left; margin-left: 10px; font-weight: normal;">|</span>
+                                            <span style="float: left; margin-left: 10px; font-weight: normal;">Qty: 2</span>
+
+                                            <span style="float: left; margin-left: 10px; font-weight: normal;">|</span>
+                                            <span style="float: left; margin-left: 10px; font-weight: normal;">Size: M</span>
+
+                                            <span style="float: left; margin-left: 10px; font-weight: normal;">|</span>
+                                            <span class="product__details__option__color checkout-color" style="float: left; margin-left: 10px; top: 2px; font-weight: normal;">
+                                                <label style='background: blue; height: 21px; width: 21px;' for='sp-1' data-toggle='tooltip' data-placement='top' title='Blue'>
+                                                    <input type='radio' id='sp-1'>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <hr>
+                                    <li class="font-weight-bold">03. Sweet autumn
+                                        <span> 
+                                            <span class="icon_heart_alt" style="padding-left: 10px;"></span>
+                                            <span class="icon_pencil"></span> 
+                                        </span>
+                                        <div>
+                                            <span style="float: left; font-style: italic; font-weight: normal;">$ 170.00</span>
+                                        </div>
+                                    </li>
+                                    <hr>
+                                    <li class="font-weight-bold">04. Cluten free mini dozen
+                                        <span> 
+                                            <span class="icon_heart_alt" style="padding-left: 10px;"></span>
+                                            <span class="icon_pencil"></span> 
+                                        </span>
+                                        <div>
+                                            <span style="float: left; font-style: italic; font-weight: normal;">$ 170.00</span>
+                                        </div>
+                                    </li>
+                                    
                                 </ul>
                                 <ul class="checkout__total__all">
                                     <li>Subtotal <span>$750.99</span></li>

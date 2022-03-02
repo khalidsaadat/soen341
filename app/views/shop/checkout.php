@@ -153,6 +153,16 @@
                                     <li>Subtotal <span>$750.99</span></li>
                                     <li>Total <span>$750.99</span></li>
                                 </ul>
+                                <p>
+                                <?php
+                                    $start    = new DateTime('today');
+                                    $interval = new DateInterval('P3W');
+                                    $period   = new DatePeriod($start, $interval, 1, DatePeriod::EXCLUDE_START_DATE);
+                                    foreach($period as $deliveryDate) {
+                                        echo "Expected Delivery Date: " . $deliveryDate->format('d-m-Y');
+                                    }
+                                ?>
+                                </p>
                                 <div class="checkout__input__checkbox">
                                     <label for="acc-or">
                                         Add as a gift?

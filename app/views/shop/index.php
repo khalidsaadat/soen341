@@ -245,40 +245,44 @@
                     </div>
                     <div class="row">
                         
-                            <?php
-                                
+                        <?php                                                             
+                      
+                           foreach($products as $product)
+                           {
+                               $product_id = $product->product_id;
+                               $name = $product->name;
+                               $price = $product->price;
 
-                                foreach($products as $product)
-                                {
-                                    $product_id = $product->product_id;
-                                    $name = $product->name;
-                                    $price = $product->price;
+                               $colors_serialized = unserialize($product->colors);
+                               $colors_array = array_filter($colors_serialized);
+                             
+                               $image = $product->images;
+                               $images_name = explode(',', $image);
+                               $image_name = $images_name[0];
+                   
+                            
+                               echo "
+                           
+                                   <div class='col-lg-4 col-md-6 col-sm-6'>
+                                       <div class='product__item'>
+                                           <div class='product__item__pic set-bg' data-setbg='/assets/products/images/$image_name'>
+                                               <ul class='product__hover'>
+                                                   <li><a href='#'><img src='/assets/img/icon/heart.png' alt=''></a></li>
+                                                   <li><a href='#'><img src='/assets/img/icon/compare.png' alt=''> <span>Compare</span></a>
+                                                   </li>
+                                                   <!-- To do: make sure to change the product id of each item. Once you loop through the product, just print their id -->
+                                                   <li><a href='/shop/product/1'><img src='/assets/img/icon/search.png' alt=''></a></li>
+                                               </ul>
+                                           </div>
+                                           
+                                            <div class='product__item__text'>
+                                                <h6>$name</h6>
 
-                                    $colors_serialized = unserialize($product->colors);
-                                    $colors_array = array_filter($colors_serialized);
-                                  
-                                    $image = $product->images;
-                                    $images_name = explode(',', $image);
-                                    $image_name = $images_name[0];
-                        
-                                    echo "
-                                        <div class='col-lg-4 col-md-6 col-sm-6'>
-                                            <div class='product__item'>
-                                                <div class='product__item__pic set-bg' data-setbg='/assets/products/images/$image_name'>
+
+                                                <form method='post'>
+                                                    <input type='hidden' name='product_id' id='product_id' value=$product_id>
+                                                    <input type='submit' class='add-cart' value='add to cart' name='add_to_cart' id='add_to_cart'>
                                         
-                                                    <ul class='product__hover'>
-                                                        <li><a href='#'><img src='/assets/img/icon/heart.png' alt=''></a></li>
-                                                        <li><a href='#'><img src='/assets/img/icon/compare.png' alt=''> <span>Compare</span></a>
-                                                        </li>
-                                                        <!-- To do: make sure to change the product id of each item. Once you loop through the product, just print their id -->
-                                                        <li><a href='/shop/product/1'><img src='/assets/img/icon/search.png' alt=''></a></li>
-                                                    </ul>
-                                                </div>
-                                                
-                                                <div class='product__item__text'>
-                                                    <h6>$name</h6>
-                                                    <a href='#' class='add-cart'>+ Add To Cart</a>
-
                                                     <h5>$$price</h5>
                                                     <div class='product__color__select'>
                                                         ";
@@ -291,16 +295,21 @@
                                                         }
                                                         echo"
                                                     </div>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-                                    ";
-                                }
-                            ?>
+                                                </form>
 
-                        
-                    </div>
+                                            </div>
+                                           
+                                       </div>
+                                   </div>
+                                ";
+        
+                            }
+                        ?>
+                       
+                   
+
+                    
+                    
                    
                 </div>
             </div>

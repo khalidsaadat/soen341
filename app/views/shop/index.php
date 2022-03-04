@@ -279,10 +279,9 @@
                                                 <h6>$name</h6>
 
 
-                                                <form method='post'>
+                                                <form method='post' id='add_to_cart_form'>
                                                     <input type='hidden' name='product_id' id='product_id' value=$product_id>
-                                                    <input type='submit' class='add-cart' value='add to cart' name='add_to_cart' id='add_to_cart'>
-                                        
+                                                    <input type='submit' class='add-cart' value='+ Add To Cart' name='add_to_cart' id='add_to_cart'>
                                                     <h5>$$price</h5>
                                                     <div class='product__color__select'>
                                                         ";

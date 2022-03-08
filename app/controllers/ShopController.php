@@ -11,6 +11,11 @@ class ShopController extends Controller{
 
 		// add to cart
 		if(isset($_POST['add_to_cart'])) {
+			// redirect user to login page if they are not logged in
+			if(!isset($_SESSION['user_id'])) {
+				$_SESSION['login_flag'] = 1;
+				return header('location:/account/login');
+			}
 			$product_quantity = 1;
 			$product_id = $_POST['product_id'];
 			$product_user_id = $_SESSION['user_id'];

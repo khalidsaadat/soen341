@@ -327,22 +327,21 @@
                     </div>
                     <div class="row">
                         
-                            <?php
-                                
+                        <?php                                                             
+                      
+                           foreach($products as $product)
+                           {
+                               $product_id = $product->product_id;
+                               $name = $product->name;
+                               $price = $product->price;
 
-                                foreach($products as $product)
-                                {
-                                    $product_id = $product->product_id;
-                                    $name = $product->name;
-                                    $price = $product->price;
-
-                                    $colors_serialized = unserialize($product->colors);
-                                    $colors_array = array_filter($colors_serialized);
-                                  
-                                    $image = $product->images;
-                                    $images_name = explode(',', $image);
-                                    $image_name = $images_name[0];
-                        
+                               $colors_serialized = unserialize($product->colors);
+                               $colors_array = array_filter($colors_serialized);
+                             
+                               $image = $product->images;
+                               $images_name = explode(',', $image);
+                               $image_name = $images_name[0];
+                   
                                     echo "
                                         <div class='col-lg-4 col-md-6 col-sm-6'>
                                             <div class='product__item'>
@@ -366,6 +365,9 @@
                                                     <h6>$name</h6>
                                                     <a href='#' class='add-cart'>+ Add To Cart</a>
 
+                                                <form method='post' id='add_to_cart_form'>
+                                                    <input type='hidden' name='product_id' id='product_id' value=$product_id>
+                                                    <input type='submit' class='add-cart' value='+ Add To Cart' name='add_to_cart' id='add_to_cart'>
                                                     <h5>$$price</h5>
                                                     <div class='product__color__select'>
                                                         ";
@@ -378,16 +380,21 @@
                                                         }
                                                         echo"
                                                     </div>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-                                    ";
-                                }
-                            ?>
+                                                </form>
 
-                        
-                    </div>
+                                            </div>
+                                           
+                                       </div>
+                                   </div>
+                                ";
+        
+                            }
+                        ?>
+                       
+                   
+
+                    
+                    
                    
                 </div>
             </div>

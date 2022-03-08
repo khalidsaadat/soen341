@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
     <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css?version=0.2" type="text/css">
     <link rel="stylesheet" href="/css/custom_style.css?version=1.9" type="text/css">
 
     <script src="/js/jquery-3.3.1.min.js"></script>

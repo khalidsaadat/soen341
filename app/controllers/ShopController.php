@@ -8,6 +8,37 @@ class ShopController extends Controller{
 		// get the products' basic information
 		$products_basic_info = $this->model('Product')->getAllBasicInfo();
 		$products = $this->model('Product')->getAllActive();
+
+		// add to cart
+		if(isset($_POST['add_to_cart'])) {
+			$product_quantity = 1;
+			$product_id = $_POST['product_id'];
+			$product_user_id = $_SESSION['user_id'];
+
+			$select_cart = $this->model('Cart')->findByProductIdByUserId($product_id, $product_user_id);
+			// if it is false, add the product to the cart
+			if(!$select_cart) {
+				$new_product = $this->model('Cart');
+				$new_product->product_id = $product_id;
+				$new_product->quantity = $product_quantity;
+				$new_product->user_id = $product_user_id;
+
+				$new_product->insert();
+
+				echo 'added to the cart';
+			}
+			else {
+				// the product is already in the cart
+				$current_quantity = $select_cart->quantity;
+				$updated_quantity = $current_quantity + 1;
+
+				// update the cart table
+				$select_cart->quantity = $updated_quantity;
+				$select_cart->updateQuantity();
+
+				echo 'updated the quantity';
+			}
+		}
     
 		$all_brands = $this->model('Brand')->getAll();
 		

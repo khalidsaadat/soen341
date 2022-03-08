@@ -15,7 +15,7 @@ class ShopController extends Controller{
 			$product_id = $_POST['product_id'];
 			$product_user_id = $_SESSION['user_id'];
 
-			$select_cart = $this->model('Cart')->findByProductId($product_id);
+			$select_cart = $this->model('Cart')->findByProductIdByUserId($product_id, $product_user_id);
 			// if it is false, add the product to the cart
 			if(!$select_cart) {
 				$new_product = $this->model('Cart');
@@ -29,10 +29,15 @@ class ShopController extends Controller{
 			}
 			else {
 				// the product is already in the cart
-				echo 'the product already exists';
-			}
+				$current_quantity = $select_cart->quantity;
+				$updated_quantity = $current_quantity + 1;
 
-			
+				// update the cart table
+				$select_cart->quantity = $updated_quantity;
+				$select_cart->updateQuantity();
+
+				echo 'updated the quantity';
+			}
 		}
     
 		$this->view('shop/index', ['products'=>$products, 'products_basic_info'=>$products_basic_info]);
@@ -40,6 +45,7 @@ class ShopController extends Controller{
 	}
 
     public function product($product_id) {
+
         $this->view('shop/product_detail');
     }
 

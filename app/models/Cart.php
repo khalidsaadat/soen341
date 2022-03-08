@@ -28,6 +28,15 @@ class Cart extends Model{
         return $stmt->fetch();
     }
 
+    public function findByProductIdByUserId($product_id, $user_id)
+    {
+        $stmt = self::$_connection->prepare("SELECT * FROM cart WHERE product_id = :product_id AND user_id =:user_id ");
+        $stmt->execute(['product_id'=>$product_id,
+                        'user_id'=>$user_id]);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, 'Cart');
+        return $stmt->fetch();
+    }
+
     public function insert(){
 	    $stmt = self::$_connection->prepare("INSERT INTO cart(product_id, quantity, user_id) VALUES(:product_id, :quantity, :user_id)");
         $stmt->execute(['product_id'=>$this->product_id,
@@ -44,6 +53,12 @@ class Cart extends Model{
         $stmt = self::$_connection->prepare("UPDATE brand SET brand_name = :brand_name WHERE brand_id = :brand_id");
         $stmt->execute(['brand_name'=>$this->brand_name,
                         'brand_id'=>$this->brand_id]);
+    }
+
+    public function updateQuantity() {
+        $stmt = self::$_connection->prepare("UPDATE cart SET quantity = :quantity WHERE product_id = :product_id");
+        $stmt->execute(['quantity'=>$this->quantity,
+                        'product_id'=>$this->product_id]);
     }
 
 }

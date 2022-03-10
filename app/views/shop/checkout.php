@@ -196,7 +196,7 @@
                                                                 <span class='icon_heart' data-toggle='tooltip' data-placement='bottom' title='Add to wishlist' style='margin-left: 10px;'></span>
                                                                 ";
                                                                 ?>
-                                                                <span class='icon_pencil' data-toggle='tooltip' data-placement='bottom' title='Edit' onclick="location.href='/shop/edit_product_wrapper/<?php echo $product_id; ?>'"></span> 
+                                                                <span class='icon_pencil' data-toggle='tooltip' data-placement='bottom' title='Edit' onclick="location.href='/shop/product/<?php echo $product_id; ?>/edit'"></span> 
                                                                 <?php
                                                                 echo "
                                                             </span>

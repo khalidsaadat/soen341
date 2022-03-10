@@ -39,9 +39,10 @@ class Cart extends Model{
 
     public function findByProductIdByUserId($product_id, $user_id)
     {
-        $stmt = self::$_connection->prepare("SELECT * FROM cart WHERE product_id = :product_id AND user_id =:user_id ");
+        $stmt = self::$_connection->prepare("SELECT * FROM cart WHERE product_id = :product_id AND user_id =:user_id AND status = :status");
         $stmt->execute(['product_id'=>$product_id,
-                        'user_id'=>$user_id]);
+                        'user_id'=>$user_id,
+                        'status'=>'0']);
         $stmt->setFetchMode(PDO::FETCH_CLASS, 'Cart');
         return $stmt->fetch();
     }
@@ -70,5 +71,15 @@ class Cart extends Model{
                         'product_id'=>$this->product_id]);
     }
 
+    public function updateCart() {
+        $stmt = self::$_connection->prepare("UPDATE cart SET size = :size, color = :color, quantity = :quantity WHERE product_id = :product_id AND user_id = :user_id AND status = :status");
+        $stmt->execute(['size'=>$this->size,
+                        'color'=>$this->color,
+                        'quantity'=>$this->quantity,
+                        'product_id'=>$this->product_id,
+                        'user_id'=>$this->user_id,
+                        'status'=>'0',]);
+    }
+
 }
-?>
+?>  

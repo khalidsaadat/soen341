@@ -115,7 +115,7 @@ class ShopController extends Controller{
 	}
 
 	// product detail page
-    public function product($product_id) {
+    public function product($product_id, $type="view") {
 		$product = $this->model('Product')->find($product_id);
 
 		// if product does not exist, show error 404 view; otherwise, show the product detail page
@@ -123,10 +123,41 @@ class ShopController extends Controller{
 			$this->view('EXCEPTIONS/error_404');
 		}
 		else {
-			$this->view('shop/product_detail', ['product'=>$product]);
+			// to view the product detail page
+			if($type == 'view') {
+				$this->view('shop/product_detail', ['product'=>$product, 'type'=>'view']);
+			}
+			// to edit the product in product detail page
+			elseif($type == 'edit') {
+				$cart_item = $this->model('Cart')->findByProductIdByUserId($product_id, $_SESSION['user_id']);
+
+				// check if the update cart button is clicked
+				if(!isset($_POST['update_cart'])) {
+					$this->view('shop/product_detail', ['product'=>$product, 'cart_item'=>$cart_item, 'type'=>'edit']);
+				}
+				else {
+					// get the updated values
+					$size = $_POST['size'];
+					$color = $_POST['color'];
+					$quantity = $_POST['quantity'];
+
+					// update the product cart
+					$cart_item->size = $size;
+					$cart_item->color = $color;
+					$cart_item->quantity = $quantity;
+
+					$cart_item->updateCart();
+					
+					return header('location:/shop/checkout');
+				}
+				
+				
+			}
+			else {
+				$this->view('EXCEPTIONS/error_404');
+			}
 		}
 		
-        
     }
 
 	public function cart() {
@@ -134,7 +165,17 @@ class ShopController extends Controller{
 	}
 
 	public function checkout() {
-		$this->view('shop/checkout');
+
+		if(isset($_SESSION['user_id'])) {
+			$cart_items = $this->model('Cart')->getAllByUserId($_SESSION['user_id']);
+
+	
+			$this->view('shop/checkout', ['cart_items'=>$cart_items]);
+		}
+		else {
+			$cart_items = '';
+			$this->view('shop/checkout', ['cart_items'=>$cart_items]);
+		}
 	}
 
 }

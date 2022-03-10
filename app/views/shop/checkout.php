@@ -183,9 +183,11 @@
                                                     $product_id = $item->product_id;
                                                     $product = $this->model('Product')->find($product_id);
                                                     $name = $product->name;
-                                                    $price = $product->price;
 
+                                                    $price = $product->price;
                                                     $quantity = $item->quantity;
+                                                    $total_price = $price * $quantity;
+
                                                     $color = $item->color;
                                                     $size = $item->size;
 
@@ -201,7 +203,7 @@
                                                                 echo "
                                                             </span>
                                                             <div>
-                                                                <span style='float: left; font-style: italic; font-weight: normal;'>$ $price</span> 
+                                                                <span style='float: left; font-style: italic; font-weight: normal;'>$ $total_price</span> 
                                                                 
                                                                 <span style='float: left; margin-left: 10px; font-weight: normal;'>|</span>
                                                                 <span style='float: left; margin-left: 10px; font-weight: normal;'>Qty: $quantity</span>

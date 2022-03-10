@@ -60,6 +60,10 @@
             
             
             <?php
+                // global cart item modal
+                $cart_items = $model['cart_items'];
+                
+
                 if(!isset($_SESSION['user_id'])) {
                     ?>
                     <div class="text-center">
@@ -69,6 +73,17 @@
                         </div>
                     </div>
                     <?php
+                }
+                elseif(count($cart_items) == 0) {
+                    ?>
+                    <div class="text-center">
+                        <h3>Your cart is empty</h3>
+                        <h5>Shop around to purchase your favorite products</h5>
+                        <div style="margin-top: 15px;">
+                            <button class="site-btn" onclick="location.href='/shop'">Shop</button>
+                        </div>
+                    </div>
+                    <?php  
                 }
                 else {
                     ?>
@@ -162,7 +177,7 @@
                                         <ul class="checkout__total__products">
                                             
                                         <?php
-                                                $cart_items = $model['cart_items'];
+                                                
                                                 $counter = 1;
                                                 foreach($cart_items as $item) {
                                                     $product_id = $item->product_id;

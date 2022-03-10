@@ -98,10 +98,17 @@ class ShopController extends Controller{
 	}
 
 	public function checkout() {
-		$cart_items = $this->model('Cart')->getAllByUserId($_SESSION['user_id']);
 
+		if(isset($_SESSION['user_id'])) {
+			$cart_items = $this->model('Cart')->getAllByUserId($_SESSION['user_id']);
 
-		$this->view('shop/checkout', ['cart_items'=>$cart_items]);
+	
+			$this->view('shop/checkout', ['cart_items'=>$cart_items]);
+		}
+		else {
+			$cart_items = '';
+			$this->view('shop/checkout', ['cart_items'=>$cart_items]);
+		}
 	}
 
 }

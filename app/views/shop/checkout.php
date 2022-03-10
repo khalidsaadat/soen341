@@ -57,194 +57,196 @@
     <!-- Checkout Section Begin -->
     <section class="checkout spad">
         <div class="container">
-            <div class="checkout__form">
-                <form action="#">
-                    <div class="row">
-                        <div class="col-lg-8 col-md-6">
-                           
-                            <h6 class="coupon__code"><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click
-                            here</a> to enter your code</h6>
-                            <h6 class="checkout__title">Billing Details</h6>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Fist Name<span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Last Name<span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="checkout__input">
-                                <p>Country<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__input">
-                                <p>Address<span>*</span></p>
-                                <input type="text" placeholder="Street Address" class="checkout__input__add">
-                                <input type="text" placeholder="Apartment, suite, unite ect (optinal)">
-                            </div>
-                            <div class="checkout__input">
-                                <p>Town/City<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__input">
-                                <p>Country/State<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__input">
-                                <p>Postcode / ZIP<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Phone<span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Email<span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="acc">
-                                    Create an account?
-                                    <input type="checkbox" id="acc">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <p>Create an account by entering the information below. If you are a returning customer
-                                please login at the top of the page</p>
-                            </div>
-                            <div class="checkout__input">
-                                <p>Account Password<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="diff-acc">
-                                    Note about your order, e.g, special noe for delivery
-                                    <input type="checkbox" id="diff-acc">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="checkout__input">
-                                <p>Order notes<span>*</span></p>
-                                <input type="text"
-                                placeholder="Notes about your order, e.g. special notes for delivery.">
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="checkout__order">
-                                <h4 class="order__title">Your order</h4>
-                                <div class="checkout__order__products">Product <span>Total</span></div>
-                                <ul class="checkout__total__products">
-                                    <li class="font-weight-bold">01. Vanilla salted caramel 
-                                        <span style="cursor: pointer;"> 
-                                            <span class="icon_heart" data-toggle='tooltip' data-placement='bottom' title='Add to wishlist' style="margin-left: 10px;"></span>
-                                            <span class="icon_pencil" data-toggle='tooltip' data-placement='bottom' title='Edit' onclick="location.href='/shop/edit_product_wrapper/19'"></span> 
-                                        </span>
-                                        <div>
-                                            <span style="float: left; font-style: italic; font-weight: normal;">$ 170.00</span> 
-                                            
-                                            <span style="float: left; margin-left: 10px; font-weight: normal;">|</span>
-                                            <span style="float: left; margin-left: 10px; font-weight: normal;">Qty: 2</span>
-
-                                            <span style="float: left; margin-left: 10px; font-weight: normal;">|</span>
-                                            <span style="float: left; margin-left: 10px; font-weight: normal;">Size: M</span>
-
-                                            <span style="float: left; margin-left: 10px; font-weight: normal;">|</span>
-                                            <span class="product__details__option__color checkout-color" style="float: left; margin-left: 10px; top: 2px; font-weight: normal;">
-                                                <label style='background: red; height: 21px; width: 21px;' for='sp-1' data-toggle='tooltip' data-placement='top' title='Red'>
-                                                    <input type='radio' id='sp-1'>
-                                                </label>
-                                            </span>
-                                        </div>
-                                    </li>
-                                    <hr>
-                                    <li class="font-weight-bold">02. German chocolate
-                                        <span style="cursor: pointer;"> 
-                                            <span class="icon_heart_alt" data-toggle='tooltip' data-placement='bottom' title='Add to wishlist' style="margin-left: 10px;"></span>
-                                            <span class="icon_pencil" data-toggle='tooltip' data-placement='bottom' title='Edit' onclick="location.href='/shop/edit_product_wrapper/19'"></span> 
-                                        </span>
-                                        <div>
-                                            <span style="float: left; font-style: italic; font-weight: normal;">$ 170.00</span> 
-                                            
-                                            <span style="float: left; margin-left: 10px; font-weight: normal;">|</span>
-                                            <span style="float: left; margin-left: 10px; font-weight: normal;">Qty: 2</span>
-
-                                            <span style="float: left; margin-left: 10px; font-weight: normal;">|</span>
-                                            <span style="float: left; margin-left: 10px; font-weight: normal;">Size: M</span>
-
-                                            <span style="float: left; margin-left: 10px; font-weight: normal;">|</span>
-                                            <span class="product__details__option__color checkout-color" style="float: left; margin-left: 10px; top: 2px; font-weight: normal;">
-                                                <label style='background: blue; height: 21px; width: 21px;' for='sp-1' data-toggle='tooltip' data-placement='top' title='Blue'>
-                                                    <input type='radio' id='sp-1'>
-                                                </label>
-                                            </span>
-                                        </div>
-                                    </li>
-                                    <hr>
-                                    <li class="font-weight-bold">03. Sweet autumn
-                                        <span> 
-                                            <span class="icon_heart_alt" style="padding-left: 10px;"></span>
-                                            <span class="icon_pencil"></span> 
-                                        </span>
-                                        <div>
-                                            <span style="float: left; font-style: italic; font-weight: normal;">$ 170.00</span>
-                                        </div>
-                                    </li>
-                                    <hr>
-                                    <li class="font-weight-bold">04. Cluten free mini dozen
-                                        <span> 
-                                            <span class="icon_heart_alt" style="padding-left: 10px;"></span>
-                                            <span class="icon_pencil"></span> 
-                                        </span>
-                                        <div>
-                                            <span style="float: left; font-style: italic; font-weight: normal;">$ 170.00</span>
-                                        </div>
-                                    </li>
-                                    
-                                </ul>
-                                <ul class="checkout__total__all">
-                                    <li>Subtotal <span>$750.99</span></li>
-                                    <li>Total <span>$750.99</span></li>
-                                </ul>
-                                <div class="checkout__input__checkbox">
-                                    <label for="acc-or">
-                                        Create an account?
-                                        <input type="checkbox" id="acc-or">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua.</p>
-                                <div class="checkout__input__checkbox">
-                                    <label for="payment">
-                                        Check Payment
-                                        <input type="checkbox" id="payment">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <div class="checkout__input__checkbox">
-                                    <label for="paypal">
-                                        Paypal
-                                        <input type="checkbox" id="paypal">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <button type="submit" class="site-btn">PLACE ORDER</button>
-                            </div>
+            
+            
+            <?php
+                if(!isset($_SESSION['user_id'])) {
+                    ?>
+                    <div class="text-center">
+                        <h3>Login to view your cart</h3>
+                        <div style="margin-top: 15px;">
+                            <button class="site-btn" onclick="location.href='/account/login'">Login</button>
                         </div>
                     </div>
-                </form>
-            </div>
+                    <?php
+                }
+                else {
+                    ?>
+                    <div class="checkout__form">
+                        <form action="#">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-6">
+                                
+                                    <h6 class="coupon__code"><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click
+                                    here</a> to enter your code</h6>
+                                    <h6 class="checkout__title">Billing Details</h6>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="checkout__input">
+                                                <p>Fist Name<span>*</span></p>
+                                                <input type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="checkout__input">
+                                                <p>Last Name<span>*</span></p>
+                                                <input type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="checkout__input">
+                                        <p>Country<span>*</span></p>
+                                        <input type="text">
+                                    </div>
+                                    <div class="checkout__input">
+                                        <p>Address<span>*</span></p>
+                                        <input type="text" placeholder="Street Address" class="checkout__input__add">
+                                        <input type="text" placeholder="Apartment, suite, unite ect (optinal)">
+                                    </div>
+                                    <div class="checkout__input">
+                                        <p>Town/City<span>*</span></p>
+                                        <input type="text">
+                                    </div>
+                                    <div class="checkout__input">
+                                        <p>Country/State<span>*</span></p>
+                                        <input type="text">
+                                    </div>
+                                    <div class="checkout__input">
+                                        <p>Postcode / ZIP<span>*</span></p>
+                                        <input type="text">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="checkout__input">
+                                                <p>Phone<span>*</span></p>
+                                                <input type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="checkout__input">
+                                                <p>Email<span>*</span></p>
+                                                <input type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="checkout__input__checkbox">
+                                        <label for="acc">
+                                            Create an account?
+                                            <input type="checkbox" id="acc">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <p>Create an account by entering the information below. If you are a returning customer
+                                        please login at the top of the page</p>
+                                    </div>
+                                    <div class="checkout__input">
+                                        <p>Account Password<span>*</span></p>
+                                        <input type="text">
+                                    </div>
+                                    <div class="checkout__input__checkbox">
+                                        <label for="diff-acc">
+                                            Note about your order, e.g, special noe for delivery
+                                            <input type="checkbox" id="diff-acc">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="checkout__input">
+                                        <p>Order notes<span>*</span></p>
+                                        <input type="text"
+                                        placeholder="Notes about your order, e.g. special notes for delivery.">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="checkout__order">
+                                        <h4 class="order__title">Your order</h4>
+                                        <div class="checkout__order__products">Product <span>Total</span></div>
+                                        <ul class="checkout__total__products">
+                                            
+                                        <?php
+                                                $cart_items = $model['cart_items'];
+                                                $counter = 1;
+                                                foreach($cart_items as $item) {
+                                                    $product_id = $item->product_id;
+                                                    $product = $this->model('Product')->find($product_id);
+                                                    $name = $product->name;
+                                                    $price = $product->price;
+
+                                                    $quantity = $item->quantity;
+                                                    $color = $item->color;
+                                                    $size = $item->size;
+
+
+                                                    echo "
+                                                        <li class='font-weight-bold'>$counter. $name
+                                                            <span style='cursor: pointer;'> 
+                                                                <span class='icon_heart' data-toggle='tooltip' data-placement='bottom' title='Add to wishlist' style='margin-left: 10px;'></span>
+                                                                ";
+                                                                ?>
+                                                                <span class='icon_pencil' data-toggle='tooltip' data-placement='bottom' title='Edit' onclick="location.href='/shop/edit_product_wrapper/<?php echo $product_id; ?>'"></span> 
+                                                                <?php
+                                                                echo "
+                                                            </span>
+                                                            <div>
+                                                                <span style='float: left; font-style: italic; font-weight: normal;'>$ $price</span> 
+                                                                
+                                                                <span style='float: left; margin-left: 10px; font-weight: normal;'>|</span>
+                                                                <span style='float: left; margin-left: 10px; font-weight: normal;'>Qty: $quantity</span>
+                    
+                                                                <span style='float: left; margin-left: 10px; font-weight: normal;'>|</span>
+                                                                <span style='float: left; margin-left: 10px; font-weight: normal;'>Size: $size</span>
+                    
+                                                                <span style='float: left; margin-left: 10px; font-weight: normal;'>|</span>
+                                                                <span class='product__details__option__color checkout-color' style='float: left; margin-left: 10px; top: 2px; font-weight: normal;'>
+                                                                    <label style='background: $color;' for='sp-1' data-toggle='tooltip' data-placement='top' title='$color'>
+                                                                        <input type='radio' id='sp-1'>
+                                                                    </label>
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                    ";
+
+                                                    $counter++;
+                                                }
+                                            ?>
+                                            
+                                            
+                                        </ul>
+                                        <ul class="checkout__total__all">
+                                            <li>Subtotal <span>$750.99</span></li>
+                                            <li>Total <span>$750.99</span></li>
+                                        </ul>
+                                        <div class="checkout__input__checkbox">
+                                            <label for="acc-or">
+                                                Create an account?
+                                                <input type="checkbox" id="acc-or">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
+                                        ut labore et dolore magna aliqua.</p>
+                                        <div class="checkout__input__checkbox">
+                                            <label for="payment">
+                                                Check Payment
+                                                <input type="checkbox" id="payment">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <div class="checkout__input__checkbox">
+                                            <label for="paypal">
+                                                Paypal
+                                                <input type="checkbox" id="paypal">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <button type="submit" class="site-btn">PLACE ORDER</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <?php
+                }
+            ?>
+
         </div>
     </section>
     <!-- Checkout Section End -->

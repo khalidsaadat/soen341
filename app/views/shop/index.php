@@ -363,30 +363,29 @@
                                                 
                                                 <div class='product__item__text'>
                                                     <h6>$name</h6>
-                                                    <a href='#' class='add-cart'>+ Add To Cart</a>
-
-                                                <form method='post' id='add_to_cart_form'>
-                                                    <input type='hidden' name='product_id' id='product_id' value=$product_id>
-                                                    <input type='submit' class='add-cart' value='+ Add To Cart' name='add_to_cart' id='add_to_cart'>
-                                                    <h5>$$price</h5>
-                                                    <div class='product__color__select'>
-                                                        ";
-                                                        foreach($colors_array as $color) {
-                                                            echo "
-                                                                <label for='pc-6' class='active' style='background:$color;' data-toggle='tooltip' data-placement='top' title='$color'>
-                                                                    <input type='radio' id='pc-6'>
-                                                                </label>
+                                                    
+                                                    <form method='post' id='add_to_cart_form'>
+                                                        <input type='hidden' name='product_id' id='product_id' value=$product_id>
+                                                        <input type='submit' class='add-cart' value='+ Add To Cart' name='add_to_cart' id='add_to_cart'>
+                                                        <h5>$$price</h5>
+                                                        <div class='product__color__select'>
                                                             ";
-                                                        }
-                                                        echo"
-                                                    </div>
-                                                </form>
+                                                            foreach($colors_array as $color) {
+                                                                echo "
+                                                                    <label for='pc-6' class='active' style='background:$color;' data-toggle='tooltip' data-placement='top' title='$color'>
+                                                                        <input type='radio' id='pc-6'>
+                                                                    </label>
+                                                                ";
+                                                            }
+                                                            echo"
+                                                        </div>
+                                                    </form>
 
+                                                </div>
+                                            
                                             </div>
-                                           
-                                       </div>
-                                   </div>
-                                ";
+                                        </div>
+                                    ";
         
                             }
                         ?>

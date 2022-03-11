@@ -212,7 +212,11 @@
                                         <ul class="checkout__total__products">
                                             
                                         <?php
-                                                
+                                                $subtotal = 0;
+                                                $tax_percentage = 14.975;
+                                                $tax_amount = 0;
+                                                $total = 0;
+
                                                 $counter = 1;
                                                 foreach($cart_items as $item) {
                                                     $product_id = $item->product_id;
@@ -225,6 +229,9 @@
 
                                                     $color = $item->color;
                                                     $size = $item->size;
+
+                                                    // add to subtotal
+                                                    $subtotal += $total_price;
 
                                                     // check wishlist table and show heart icon if the product is in the wishlist
                                                     $in_wishlist_flag = ($this->model('Wishlist')->isInWishList($product_id, $_SESSION['user_id'])) ? true : false;
@@ -269,13 +276,21 @@
 
                                                     $counter++;
                                                 }
+
+                                                // calculating the total amount
+                                                $tax_amount = $subtotal * ($tax_percentage / 100);
+                                                $tax_amount = number_format($tax_amount, 2);
+
+                                                $total = $tax_amount + $subtotal;
+                                                $total = number_format($total, 2);
                                             ?>
                                             
                                             
                                         </ul>
                                         <ul class="checkout__total__all">
-                                            <li>Subtotal <span>$750.99</span></li>
-                                            <li>Total <span>$750.99</span></li>
+                                            <li>Subtotal <span>$<?php echo $subtotal; ?></span></li>
+                                            <li>Tax (<?php echo $tax_percentage; ?>%) <span>$<?php echo $tax_amount; ?></span></li>
+                                            <li>Total <span>$<?php echo $total; ?></span></li>
                                         </ul>
                                         <p>
                                             <?php

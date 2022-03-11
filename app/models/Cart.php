@@ -55,8 +55,10 @@ class Cart extends Model{
     }
 
     public function delete(){
-        $stmt = self::$_connection->prepare("DELETE FROM brand WHERE brand_id = :brand_id");
-        $stmt->execute(['brand_id'=>$this->brand_id]);
+        $stmt = self::$_connection->prepare("DELETE FROM cart WHERE product_id = :product_id AND user_id = :user_id AND status = :status");
+        $stmt->execute(['product_id'=>$this->product_id,
+                        'user_id'=>$this->user_id,
+                        'status'=>'0']);
     }
 
     public function updateStatus(){

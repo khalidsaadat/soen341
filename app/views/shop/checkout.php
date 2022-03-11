@@ -195,6 +195,17 @@
                                             }
 
                                             unset($_SESSION['wishlist_removed']);
+
+                                            // success cart removed msg
+                                            if(isset($_SESSION['cart_removed'])) {
+                                                echo "
+                                                    <div class='form_error'>
+                                                        Product removed from your cart
+                                                    </div>
+                                                ";
+                                            }
+
+                                            unset($_SESSION['cart_removed']);
                                         ?>
                                         
                                         <div class="checkout__order__products">Product <span>Total</span></div>

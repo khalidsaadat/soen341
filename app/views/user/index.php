@@ -370,6 +370,7 @@
                                             <?php
                                                 // get wishlist from the db
                                                 if(count($wishlists) > 0) {
+                                                    $modal_counter = 1;
                                                     foreach($wishlists as $wishlist) {
                                                         $wishlist_id = $wishlist->wishlist_id;
                                                         $date = date('F d, Y', strtotime($wishlist->date));
@@ -428,7 +429,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class='col-lg-3 text-right'>
-                                                                        <div>
+                                                                        <div data-toggle='modal' data-target='#remove-wishlist-modal-$modal_counter'>
                                                                             <span style='font-weight: bold; cursor: pointer;'><img src='/assets/icons/trash.png' alt='' style='height: 22px; padding-right: 10px;' data-toggle='tooltip' data-placement='right' title='Remove from wishlist'>&nbsp; </span>
                                                                         </div>
                                                                     </div>
@@ -436,6 +437,32 @@
                                                                 
                                                             </div>
                                                         ";
+
+
+                                                        // Cancel Modal 
+                                                        ?>
+                                                        <div class="modal fade" id="remove-wishlist-modal-<?php echo $modal_counter; ?>" tabindex="-1" role="dialog" aria-labelledby="remove-wishlist-modal-label" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title font-weight" id="remove-wishlist-modal-label"><?php echo $name; ?></h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        Are you sure you want to remove it from your wishlist?
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="site-btn" data-dismiss="modal">Close</button>
+                                                                        <button type="button" class="site-btn" onclick="location.href='/shop/remove_from_wishlist/<?php echo $product_id; ?>'">Remove</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <?php
+                                                        // increment to the next wishlist item
+                                                        $modal_counter++;
                                                     }
                                                 }
                                                 else {
@@ -452,26 +479,7 @@
                                     </div>
 
                                     
-                                    <!-- Cancel Modal -->
-                                    <div class="modal fade" id="cancel-order-modal" tabindex="-1" role="dialog" aria-labelledby="cancel-order-modal-label" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title font-weight" id="cancel-order-modal-label">Product Name</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Are you sure you want to cancel your order?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="site-btn" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="site-btn">Cancel Order</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
 
                                     
 

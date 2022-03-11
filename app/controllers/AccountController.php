@@ -12,8 +12,11 @@ class AccountController extends Controller{
 		$user_profile = $this->model('Profile')->findByUserId($_SESSION['user_id']);
 		$profile_id = $user_profile->profile_id;
 
+		// wishlist
+		$wishlists = $this->model('Wishlist')->getAllActiveForUserId($_SESSION['user_id']);
+
 		if(!isset($_POST['update-account'])) {
-			$this->view('user/index', ['user_profile'=>$user_profile]);
+			$this->view('user/index', ['user_profile'=>$user_profile, 'wishlists'=>$wishlists]);
 		}
 		else {
 			// Get users information
@@ -61,17 +64,17 @@ class AccountController extends Controller{
 						}
 						else {
 							$error_msg = 'Passwords do not match!';
-							$this->view('user/index', ['user_profile'=>$user_profile, 'error_msg'=>$error_msg]);	
+							$this->view('user/index', ['user_profile'=>$user_profile, 'error_msg'=>$error_msg, 'wishlists'=>$wishlists]);	
 						}
 					}
 					else {
 						$error_msg = 'To change your password, enter your new password!';
-						$this->view('user/index', ['user_profile'=>$user_profile, 'error_msg'=>$error_msg]);	
+						$this->view('user/index', ['user_profile'=>$user_profile, 'error_msg'=>$error_msg, 'wishlists'=>$wishlists]);	
 					}
 				}
 				else {
 					$error_msg = 'Current password is wrong!';
-					$this->view('user/index', ['user_profile'=>$user_profile, 'error_msg'=>$error_msg]);
+					$this->view('user/index', ['user_profile'=>$user_profile, 'error_msg'=>$error_msg, 'wishlists'=>$wishlists]);
 				}
 			}
 			else {

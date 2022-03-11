@@ -173,6 +173,30 @@
                                 <div class="col-lg-4 col-md-6">
                                     <div class="checkout__order">
                                         <h4 class="order__title">Your order</h4>
+                                        <?php
+                                            // success wishlist added msg
+                                            if(isset($_SESSION['wishlist_added'])) {
+                                                echo "
+                                                    <div class='form_error'>
+                                                        Product added to wishlist
+                                                    </div>
+                                                ";
+                                            }
+
+                                            unset($_SESSION['wishlist_added']);
+
+                                            // success wishlist removed msg
+                                            if(isset($_SESSION['wishlist_removed'])) {
+                                                echo "
+                                                    <div class='form_error'>
+                                                        Product removed from wishlist
+                                                    </div>
+                                                ";
+                                            }
+
+                                            unset($_SESSION['wishlist_removed']);
+                                        ?>
+                                        
                                         <div class="checkout__order__products">Product <span>Total</span></div>
                                         <ul class="checkout__total__products">
                                             
@@ -191,13 +215,24 @@
                                                     $color = $item->color;
                                                     $size = $item->size;
 
-
+                                                    // check wishlist table and show heart icon if the product is in the wishlist
+                                                    $in_wishlist_flag = ($this->model('Wishlist')->isInWishList($product_id, $_SESSION['user_id'])) ? true : false;
+                                                    
                                                     echo "
                                                         <li class='font-weight-bold'>$counter. $name
                                                             <span style='cursor: pointer;'> 
-                                                                <span class='icon_heart' data-toggle='tooltip' data-placement='bottom' title='Add to wishlist' style='margin-left: 10px;'></span>
                                                                 ";
-                                                                ?>
+                                                                if($in_wishlist_flag) {
+                                                                    ?>
+                                                                        <span class='icon_heart' data-toggle='tooltip' data-placement='right' title='Remove from wishlist' onclick="location.href='/shop/remove_from_wishlist/<?php echo $product_id; ?>'" style='margin-left: 10px;'></span>
+                                                                    <?php
+                                                                }
+                                                                else {
+                                                                    ?>
+                                                                        <span class='icon_heart_alt' data-toggle='tooltip' data-placement='right' title='Add to wishlist' onclick="location.href='/shop/add_to_wishlist/<?php echo $product_id; ?>'" style='margin-left: 10px;'></span>
+                                                                    <?php
+                                                                }
+                                                                ?>                                                                
                                                                 <span class='icon_pencil' data-toggle='tooltip' data-placement='bottom' title='Edit' onclick="location.href='/shop/product/<?php echo $product_id; ?>/edit'"></span> 
                                                                 <?php
                                                                 echo "

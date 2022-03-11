@@ -3,9 +3,91 @@ class AccountController extends Controller{
 
 	// Function that shows the index page when you type 'localhost'
 	public function index(){
+		// only admin users are allowed to visit this page
+		if($_SESSION['role'] != 'user') {
+			return header('location:/');
+		}
 
-		// Send the 'products' variable to the View for rendering it to the webpage.
-		$this->view('account/index');
+		// user detail
+		$user_profile = $this->model('Profile')->findByUserId($_SESSION['user_id']);
+		$profile_id = $user_profile->profile_id;
+
+		if(!isset($_POST['update-account'])) {
+			$this->view('user/index', ['user_profile'=>$user_profile]);
+		}
+		else {
+			// Get users information
+
+			// user table info
+			$current_user = $this->model('User')->find($_SESSION['user_id']);
+
+			$full_name = $_POST['full_name'];
+			$phone_number = $_POST['phone_number'];
+			$email = $_POST['email'];
+			$address = $_POST['address'];
+
+			// update profile table
+			$user_profile->full_name = $full_name;
+			$user_profile->email = $email;
+			$user_profile->phone_number = $phone_number;
+			$user_profile->address = $address;
+
+			$user_profile->update();
+			
+			// update user table for password if their password is changed
+			// if all fields are filled
+			if(!empty($_POST['current_pwd'])) {
+				$current_pwd = $_POST['current_pwd'];
+				
+
+				// get user's old password 
+				$old_password = $current_user->password;
+				// verify if old password matches with the entered current password - if true, good; if not, print error.
+				if(password_verify($current_pwd, $old_password)) {
+					if(!empty($_POST['new_pwd']) && !empty($_POST['confirm_new_pwd'])) {
+						$new_pwd = $_POST['new_pwd'];
+						$confirm_new_pwd = $_POST['confirm_new_pwd'];
+
+						// verify the new and confirm password
+						if($new_pwd == $confirm_new_pwd) {
+							// change user's password
+							$current_user->password = password_hash($new_pwd, PASSWORD_DEFAULT);
+							$current_user->updatePassword();
+
+							// redirect with success msg
+							$_SESSION['return-msg'] = "Password changed successfully";
+
+							return header('location:/account');
+						}
+						else {
+							$error_msg = 'Passwords do not match!';
+							$this->view('user/index', ['user_profile'=>$user_profile, 'error_msg'=>$error_msg]);	
+						}
+					}
+					else {
+						$error_msg = 'To change your password, enter your new password!';
+						$this->view('user/index', ['user_profile'=>$user_profile, 'error_msg'=>$error_msg]);	
+					}
+				}
+				else {
+					$error_msg = 'Current password is wrong!';
+					$this->view('user/index', ['user_profile'=>$user_profile, 'error_msg'=>$error_msg]);
+				}
+			}
+			else {
+				// redirect with success msg
+				$_SESSION['return-msg'] = "Profile updated successfully";
+
+				return header('location:/account');
+			}
+
+			
+			
+
+			
+
+
+		}
 	}
 
 	public function signup() {

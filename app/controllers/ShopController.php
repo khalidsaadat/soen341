@@ -29,8 +29,6 @@ class ShopController extends Controller{
 				$new_product->user_id = $product_user_id;
 
 				$new_product->insert();
-
-				echo 'added to the cart';
 			}
 			else {
 				// the product is already in the cart
@@ -40,8 +38,6 @@ class ShopController extends Controller{
 				// update the cart table
 				$select_cart->quantity = $updated_quantity;
 				$select_cart->updateQuantity();
-
-				echo 'updated the quantity';
 			}
 		}
     

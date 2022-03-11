@@ -3,12 +3,21 @@
 class ProductController extends Controller{
 
 	public function index(){
+        // only admin users are allowed to visit this page
+		if($_SESSION['role'] != 'admin') {
+			return header('location:/');
+		}
 
 		// redirect to admin dashboard page
 		return header('location:/admin/');
 	}
 
     public function add_product() {
+        // only admin users are allowed to visit this page
+		if($_SESSION['role'] != 'admin') {
+			return header('location:/');
+		}
+
         $brands = $this->model('Brand')->getAll();
         $categories = $this->model('Category')->getAll();
 

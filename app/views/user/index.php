@@ -399,7 +399,11 @@
                                                                         <img src='/assets/products/images/$image_name' alt=''>
                                                                     </div>
                                                                     <div class='col-lg-7 pd-l-0'>
-                                                                        <div class='order-item-title'>$name</div>
+                                                                        ";
+                                                                        ?>
+                                                                        <div class='order-item-title' onclick="location.href='/shop/product/<?php echo $product_id; ?>'" style="cursor: pointer;"><?php echo $name; ?></div>
+                                                                        <?php
+                                                                        echo "
                                                                         <div>
                                                                             Size(s) Available: ";
                                                                                 foreach($sizes as $size) {

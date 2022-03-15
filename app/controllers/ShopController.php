@@ -98,7 +98,205 @@ class ShopController extends Controller{
 	}
 
 	public function checkout() {
-		$this->view('shop/checkout');
+
+		if(!isset($_SESSION['user_id'])) {
+			$_SESSION['login_flag'] = 1;
+			return header('location:/account/login');
+		}
+
+		if(!isset($_POST['review_cart'])) {
+			$this->view('shop/checkout');
+		}
+		else {
+			// get the user information
+			$order_id = '';
+			$first_name = $_POST['first'];
+			$last_name = $_POST['last'];
+			$addres = $_POST['address'];
+			$city = $_POST['city'];
+			$province = $_POST['province'];
+			$postal_code = $_POST['code'];
+			$country = $_POST['country'];
+			$phone = $_POST['phone_num'];
+			$email = $_POST['email'];
+			$card = $_POST['credit_card_num'];
+			$name = $_POST['card_holder_name'];
+			$expiry_date = $_POST['expiry_date'];
+			$cvv_num = $_POST['cvv'];
+			$cvvType = $_POST['cvvType'];
+			$detail_user_id = $_SESSION['user_id'];
+
+
+			// Evaluation
+
+			// credit card validation
+			$ccResult = ($this->CCValidate($cvvType, $card)) ? 'valid' : 'invalid';
+
+			// cvv validation
+			$cvvResult = ($this->CVV($cvvType, $cvv_num)) ? 'valid' : 'invalid';
+
+			// expiry date validation
+			$expResult = ($this->validateCCExpDate($expiry_date)) ? 'valid' : 'invalid';
+	
+			if($ccResult == 'valid' && $cvvResult == 'valid' && $expResult == 'valid') { 
+				// it is safe to continue
+
+				// Order table
+				// $last_order_id = '5';
+
+                // get the information
+                $cart_ids = $this->model('Cart')->getAllIdsByUserId($_SESSION['user_id']);	// {1,2,3,4}
+				$billing_detail = $_SESSION['billing_detail_id'];
+				$order_number = $_POST['order_number'];
+				$status = $_POST['status'];
+                
+						
+				$order_number = $this->getToken();
+				$_SESSION['current_order_number'] = $order_number;
+				
+				// $order->order_number = $order_number;
+				// echo "$order_number";
+
+
+				//Order Table
+				$new_order = $this->model('Order');
+				$new_order->cart_ids = $cart_ids;
+				$new_order->order_number  = $order_number;
+				$new_order->status  = $status;
+
+				$new_order->insert();
+
+				$last_order_id = $_SESSION['last_order_id'];
+
+				// Billing detail table
+				$new_detail = $this->model('BillingDetails');
+				$new_detail->order_id = $last_order_id;
+				$new_detail->first_name   = $first_name;
+				$new_detail->last_name    = $last_name;
+				$new_detail->address = $addres;
+				$new_detail->city    = $city;
+				$new_detail->province = $province;
+				$new_detail->postal_code     = $postal_code;
+				$new_detail->country  = $country;
+				$new_detail->phone = $phone;
+				$new_detail->email     = $email;
+				$new_detail->user_id  = $detail_user_id; 
+
+				$new_detail->insert();
+
+				// success redirect
+				return header('location:/shop/order_confirmation');
+		
+			}
+			else {
+				// credit card detail wrong
+				$this->view('shop/checkout', ['ccError'=>$ccResult, 'cvvError'=>$cvvResult, 'expError'=>$expResult]);
+			}
+
+		}
+		
 	}
 
+	private function CCValidate($type, $cNum) {
+        switch ($type) {
+        case "American":
+            $pattern = "/^([34|37]{2})([0-9]{13})$/";//American Express
+            return (preg_match($pattern,$cNum)) ? true : false; 
+            break;
+        case "Discover":
+            $pattern = "/^([6011]{4})([0-9]{12})$/";//Discover Card
+            return (preg_match($pattern,$cNum)) ? true : false;
+            break;
+        case "Master":
+            $pattern = "/^([51|52|53|54|55]{2})([0-9]{14})$/";//Mastercard
+            return (preg_match($pattern,$cNum)) ? true : false;
+            break;
+        case "Visa":
+            $pattern = "/^([4]{1})([0-9]{12,15})$/";//Visa
+            return (preg_match($pattern,$cNum)) ? true : false; 
+            break;               
+       }
+    } 
+
+	private function CVV($type, $cvv)
+    {
+        
+        switch ($type) {
+        case "American":
+            $pattern = "/^[0-9]{4}$/";//American Express
+            return (preg_match($pattern,$cvv)) ? true : false; 
+            break;
+        case "Discover":
+            $pattern = "/^[0-9]{4}$/";//Discover Card
+            return (preg_match($pattern,$cvv)) ? true : false;
+            break;
+        case "Master":
+            $pattern = "/^[0-9]{3}$/";//Mastercard
+            return (preg_match($pattern,$cvv)) ? true : false;
+            break;
+        case "Visa":
+            $pattern = "/^[0-9]{3}$/";//Visa
+            return (preg_match($pattern,$cvv)) ? true : false; 
+            break;               
+       }
+    }
+
+
+    private function validateCCExpDate($date)
+    {
+       
+         // get the expiry date from the checkout view
+        $expiry_date_post = $date;
+        // add "01" (which is day) to the expiry date variable
+        $expiry_date_str = "01/" . $expiry_date_post;
+        // replace / with - 
+        $expiry_date = str_replace('/', '-', $expiry_date_str);
+
+        // Creating timestamp from given date
+        $timestamp = strtotime($expiry_date);
+
+        // Creating new date format from that timestamp
+        $new_date = date("Y/m", $timestamp);
+        //echo $new_date;
+		$current_date = date("Y/m");
+        return ($new_date > $current_date) ? true : false;
+	
+    }
+
+	public function order_confirmation() {
+		$order_detail = ''; // get the order detail from order table
+
+
+
+		$this->view('shop/order_confirmation', ['order_detail'=>$order_detail]);
+	}
+
+	private function crypto_rand_secure($min, $max) {
+        $range = $max - $min;
+        if ($range < 0) return $min; // not so random...
+        $log = log($range, 2);
+        $bytes = (int) ($log / 8) + 1; // length in bytes
+        $bits = (int) $log + 1; // length in bits
+        $filter = (int) (1 << $bits) - 1; // set all lower bits to 1
+        do {
+            $rnd = hexdec(bin2hex(openssl_random_pseudo_bytes($bytes)));
+            $rnd = $rnd & $filter; // discard irrelevant bits
+        } while ($rnd >= $range);
+        return $min + $rnd;
+    }
+    
+    private function getToken($length=12){
+        $token = "";
+        $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $codeAlphabet.= "abcdefghijklmnopqrstuvwxyz";
+        $codeAlphabet.= "0123456789";
+        for($i=0;$i<$length;$i++){
+            $token .= $codeAlphabet[$this->crypto_rand_secure(0,strlen($codeAlphabet))];
+        }
+        return $token;
+    }
+
 }
+
+	
+

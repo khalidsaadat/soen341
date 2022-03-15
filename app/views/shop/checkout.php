@@ -1,6 +1,8 @@
 <?php
     $this->view('include/header');
 ?>
+
+
 <title>Checkout</title>
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
@@ -34,6 +36,12 @@
         </div>
     </header>
     <!-- Header Section End -->
+    <style>
+    .error {
+        color: #FF0000;
+        text-align: center;
+    }
+    </style>
 
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-option">
@@ -58,85 +66,131 @@
     <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
-                <form action="#">
+                <form method="post">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
-                            <h6 class="coupon__code"><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click
-                            here</a> to enter your code</h6>
+                            <?php
+                                // Card Number Check 
+                                // get the error model if any
+                                if(isset($model['ccError'])) {
+                                    $ccError = $model['ccError'];
+                                    if($ccError == 'invalid') {
+                                        echo "
+                                            <span class='error'>* Credit Card Invalid.</span>
+                                        ";
+                                    }
+                                }
+                            ?>
+                            <?php
+                                // CVV Check 
+                                // get the error model if any
+                                if(isset($model['cvvError'])) {
+                                    $cvvError = $model['cvvError'];
+                                    if($cvvError == 'invalid') {
+                                        echo "
+                                            <span class='error'>* CVV Invalid.</span>
+                                        ";
+                                    }
+                                }                             
+                            ?>
+                             <?php
+                                // Expiry Check 
+                                // get the error model if any
+                                if(isset($model['expError'])) {
+                                    $expError = $model['expError'];
+                                    if($expError == 'invalid') {
+                                        echo "
+                                            <span class='error'>* Card Expired.</span>
+                                        ";
+                                    }
+                                }                             
+                            ?>
+                            <br>          
                             <h6 class="checkout__title">Billing Details</h6>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
-                                        <p>Fist Name<span>*</span></p>
-                                        <input type="text">
+                                        <p>First Name<span>*</span></p>
+                                        <input type="text" name="first">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Last Name<span>*</span></p>
-                                        <input type="text">
+                                        <input type="text" name="last">
                                     </div>
                                 </div>
                             </div>
                             <div class="checkout__input">
                                 <p>Country<span>*</span></p>
-                                <input type="text">
+                                <input type="text" name="country">
                             </div>
                             <div class="checkout__input">
                                 <p>Address<span>*</span></p>
-                                <input type="text" placeholder="Street Address" class="checkout__input__add">
-                                <input type="text" placeholder="Apartment, suite, unite ect (optinal)">
+                                <input type="text" name="address" placeholder="Street, Apartment, Suite, Unit" class="checkout__input__add">                            
                             </div>
                             <div class="checkout__input">
                                 <p>Town/City<span>*</span></p>
-                                <input type="text">
+                                <input type="text" name="city">
                             </div>
                             <div class="checkout__input">
-                                <p>Country/State<span>*</span></p>
-                                <input type="text">
+                                <p>State<span>*</span></p>
+                                <input type="text" name="province">
                             </div>
                             <div class="checkout__input">
                                 <p>Postcode / ZIP<span>*</span></p>
-                                <input type="text">
+                                <input type="text" name="code">
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Phone<span>*</span></p>
-                                        <input type="text">
+                                        <input type="text" name="phone_num">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Email<span>*</span></p>
-                                        <input type="text">
+                                        <input type="text" name="email">
                                     </div>
                                 </div>
                             </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="acc">
-                                    Create an account?
-                                    <input type="checkbox" id="acc">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <p>Create an account by entering the information below. If you are a returning customer
-                                please login at the top of the page</p>
+                            <h6 class="checkout__title">Payment <span style="float:right"><a href="#"><img src="../malefashion/img/payment.png" alt=""></a></span></h6>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input"> 
+                                                                           
+                                        <p>Credit/Debit Card<span>*</span></p>
+                                            <select name="cvvType" style= "position: absolute; left:222px; border: 1px solid #e5e5e5;">
+                                                <option value="Type" disabled>Select Type</option>
+                                                <option value="American">American Express</option>
+                                                <option value="Discover">Discover</option>
+                                                <option value="Master">Master Card</option>
+                                                <option value="Visa">Visa</option>
+                                            </select>       
+                                            <input type="text" name="credit_card_num" placeholder="&#128179; Card Number">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">                                  
+                                    <div class="checkout__input">
+                                        <p>Cardholder Name<span>*</span></p>                                       
+                                        <input type="text" name="card_holder_name" placeholder="Name on Card">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="checkout__input">
-                                <p>Account Password<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="diff-acc">
-                                    Note about your order, e.g, special noe for delivery
-                                    <input type="checkbox" id="diff-acc">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="checkout__input">
-                                <p>Order notes<span>*</span></p>
-                                <input type="text"
-                                placeholder="Notes about your order, e.g. special notes for delivery.">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Expiration Date<span>*</span></p>
+                                        <input type="text" name="expiry_date" placeholder="MM/YY">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Security Code<span>*</span></p>
+                                        <input type="text" name="cvv" placeholder="CVC">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
@@ -176,7 +230,7 @@
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
-                                <button type="submit" class="site-btn">PLACE ORDER</button>
+                                <button type="submit" name="review_cart" class="site-btn">PLACE ORDER</button>                             
                             </div>
                         </div>
                     </div>

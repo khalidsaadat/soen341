@@ -173,11 +173,50 @@
                                 <div class="col-lg-4 col-md-6">
                                     <div class="checkout__order">
                                         <h4 class="order__title">Your order</h4>
+                                        <?php
+                                            // success wishlist added msg
+                                            if(isset($_SESSION['wishlist_added'])) {
+                                                echo "
+                                                    <div class='form_error'>
+                                                        Product added to wishlist
+                                                    </div>
+                                                ";
+                                            }
+
+                                            unset($_SESSION['wishlist_added']);
+
+                                            // success wishlist removed msg
+                                            if(isset($_SESSION['wishlist_removed'])) {
+                                                echo "
+                                                    <div class='form_error'>
+                                                        Product removed from wishlist
+                                                    </div>
+                                                ";
+                                            }
+
+                                            unset($_SESSION['wishlist_removed']);
+
+                                            // success cart removed msg
+                                            if(isset($_SESSION['cart_removed'])) {
+                                                echo "
+                                                    <div class='form_error'>
+                                                        Product removed from your cart
+                                                    </div>
+                                                ";
+                                            }
+
+                                            unset($_SESSION['cart_removed']);
+                                        ?>
+                                        
                                         <div class="checkout__order__products">Product <span>Total</span></div>
                                         <ul class="checkout__total__products">
                                             
                                         <?php
-                                                
+                                                $subtotal = 0;
+                                                $tax_percentage = 14.975;
+                                                $tax_amount = 0;
+                                                $total = 0;
+
                                                 $counter = 1;
                                                 foreach($cart_items as $item) {
                                                     $product_id = $item->product_id;
@@ -191,13 +230,27 @@
                                                     $color = $item->color;
                                                     $size = $item->size;
 
+                                                    // add to subtotal
+                                                    $subtotal += $total_price;
 
+                                                    // check wishlist table and show heart icon if the product is in the wishlist
+                                                    $in_wishlist_flag = ($this->model('Wishlist')->isInWishList($product_id, $_SESSION['user_id'])) ? true : false;
+                                                    
                                                     echo "
                                                         <li class='font-weight-bold'>$counter. $name
                                                             <span style='cursor: pointer;'> 
-                                                                <span class='icon_heart' data-toggle='tooltip' data-placement='bottom' title='Add to wishlist' style='margin-left: 10px;'></span>
                                                                 ";
-                                                                ?>
+                                                                if($in_wishlist_flag) {
+                                                                    ?>
+                                                                        <span class='icon_heart' data-toggle='tooltip' data-placement='right' title='Remove from wishlist' onclick="location.href='/shop/remove_from_wishlist/<?php echo $product_id; ?>'" style='margin-left: 10px;'></span>
+                                                                    <?php
+                                                                }
+                                                                else {
+                                                                    ?>
+                                                                        <span class='icon_heart_alt' data-toggle='tooltip' data-placement='right' title='Add to wishlist' onclick="location.href='/shop/add_to_wishlist/<?php echo $product_id; ?>'" style='margin-left: 10px;'></span>
+                                                                    <?php
+                                                                }
+                                                                ?>                                                                
                                                                 <span class='icon_pencil' data-toggle='tooltip' data-placement='bottom' title='Edit' onclick="location.href='/shop/product/<?php echo $product_id; ?>/edit'"></span> 
                                                                 <?php
                                                                 echo "
@@ -223,13 +276,21 @@
 
                                                     $counter++;
                                                 }
+
+                                                // calculating the total amount
+                                                $tax_amount = $subtotal * ($tax_percentage / 100);
+                                                $tax_amount = number_format($tax_amount, 2);
+
+                                                $total = $tax_amount + $subtotal;
+                                                $total = number_format($total, 2);
                                             ?>
                                             
                                             
                                         </ul>
                                         <ul class="checkout__total__all">
-                                            <li>Subtotal <span>$750.99</span></li>
-                                            <li>Total <span>$750.99</span></li>
+                                            <li>Subtotal <span>$<?php echo $subtotal; ?></span></li>
+                                            <li>Tax (<?php echo $tax_percentage; ?>%) <span>$<?php echo $tax_amount; ?></span></li>
+                                            <li>Total <span>$<?php echo $total; ?></span></li>
                                         </ul>
                                         <p>
                                             <?php

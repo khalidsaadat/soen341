@@ -8,6 +8,8 @@
         $cart_quantity =  1; // default quantity is 1
         $cart_button_name = "Add to cart";
         $cart_btn_action_name = 'add_to_cart';
+
+        $remove_from_cart_flag = 0;
         if(isset($model['cart_item'])) {
             // for editing a product in product detail page
             $cart_item = $model['cart_item'];
@@ -17,6 +19,8 @@
             $cart_quantity = $cart_item->quantity;
             $cart_button_name = "Update Cart";
             $cart_btn_action_name = 'update_cart';
+
+            $remove_from_cart_flag = 1;
         }
   
        // for product detail page
@@ -249,6 +253,16 @@
                                     <a href="#"><i class="fa fa-heart"></i> add to wishlist</a>
                                     <a href="#"><i class="fa fa-exchange"></i> Add To Compare</a>
                                 </div>
+
+                                <?php
+                                    if($remove_from_cart_flag == 1) {
+                                        echo "
+                                            <div>
+                                                <button type='submit' name='remove_cart' style='color: blue; border: none; background: none;'>Remove from cart</button> 
+                                            </div>
+                                        ";
+                                    }
+                                ?>
                             
                             </div>
                         </div>

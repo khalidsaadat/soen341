@@ -9,9 +9,13 @@
     $phone = $profile->phone_number;
     $address = $profile->address;
 
+    // Order detail
+
+    // Wishlist detail
+    $wishlists = $model['wishlists'];
 ?>
 
-<title>{TITLE}</title>
+<title>My Account</title>
 
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
@@ -358,8 +362,131 @@
                             </div>
                             <div class="tab-pane fade" id="wish-list" role="tabpanel" aria-labelledby="wish-list-tab">
                                 <div class="container-fluid">
-                                    <h2 class="mb-3 font-weight-bold">Wish Lists</h2>
+                                    <h2 class="mb-3 font-weight-bold">Wishlist</h2>
                                     
+                                    <div class="col-lg-12">
+                                        <div class="row" style="margin-bottom: 15px;">
+
+                                            <?php
+                                                // get wishlist from the db
+                                                if(count($wishlists) > 0) {
+                                                    $modal_counter = 1;
+                                                    foreach($wishlists as $wishlist) {
+                                                        $wishlist_id = $wishlist->wishlist_id;
+                                                        $date = date('F d, Y', strtotime($wishlist->date));
+
+                                                        $product_id = $wishlist->product_id;
+                                                        $product = $this->model('Product')->find($product_id);
+
+                                                        $name = $product->name;
+                                                        $sizes = unserialize($product->size);
+                                                            $sizes_copy = $sizes;
+                                                        $colors = unserialize($product->colors);
+                                                        $image = $product->images;
+                                                        $images_name = explode(',', $image);
+                                                        $image_name = $images_name[0];
+
+                                                   
+                                                        echo "
+                                                            <div class='col-lg-12 order-item mb-10'>
+                                                                <div class='row order-header'>
+                                                                    <div class='col-lg-6'>
+                                                                        <span><strong>Date Added: </strong>$date</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class='row pd-10'>
+                                                                    <div class='col-lg-2'>
+                                                                        <img src='/assets/products/images/$image_name' alt=''>
+                                                                    </div>
+                                                                    <div class='col-lg-7 pd-l-0'>
+                                                                        ";
+                                                                        ?>
+                                                                        <div class='order-item-title' onclick="location.href='/shop/product/<?php echo $product_id; ?>'" style="cursor: pointer;"><?php echo $name; ?></div>
+                                                                        <?php
+                                                                        echo "
+                                                                        <div>
+                                                                            Size(s) Available: ";
+                                                                                foreach($sizes as $size) {
+                                                                                    echo $size;
+                                                                                    // add comma except the last value
+                                                                                    if(next($sizes_copy)) {
+                                                                                        echo ', ';
+                                                                                    }
+                                                                                }
+                                                                            echo "
+                                                                        </div>
+                                                                        <div>
+                                                                            Color(s) Available: 
+                                                                                <div>";
+                                                                                foreach($colors as $color) {
+                                                                                    $color = ucfirst($color);
+                                                                                    echo "
+                                                                                        <span class='product__details__option__color checkout-color' style='float: left; margin-left: 10px; top: 2px; font-weight: normal;'>
+                                                                                            <label style='background: $color;' for='sp-1' data-toggle='tooltip' data-placement='top' title='$color'>
+                                                                                                <input type='radio' id='sp-1'>
+                                                                                            </label>
+                                                                                        </span>
+                                                                                    ";
+                                                                                }
+                                                                            echo "
+                                                                                </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class='col-lg-3 text-right'>
+                                                                        <div data-toggle='modal' data-target='#remove-wishlist-modal-$modal_counter'>
+                                                                            <span style='font-weight: bold; cursor: pointer;'><img src='/assets/icons/trash.png' alt='' style='height: 22px; padding-right: 10px;' data-toggle='tooltip' data-placement='right' title='Remove from wishlist'>&nbsp; </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        ";
+
+
+                                                        // Cancel Modal 
+                                                        ?>
+                                                        <div class="modal fade" id="remove-wishlist-modal-<?php echo $modal_counter; ?>" tabindex="-1" role="dialog" aria-labelledby="remove-wishlist-modal-label" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title font-weight" id="remove-wishlist-modal-label"><?php echo $name; ?></h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        Are you sure you want to remove it from your wishlist?
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="site-btn" data-dismiss="modal">Close</button>
+                                                                        <button type="button" class="site-btn" onclick="location.href='/shop/remove_from_wishlist/<?php echo $product_id; ?>'">Remove</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <?php
+                                                        // increment to the next wishlist item
+                                                        $modal_counter++;
+                                                    }
+                                                }
+                                                else {
+                                                    ?>
+                                                    <div>
+                                                        <h4>Your wishlist is empty</h4>
+                                                    </div>
+                                                    <?php
+                                                }
+                                            ?>
+
+                                        </div>
+
+                                    </div>
+
+                                    
+                                    
+
+                                    
+
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="rewards" role="tabpanel" aria-labelledby="rewards-tab">

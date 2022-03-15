@@ -1,5 +1,5 @@
 <?php
-class Cart extends Model{
+class Order extends Model{
 
     public function __construct()
     {   
@@ -7,9 +7,9 @@ class Cart extends Model{
     }
 
 	public function getAll(){
-        $stmt = self::$_connection->prepare("SELECT * FROM cart");
+        $stmt = self::$_connection->prepare("SELECT * FROM my_order");
         $stmt->execute();
-    	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Cart');
+    	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Order');
 		return $stmt->fetchAll();
     }
 
@@ -17,18 +17,9 @@ class Cart extends Model{
         $stmt = self::$_connection->prepare("SELECT * FROM cart where user_id = :user_id AND status = :status");
         $stmt->execute(['user_id'=>$user_id,
                         'status'=>'0']);
-    	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Cart');
+    	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Order');
 		return $stmt->fetchAll();
     }
-
-    public function getAllIdsByUserId($user_id){
-        $stmt = self::$_connection->prepare("SELECT cart_id FROM cart where user_id = :user_id AND status = :status");
-        $stmt->execute(['user_id'=>$user_id,
-                        'status'=>'0']);
-    	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Cart');
-		return $stmt->fetchAll();
-    }
-
 
     public function find($brand_id){
         $stmt = self::$_connection->prepare("SELECT * FROM brand WHERE brand_id = :brand_id");
@@ -37,30 +28,22 @@ class Cart extends Model{
         return $stmt->fetch();
     }
 
-    public function findByProductId($product_id)
+    public function findByBillingId($billing_detail_id)
     {
-        $stmt = self::$_connection->prepare("SELECT * FROM cart WHERE product_id = :product_id");
-        $stmt->execute(['product_id'=>$product_id]);
-        $stmt->setFetchMode(PDO::FETCH_CLASS, 'Cart');
+        $stmt = self::$_connection->prepare("SELECT * FROM my_order WHERE billing_detail_id = :billing_detail_id");
+        $stmt->execute(['billing_detail_id'=>$billing_detail_id]);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, 'Order');
         return $stmt->fetch();
     }
 
-    public function findByProductIdByUserId($product_id, $user_id)
-    {
-        $stmt = self::$_connection->prepare("SELECT * FROM cart WHERE product_id = :product_id AND user_id =:user_id AND status = :status");
-        $stmt->execute(['product_id'=>$product_id,
-                        'user_id'=>$user_id,
-                        'status'=>'0']);
-        $stmt->setFetchMode(PDO::FETCH_CLASS, 'Cart');
-        return $stmt->fetch();
-    }
 
     public function insert(){
-	    $stmt = self::$_connection->prepare("INSERT INTO cart(product_id, quantity, user_id) VALUES(:product_id, :quantity, :user_id)");
-        $stmt->execute(['product_id'=>$this->product_id,
-                        'quantity'=>$this->quantity,
-                        'user_id'=>$this->user_id]);
-        $_SESSION['cart_last_id'] = self::$_connection->lastInsertId();
+	    $stmt = self::$_connection->prepare("INSERT INTO my_order(cart_ids, billing_detail_id, order_number, status) VALUES(:cart_ids, :billing_detail_id, :order_number, :status)");
+        $stmt->execute(['cart_ids'=>$this->cart_ids,
+                        'billing_detail_id'=>$this->billing_detail_id,
+                        'order_number'=>$this->order_number,
+                        'status'=>$this->status]);
+        $_SESSION['last_order'] = self::$_connection->lastInsertId();
     }
 
     public function delete(){

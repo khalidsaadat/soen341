@@ -2,6 +2,10 @@
 class AdminController extends Controller{
 
 	public function index(){
+		// only admin users are allowed to visit this page
+		if($_SESSION['role'] != 'admin') {
+			return header('location:/');
+		}
 		// get list of all products from the db
 		$products = $this->model('Product')->getAll();
 		$promotions = $this->model('Product')->getAllPromotions();

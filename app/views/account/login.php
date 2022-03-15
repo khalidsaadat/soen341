@@ -66,6 +66,18 @@
                                         </div>
                                     ";
                                 }
+
+                                // user login before they add to cart
+                                if(isset($_SESSION['login_flag'])) {
+                                    echo "
+                                        <div class='form_success'>
+                                            You must login first to purchase products
+                                        </div>
+                                    ";
+
+                                    // unset the session variable
+                                    unset($_SESSION['login_flag']);
+                                }
                             ?>
                             <div class="checkout__input">
                                 <p>Email<span>*</span></p>

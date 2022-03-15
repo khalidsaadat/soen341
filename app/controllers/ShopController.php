@@ -8,6 +8,38 @@ class ShopController extends Controller{
 		// get the products' basic information
 		$products_basic_info = $this->model('Product')->getAllBasicInfo();
 		$products = $this->model('Product')->getAllActive();
+
+		// add to cart
+		if(isset($_POST['add_to_cart'])) {
+			// redirect user to login page if they are not logged in
+			if(!isset($_SESSION['user_id'])) {
+				$_SESSION['login_flag'] = 1;
+				return header('location:/account/login');
+			}
+			$product_quantity = 1;
+			$product_id = $_POST['product_id'];
+			$product_user_id = $_SESSION['user_id'];
+
+			$select_cart = $this->model('Cart')->findByProductIdByUserId($product_id, $product_user_id);
+			// if it is false, add the product to the cart
+			if(!$select_cart) {
+				$new_product = $this->model('Cart');
+				$new_product->product_id = $product_id;
+				$new_product->quantity = $product_quantity;
+				$new_product->user_id = $product_user_id;
+
+				$new_product->insert();
+			}
+			else {
+				// the product is already in the cart
+				$current_quantity = $select_cart->quantity;
+				$updated_quantity = $current_quantity + 1;
+
+				// update the cart table
+				$select_cart->quantity = $updated_quantity;
+				$select_cart->updateQuantity();
+			}
+		}
     
 		$all_brands = $this->model('Brand')->getAll();
 		
@@ -79,7 +111,7 @@ class ShopController extends Controller{
 	}
 
 	// product detail page
-    public function product($product_id) {
+    public function product($product_id, $type="view") {
 		$product = $this->model('Product')->find($product_id);
 
 		// if product does not exist, show error 404 view; otherwise, show the product detail page
@@ -87,10 +119,41 @@ class ShopController extends Controller{
 			$this->view('EXCEPTIONS/error_404');
 		}
 		else {
-			$this->view('shop/product_detail', ['product'=>$product]);
+			// to view the product detail page
+			if($type == 'view') {
+				$this->view('shop/product_detail', ['product'=>$product, 'type'=>'view']);
+			}
+			// to edit the product in product detail page
+			elseif($type == 'edit') {
+				$cart_item = $this->model('Cart')->findByProductIdByUserId($product_id, $_SESSION['user_id']);
+
+				// check if the update cart button is clicked
+				if(!isset($_POST['update_cart'])) {
+					$this->view('shop/product_detail', ['product'=>$product, 'cart_item'=>$cart_item, 'type'=>'edit']);
+				}
+				else {
+					// get the updated values
+					$size = $_POST['size'];
+					$color = $_POST['color'];
+					$quantity = $_POST['quantity'];
+
+					// update the product cart
+					$cart_item->size = $size;
+					$cart_item->color = $color;
+					$cart_item->quantity = $quantity;
+
+					$cart_item->updateCart();
+					
+					return header('location:/shop/checkout');
+				}
+				
+				
+			}
+			else {
+				$this->view('EXCEPTIONS/error_404');
+			}
 		}
 		
-        
     }
 
 	public function cart() {
@@ -98,103 +161,110 @@ class ShopController extends Controller{
 	}
 
 	public function checkout() {
-
 		if(!isset($_SESSION['user_id'])) {
 			$_SESSION['login_flag'] = 1;
 			return header('location:/account/login');
 		}
 
-		if(!isset($_POST['review_cart'])) {
-			$this->view('shop/checkout');
-		}
-		else {
-			// get the user information
-			$order_id = '';
-			$first_name = $_POST['first'];
-			$last_name = $_POST['last'];
-			$addres = $_POST['address'];
-			$city = $_POST['city'];
-			$province = $_POST['province'];
-			$postal_code = $_POST['code'];
-			$country = $_POST['country'];
-			$phone = $_POST['phone_num'];
-			$email = $_POST['email'];
-			$card = $_POST['credit_card_num'];
-			$name = $_POST['card_holder_name'];
-			$expiry_date = $_POST['expiry_date'];
-			$cvv_num = $_POST['cvv'];
-			$cvvType = $_POST['cvvType'];
-			$detail_user_id = $_SESSION['user_id'];
+		if(isset($_SESSION['user_id'])) {
+			$cart_items = $this->model('Cart')->getAllByUserId($_SESSION['user_id']);
 
-
-			// Evaluation
-
-			// credit card validation
-			$ccResult = ($this->CCValidate($cvvType, $card)) ? 'valid' : 'invalid';
-
-			// cvv validation
-			$cvvResult = ($this->CVV($cvvType, $cvv_num)) ? 'valid' : 'invalid';
-
-			// expiry date validation
-			$expResult = ($this->validateCCExpDate($expiry_date)) ? 'valid' : 'invalid';
-	
-			if($ccResult == 'valid' && $cvvResult == 'valid' && $expResult == 'valid') { 
-				// it is safe to continue
-
-				// Order table
-				// $last_order_id = '5';
-
-                // get the information
-                $cart_ids = $this->model('Cart')->getAllIdsByUserId($_SESSION['user_id']);	// {1,2,3,4}
-				$billing_detail = $_SESSION['billing_detail_id'];
-				$order_number = $_POST['order_number'];
-				$status = $_POST['status'];
-                
-						
-				$order_number = $this->getToken();
-				$_SESSION['current_order_number'] = $order_number;
-				
-				// $order->order_number = $order_number;
-				// echo "$order_number";
-
-
-				//Order Table
-				$new_order = $this->model('Order');
-				$new_order->cart_ids = $cart_ids;
-				$new_order->order_number  = $order_number;
-				$new_order->status  = $status;
-
-				$new_order->insert();
-
-				$last_order_id = $_SESSION['last_order_id'];
-
-				// Billing detail table
-				$new_detail = $this->model('BillingDetails');
-				$new_detail->order_id = $last_order_id;
-				$new_detail->first_name   = $first_name;
-				$new_detail->last_name    = $last_name;
-				$new_detail->address = $addres;
-				$new_detail->city    = $city;
-				$new_detail->province = $province;
-				$new_detail->postal_code     = $postal_code;
-				$new_detail->country  = $country;
-				$new_detail->phone = $phone;
-				$new_detail->email     = $email;
-				$new_detail->user_id  = $detail_user_id; 
-
-				$new_detail->insert();
-
-				// success redirect
-				return header('location:/shop/order_confirmation');
-		
+			if(!isset($_POST['review_cart'])) {
+				$this->view('shop/checkout', ['cart_items'=>$cart_items]);
 			}
 			else {
-				// credit card detail wrong
-				$this->view('shop/checkout', ['ccError'=>$ccResult, 'cvvError'=>$cvvResult, 'expError'=>$expResult]);
-			}
-
-		}
+				// get the user information
+				$order_id = 5;
+				$first_name = $_POST['first'];
+				$last_name = $_POST['last'];
+				$addres = $_POST['address'];
+				$city = $_POST['city'];
+				$province = $_POST['province'];
+				$postal_code = $_POST['code'];
+				$country = $_POST['country'];
+				$phone = $_POST['phone_num'];
+				$email = $_POST['email'];
+				$card = $_POST['credit_card_num'];
+				$name = $_POST['card_holder_name'];
+				$expiry_date = $_POST['expiry_date'];
+				$cvv_num = $_POST['cvv'];
+				$cvvType = $_POST['cvvType'];
+				$detail_user_id = $_SESSION['user_id'];
+	
+	
+				// Evaluation
+	
+				// credit card validation
+				$ccResult = ($this->CCValidate($cvvType, $card)) ? 'valid' : 'invalid';
+	
+				// cvv validation
+				$cvvResult = ($this->CVV($cvvType, $cvv_num)) ? 'valid' : 'invalid';
+	
+				// expiry date validation
+				$expResult = ($this->validateCCExpDate($expiry_date)) ? 'valid' : 'invalid';
 		
+				if($ccResult == 'valid' && $cvvResult == 'valid' && $expResult == 'valid') { 
+					// it is safe to continue
+	
+					// Order table
+					// $last_order_id = '5';
+	
+					// get the information
+					$cart_ids = $this->model('Cart')->getAllIdsByUserId($_SESSION['user_id']);	// {1,2,3,4}
+					// $billing_detail = $_SESSION['billing_detail_id'];
+					// $order_number = $_POST['order_number'];
+					// $status = $_POST['status'];
+					
+							
+					$order_number = $this->getToken();
+
+					$_SESSION['current_order_number'] = $order_number;
+					
+					// $order->order_number = $order_number;
+					// echo "$order_number";
+	
+	
+					//Order Table
+					// $new_order = $this->model('Order');
+					// $new_order->cart_ids = $cart_ids;
+					// $new_order->order_number  = $order_number;
+					// $new_order->status  = $status;
+	
+					// $new_order->insert();
+	
+					$last_order_id = $_SESSION['current_order_number'];
+	
+					// Billing detail table
+					$new_detail = $this->model('BillingDetails');
+					// $new_detail->order_id = $last_order_id; --> we dont need it
+					$new_detail->first_name   = $first_name;
+					$new_detail->last_name    = $last_name;
+					$new_detail->address = $addres;
+					$new_detail->city    = $city;
+					$new_detail->province = $province;
+					$new_detail->postal_code     = $postal_code;
+					$new_detail->country  = $country;
+					$new_detail->phone = $phone;
+					$new_detail->email     = $email;
+					$new_detail->user_id  = $detail_user_id; 
+	
+					$new_detail->insert();
+	
+					// success redirect
+					return header('location:/shop/order_confirmation');
+			
+				}
+				else {
+					// credit card detail wrong
+					$this->view('shop/checkout', ['cart_items'=>$cart_items, 'ccError'=>$ccResult, 'cvvError'=>$cvvResult, 'expError'=>$expResult]);
+				}
+	
+			}
+		}
+		else {
+			$cart_items = '';
+			$this->view('shop/checkout', ['cart_items'=>$cart_items]);
+		}
 	}
 
 	private function CCValidate($type, $cNum) {

@@ -39,9 +39,8 @@ class BillingDetails extends Model{
     }
 
     public function insert(){
-	    $stmt = self::$_connection->prepare("INSERT INTO billing_detail(order_id, first_name, last_name, address, city, province, postal_code, country, phone, email, user_id) VALUES(:order_id, :first_name, :last_name, :address, :city, :province, :postal_code, :country, :phone, :email, :user_id)");
-        $stmt->execute(['order_id'=>$this->order_id,
-                        'first_name'=>$this->first_name,
+	    $stmt = self::$_connection->prepare("INSERT INTO billing_detail(first_name, last_name, address, city, province, postal_code, country, phone, email, user_id) VALUES(:first_name, :last_name, :address, :city, :province, :postal_code, :country, :phone, :email, :user_id)");
+        $stmt->execute(['first_name'=>$this->first_name,
                         'last_name'=>$this->last_name,
                         'address'=>$this->address,
                         'city'=>$this->city,

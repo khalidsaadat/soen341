@@ -343,3 +343,19 @@ img.avatar {
     text-transform: capitalize;
     text-align: center;
 }
+
+.product__item__text input.size-button {
+	font-size: 15px;
+	font-weight: 700;
+	padding-bottom:30px;
+	left:10px;
+	top: 0;
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: all, 0.3s;
+	-o-transition: all, 0.3s;
+	transition: all, 0.3s;
+	border: none;
+    background: none;
+}
+

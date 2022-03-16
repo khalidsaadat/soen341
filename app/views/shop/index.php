@@ -255,6 +255,9 @@
 
                                $colors_serialized = unserialize($product->colors);
                                $colors_array = array_filter($colors_serialized);
+
+                               $size_serialized = unserialize($product->size);
+                               $size_array = array_filter($size_serialized);
                              
                                $image = $product->images;
                                $images_name = explode(',', $image);
@@ -283,6 +286,29 @@
                                                     <input type='hidden' name='product_id' id='product_id' value=$product_id>
                                                     <input type='submit' class='add-cart' value='+ Add To Cart' name='add_to_cart' id='add_to_cart'>
                                                     <h5>$$price</h5>
+
+                                                    <div class='product__details__option__sizes'>
+                                                        ";
+                                                        $size_ratio_counter = 1;
+                                                        foreach($size_array as $size) {
+
+                                                            echo "
+                                                                <label for='size_counter_$size_ratio_counter'>
+                                                                    <input type='radio' name='size_counter_$size_ratio_counter' class='size-button' value='$size'>$size
+                                                                </label>
+                                                            ";
+
+                                                            // S,M,L
+                                                            // S = size_counter_1
+                                                            // M = size_counter_2
+                                                            // L = size_counter_3
+
+                                                            $size_ratio_counter++;
+                                                        }
+                                                        
+                                                        echo"
+                                                     </div> 
+                                                     
                                                     <div class='product__color__select'>
                                                         ";
                                                         foreach($colors_array as $color) {

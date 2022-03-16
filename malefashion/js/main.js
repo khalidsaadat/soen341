@@ -110,6 +110,12 @@
         $(this).addClass('active');
     });
 
+
+    $(".product__item__text .product__details__option__sizes label").on('click', function () {
+        $(".product__item__text .product__details__option__sizes labell").removeClass('active');
+        $(this).addClass('active');
+    });
+
     /*-------------------
 		Scroll
 	--------------------- */

@@ -12,34 +12,148 @@ class AccountController extends Controller{
 		$user_profile = $this->model('Profile')->findByUserId($_SESSION['user_id']);
 		$profile_id = $user_profile->profile_id;
 
+		// address detail
+		$primary_address = $this->model('Address')->getPrimaryAddress($_SESSION['user_id']);
+		$secondary_address = $this->model('Address')->getSecondaryAddress($_SESSION['user_id']);
+
 		// wishlist
 		$wishlists = $this->model('Wishlist')->getAllActiveForUserId($_SESSION['user_id']);
 
+		// redirection ids
+		$redirect_condition = '';
+
+		// update address
+		if(isset($_POST['update_address'])) {
+			$redirect_condition = 4;
+
+			// get primary address info
+			$user_id = $_SESSION['user_id'];
+			$p_street = $_POST['p_street'];
+			$p_city = $_POST['p_city'];
+			$p_province = $_POST['p_province'];
+			$p_postal_code = $_POST['p_postal_code'];
+			$p_country = $_POST['p_country'];
+			$p_status = '';
+			if(isset($_POST['p_primary_address'])) {
+				$p_status = 1;
+			}
+			else {
+				$p_status = 0;
+			}
+
+			// get secondary address info
+			$user_id = $_SESSION['user_id'];
+			$s_street = $_POST['s_street'];
+			$s_city = $_POST['s_city'];
+			$s_province = $_POST['s_province'];
+			$s_postal_code = $_POST['s_postal_code'];
+			$s_country = $_POST['s_country'];
+			$s_status = '';
+			if(isset($_POST['s_primary_address'])) {
+				$s_status = 1;
+			}
+			else {
+				$s_status = 0;
+			}
+
+			// check if the address already exists in the db
+			// primary address already exitss, just update it; otherwise, make a new one.
+			if($primary_address) {
+				$primary_address->user_id = $user_id;
+				$primary_address->street = $p_street;
+				$primary_address->city = $p_city;
+				$primary_address->province = $p_province;
+				$primary_address->postal_code = $p_postal_code;
+				$primary_address->country = $p_country;
+				$primary_address->status = $p_status;
+	
+				$primary_address->update();
+			}
+			else {
+				$primary_address = $this->model('Address');
+				$primary_address->user_id = $user_id;
+				$primary_address->street = $p_street;
+				$primary_address->city = $p_city;
+				$primary_address->province = $p_province;
+				$primary_address->postal_code = $p_postal_code;
+				$primary_address->country = $p_country;
+				$primary_address->status = $p_status;
+	
+				$primary_address->insert();
+			}
+			
+			// secondary address already exitss, just update it; otherwise, make a new one.
+			if($secondary_address) {
+				// $secondary_address->user_id = $user_id;
+				// $secondary_address->street = $street;
+				// $secondary_address->city = $city;
+				// $secondary_address->province = $province;
+				// $secondary_address->postal_code = $postal_code;
+				// $secondary_address->country = $country;
+				// $secondary_address->status = $status;
+	
+				// $secondary_address->update();
+			}
+			else {
+				// $secondary_address->user_id = $user_id;
+				// $secondary_address->street = $street;
+				// $secondary_address->city = $city;
+				// $secondary_address->province = $province;
+				// $secondary_address->postal_code = $postal_code;
+				// $secondary_address->country = $country;
+				// $secondary_address->status = $status;
+	
+				// $secondary_address->insert();
+			}
+
+			
+
+			$updated_address_id = $_SESSION['updated_address_id'];
+
+			// update profile table with the new primary address id
+
+			// success msg 
+			$_SESSION['return-msg'] = "Address updated successfully";
+			if($redirect_condition == 4) {
+				$this->redirect_to('/account');
+			}
+		}
+
+		// update account info
 		if(!isset($_POST['update-account'])) {
-			$this->view('user/index', ['user_profile'=>$user_profile, 'wishlists'=>$wishlists]);
+			// redirection condition
+			$redirect_condition = 1;
+
+			$this->view('user/index', ['user_profile'=>$user_profile, 'wishlists'=>$wishlists, 'primary_address'=>$primary_address, 'secondary_address'=>$secondary_address]);
 		}
 		else {
+			
 			// Get users information
 
 			// user table info
 			$current_user = $this->model('User')->find($_SESSION['user_id']);
 
 			$full_name = $_POST['full_name'];
+			echo $full_name;
 			$phone_number = $_POST['phone_number'];
 			$email = $_POST['email'];
-			$address = $_POST['address'];
+			// $address = $_POST['address'];
 
 			// update profile table
 			$user_profile->full_name = $full_name;
 			$user_profile->email = $email;
 			$user_profile->phone_number = $phone_number;
-			$user_profile->address = $address;
+			// $user_profile->address = $address;
 
 			$user_profile->update();
 			
 			// update user table for password if their password is changed
 			// if all fields are filled
 			if(!empty($_POST['current_pwd'])) {
+
+				// redirection condition
+				$redirect_condition = 1;
+
 				$current_pwd = $_POST['current_pwd'];
 				
 
@@ -59,37 +173,44 @@ class AccountController extends Controller{
 
 							// redirect with success msg
 							$_SESSION['return-msg'] = "Password changed successfully";
-
-							return header('location:/account');
+							
+							if($redirect_condition == 1) {
+								$this->redirect_to('/account');
+							}
+							
 						}
 						else {
 							$error_msg = 'Passwords do not match!';
-							$this->view('user/index', ['user_profile'=>$user_profile, 'error_msg'=>$error_msg, 'wishlists'=>$wishlists]);	
+							$this->view('user/index', ['user_profile'=>$user_profile, 'error_msg'=>$error_msg, 'wishlists'=>$wishlists, 'primary_address'=>$primary_address, 'secondary_address'=>$secondary_address]);	
 						}
 					}
 					else {
 						$error_msg = 'To change your password, enter your new password!';
-						$this->view('user/index', ['user_profile'=>$user_profile, 'error_msg'=>$error_msg, 'wishlists'=>$wishlists]);	
+						$this->view('user/index', ['user_profile'=>$user_profile, 'error_msg'=>$error_msg, 'wishlists'=>$wishlists, 'primary_address'=>$primary_address, 'secondary_address'=>$secondary_address]);	
 					}
 				}
 				else {
 					$error_msg = 'Current password is wrong!';
-					$this->view('user/index', ['user_profile'=>$user_profile, 'error_msg'=>$error_msg, 'wishlists'=>$wishlists]);
+					$this->view('user/index', ['user_profile'=>$user_profile, 'error_msg'=>$error_msg, 'wishlists'=>$wishlists, 'primary_address'=>$primary_address, 'secondary_address'=>$secondary_address]);
 				}
 			}
 			else {
+				// redirection condition
+				$redirect_condition = 2;
+				
 				// redirect with success msg
 				$_SESSION['return-msg'] = "Profile updated successfully";
 
-				return header('location:/account');
+				if($redirect_condition == 2) {
+					$this->redirect_to('/account');
+				}
 			}
 
 		}
 
-		if(isset($_POST['update_address'])) {
-			return header('location:/shop/');
-		}
+		
 	}
+
 
 	public function signup() {
 
@@ -249,6 +370,15 @@ class AccountController extends Controller{
 
 		header('location:/account/login');
 
+	}
+
+	// used for multiple header redirection - to fix the probelem
+	private function redirect_to($destination) {
+		if (headers_sent($filename, $line)) {
+			trigger_error("Headers already sent in {$filename} on line {$line}", E_USER_ERROR);
+		  }
+		header("Location: {$destination}");
+		exit;
 	}
 
 }

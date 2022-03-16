@@ -40,7 +40,7 @@ class Profile extends Model{
         $stmt->execute(['full_name'=>$this->full_name,
                         'email'=>$this->email, 
                         'phone_number'=>$this->phone_number, 
-                        'address'=>$this->address, 
+                        // 'address'=>$this->address, 
                         'profile_id'=>$this->profile_id]);
     }
 

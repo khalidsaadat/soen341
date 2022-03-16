@@ -134,9 +134,9 @@ class AccountController extends Controller{
 				$primary_address->makeSecondary($primary_address->address_id);
 			}
 
-			
-
 			// // update profile table with the new primary address id
+			$user_profile->address = $updated_address_id;
+			$user_profile->updateAddress();
 
 			// success msg 
 			$_SESSION['return-msg'] = "Address updated successfully";

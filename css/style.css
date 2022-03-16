@@ -969,10 +969,6 @@ ol {
 	visibility: visible;
 }
 
-.product__item:hover .product__item__text h6 {
-	opacity: 0;
-}
-
 .product__item:hover .product__item__text .product__color__select {
 	opacity: 1;
 }
@@ -1071,23 +1067,6 @@ ol {
 	-webkit-transition: all, 0.3s;
 	-o-transition: all, 0.3s;
 	transition: all, 0.3s;
-}
-
-.product__item__text input.add-cart {
-	font-size: 15px;
-	color: #e53637;
-	font-weight: 700;
-	position: absolute;
-	left: 0;
-	top: 0;
-	opacity: 0;
-	visibility: hidden;
-	-webkit-transition: all, 0.3s;
-	-o-transition: all, 0.3s;
-	transition: all, 0.3s;
-	border: none;
-    background: none;
-    padding: 0px;
 }
 
 .product__item__text h6 {

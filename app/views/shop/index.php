@@ -337,6 +337,9 @@
 
                                $colors_serialized = unserialize($product->colors);
                                $colors_array = array_filter($colors_serialized);
+
+                               $size_serialized = unserialize($product->size);
+                               $size_array = array_filter($size_serialized);
                              
                                $image = $product->images;
                                $images_name = explode(',', $image);
@@ -364,29 +367,28 @@
                                                 <div class='product__item__text'>
                                                     <h6>$name</h6>
                                                     
-                                                    <form method='post' id='add_to_cart_form'>
-                                                        <input type='hidden' name='product_id' id='product_id' value=$product_id>
-                                                        <input type='submit' class='add-cart' value='+ Add To Cart' name='add_to_cart' id='add_to_cart'>
-                                                        <h5>$$price</h5>
-                                                        <div class='product__color__select'>
+                                                    <h5>$$price</h5>
+
+                                                    <div class='product__color__select'>
+                                                        ";
+                                                        $radio_color_counter = 1;
+                                                        foreach($colors_array as $color) {
+                                                            echo "
+                                                                <label class='active' for='pc-6_$radio_color_counter' style='background:$color;' data-toggle='tooltip' data-placement='top' title='$color'>
+                                                                    <input type='radio' name='color' id='pc-6_$radio_color_counter' value='$color'>
+                                                                </label>
                                                             ";
-                                                            foreach($colors_array as $color) {
-                                                                echo "
-                                                                    <label for='pc-6' class='active' style='background:$color;' data-toggle='tooltip' data-placement='top' title='$color'>
-                                                                        <input type='radio' id='pc-6'>
-                                                                    </label>
-                                                                ";
-                                                            }
-                                                            echo"
-                                                        </div>
-                                                    </form>
+                                                            $radio_color_counter++;
+                                                        }
+                                                        echo"
+                                                    </div>
 
                                                 </div>
                                             
                                             </div>
                                         </div>
                                     ";
-        
+            
                             }
                         ?>
                        

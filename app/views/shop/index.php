@@ -366,54 +366,29 @@
                                                 
                                                 <div class='product__item__text'>
                                                     <h6>$name</h6>
-                                                    <a href='#' class='add-cart'>+ Add To Cart</a>
-
-                                                <form method='post' id='add_to_cart_form'>
-                                                    <input type='hidden' name='product_id' id='product_id' value=$product_id>
-                                                    <input type='submit' class='add-cart' value='+ Add To Cart' name='add_to_cart' id='add_to_cart'>
+                                                    
                                                     <h5>$$price</h5>
 
-                                                    <div class='product__details__option__sizes'>
-                                                        ";
-                                                        $size_ratio_counter = 1;
-                                                        foreach($size_array as $size) {
-
-                                                            echo "
-                                                                <label for='size_counter_$size_ratio_counter'>
-                                                                    <input type='radio' name='size_counter_$size_ratio_counter' class='size-button' value='$size'>$size
-                                                                </label>
-                                                            ";
-
-                                                            // S,M,L
-                                                            // S = size_counter_1
-                                                            // M = size_counter_2
-                                                            // L = size_counter_3
-
-                                                            $size_ratio_counter++;
-                                                        }
-                                                        
-                                                        echo"
-                                                     </div> 
-                                                     
                                                     <div class='product__color__select'>
                                                         ";
+                                                        $radio_color_counter = 1;
                                                         foreach($colors_array as $color) {
                                                             echo "
-                                                                <label for='pc-6' class='active' style='background:$color;' data-toggle='tooltip' data-placement='top' title='$color'>
-                                                                    <input type='radio' id='pc-6'>
+                                                                <label class='active' for='pc-6_$radio_color_counter' style='background:$color;' data-toggle='tooltip' data-placement='top' title='$color'>
+                                                                    <input type='radio' name='color' id='pc-6_$radio_color_counter' value='$color'>
                                                                 </label>
                                                             ";
+                                                            $radio_color_counter++;
                                                         }
                                                         echo"
                                                     </div>
-                                                </form>
 
+                                                </div>
+                                            
                                             </div>
-                                           
-                                       </div>
-                                   </div>
-                                ";
-        
+                                        </div>
+                                    ";
+            
                             }
                         ?>
                        

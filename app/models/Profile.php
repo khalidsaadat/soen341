@@ -20,6 +20,13 @@ class Profile extends Model{
         return $stmt->fetch();
     }
 
+    public function findByUserId($user_id){
+        $stmt = self::$_connection->prepare("SELECT * FROM profile WHERE user_id = :user_id");
+        $stmt->execute(['user_id'=>$user_id]);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, 'Profile');
+        return $stmt->fetch();
+    }    
+
     public function insert(){
 	    $stmt = self::$_connection->prepare("INSERT INTO profile(user_id, full_name, email, phone_number) VALUES(:user_id, :full_name, :email, :phone_number)");
         $stmt->execute(['user_id'=>$this->user_id,

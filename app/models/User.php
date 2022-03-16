@@ -48,5 +48,11 @@ class User extends Model{
                         'user_id'=>$this->user_id]);
     }
 
+    public function updatePassword(){
+        $stmt = self::$_connection->prepare("UPDATE user SET password = :password WHERE user_id = :user_id");
+        $stmt->execute(['password'=>$this->password,
+                        'user_id'=>$this->user_id]);
+    }
+
 }
 ?>

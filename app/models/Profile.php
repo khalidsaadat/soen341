@@ -36,11 +36,17 @@ class Profile extends Model{
     }
 
     public function update(){
-        $stmt = self::$_connection->prepare("UPDATE profile SET full_name = :full_name, email = :email, phone_number = :phone_number, address = :address WHERE profile_id = :profile_id");
+        $stmt = self::$_connection->prepare("UPDATE profile SET full_name = :full_name, email = :email, phone_number = :phone_number WHERE profile_id = :profile_id");
         $stmt->execute(['full_name'=>$this->full_name,
                         'email'=>$this->email, 
                         'phone_number'=>$this->phone_number, 
                         'address'=>$this->address, 
+                        'profile_id'=>$this->profile_id]);
+    }
+
+    public function updateAddress() {
+        $stmt = self::$_connection->prepare("UPDATE profile SET address = :address WHERE profile_id = :profile_id");
+        $stmt->execute(['address'=>$this->address, 
                         'profile_id'=>$this->profile_id]);
     }
 

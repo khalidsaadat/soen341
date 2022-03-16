@@ -141,12 +141,12 @@
                                                     <input type="text" name="phone_number" id="phone_number" value="<?php echo $phone; ?>">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <!-- <div class="col-lg-6">
                                                 <div class="checkout__input">
                                                     <p>Address<span>*</span></p>
                                                     <input type="text" name="address" id="address" value="<?php echo $address; ?>">
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
 
                                         <hr>
@@ -172,6 +172,97 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <hr>
+                                        <h3 class="mb-3 font-weight">Addresses</h3>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="panel panel-1" style="background: #cdedfd; color: #000; border: 1px solid #cfdee7;">
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="heading">Primary Address</div>
+                                                        </div>
+                                                        <div class="col-md-2 text-right">
+                                                            <span class="icon_pencil" style="cursor: pointer;" data-toggle="modal" data-target="#primary-address-modal"></span> &nbsp;
+                                                            <span class="icon_heart" style="cursor: pointer;" data-toggle="modal" data-target="#primary-address-modal"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-left" style="margin-top: 10px;">
+                                                        <div>
+                                                            123 Boulevard Street, Laval, QC, H6R 0H1
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="panel panel-2" style="background: #e7e5e5; color: #000; border: 1px solid #aee5d8;">
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="heading">Secondary Address</div>
+                                                        </div>
+                                                        <div class="col-md-2 text-right">
+                                                            <span class="icon_pencil"></span> &nbsp;
+                                                            <span class="icon_heart_alt" style="cursor: pointer;" data-toggle="modal" data-target="#primary-address-modal"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-left" style="margin-top: 10px;">
+                                                        <div>
+                                                            123 Boulevard Street, Montreal, QC, H6R 0H1
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Primary Address Modal -->
+                                        <div class="modal fade" id="primary-address-modal" tabindex="-1" role="dialog" aria-labelledby="primary-address-modal-label" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title font-weight" id="primary-address-modal-label">Primary Address</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <form method="post">
+                                                        <div class="modal-body">
+                                                            
+                                                                <div class="checkout__input">
+                                                                    <p>Street #<span>*</span></p>
+                                                                    <input type="text" name="full_name" id="full_name" value="<?php echo $name; ?>">
+                                                                </div>
+
+                                                                <div class="checkout__input">
+                                                                    <p>City<span>*</span></p>
+                                                                    <input type="text" name="full_name" id="full_name" value="<?php echo $name; ?>">
+                                                                </div>
+
+                                                                <div class="checkout__input">
+                                                                    <p>Province<span>*</span></p>
+                                                                    <input type="text" name="full_name" id="full_name" value="<?php echo $name; ?>">
+                                                                </div>
+
+                                                                <div class="checkout__input">
+                                                                    <p>Postal Code<span>*</span></p>
+                                                                    <input type="text" name="full_name" id="full_name" value="<?php echo $name; ?>">
+                                                                </div>
+
+                                                                <div class="checkout__input">
+                                                                    <p>Country<span>*</span></p>
+                                                                    <input type="text" name="full_name" id="full_name" value="<?php echo $name; ?>">
+                                                                </div>
+                                                        
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="site-btn" data-dismiss="modal">Close</button>
+                                                            <button type="submit"  name="update_address" class="site-btn">Save Changes</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
 
                                         <button type="submit" name="update-account" class="site-btn">UDPATE</button>
                                         

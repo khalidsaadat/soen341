@@ -84,12 +84,10 @@ class AccountController extends Controller{
 				return header('location:/account');
 			}
 
-			
-			
+		}
 
-			
-
-
+		if(isset($_POST['update_address'])) {
+			return header('location:/shop/');
 		}
 	}
 

@@ -56,6 +56,9 @@ class AccountController extends Controller{
 				$s_status = 0;
 			}
 
+			// udpated primary address id
+			$updated_address_id = '';
+
 			// check if the address already exists in the db
 			// primary address already exitss, just update it; otherwise, make a new one.
 			if($primary_address) {
@@ -80,37 +83,60 @@ class AccountController extends Controller{
 				$primary_address->status = $p_status;
 	
 				$primary_address->insert();
+
+				$updated_address_id = $_SESSION['updated_address_id'];
 			}
 			
 			// secondary address already exitss, just update it; otherwise, make a new one.
 			if($secondary_address) {
-				// $secondary_address->user_id = $user_id;
-				// $secondary_address->street = $street;
-				// $secondary_address->city = $city;
-				// $secondary_address->province = $province;
-				// $secondary_address->postal_code = $postal_code;
-				// $secondary_address->country = $country;
-				// $secondary_address->status = $status;
+				$secondary_address->user_id = $user_id;
+				$secondary_address->street = $s_street;
+				$secondary_address->city = $s_city;
+				$secondary_address->province = $s_province;
+				$secondary_address->postal_code = $s_postal_code;
+				$secondary_address->country = $s_country;
+				$secondary_address->status = $s_status;
 	
-				// $secondary_address->update();
+				$secondary_address->update();
 			}
 			else {
-				// $secondary_address->user_id = $user_id;
-				// $secondary_address->street = $street;
-				// $secondary_address->city = $city;
-				// $secondary_address->province = $province;
-				// $secondary_address->postal_code = $postal_code;
-				// $secondary_address->country = $country;
-				// $secondary_address->status = $status;
+				$secondary_address = $this->model('Address');
+				$secondary_address->user_id = $user_id;
+				$secondary_address->street = $s_street;
+				$secondary_address->city = $s_city;
+				$secondary_address->province = $s_province;
+				$secondary_address->postal_code = $s_postal_code;
+				$secondary_address->country = $s_country;
+				$secondary_address->status = $s_status;
 	
-				// $secondary_address->insert();
+				$secondary_address->insert();
+			}
+
+			
+			// if primary checkbox is not clicked in either of them, keep the existing primary address the same
+			// if primary address's pcheck is clicked, make secadd paddress, and change paddress to secaddress
+			if($p_status == 0) {
+				// update secondary address status to 1
+				$secondary_address->makePrimary($secondary_address->address_id);
+				$updated_address_id = $secondary_address->address_id;
+
+				// update primary address status to 0
+				$primary_address->makeSecondary($primary_address->address_id);
+			}
+
+			// if secondary address's pcheck is clicked, make secadd paddress, and change paddress to secaddress
+			if($s_status == 1) {
+				// update secondary address status to 1
+				$secondary_address->makePrimary($secondary_address->address_id);
+				$updated_address_id = $secondary_address->address_id;
+				
+				// update primary address status to 0
+				$primary_address->makeSecondary($primary_address->address_id);
 			}
 
 			
 
-			$updated_address_id = $_SESSION['updated_address_id'];
-
-			// update profile table with the new primary address id
+			// // update profile table with the new primary address id
 
 			// success msg 
 			$_SESSION['return-msg'] = "Address updated successfully";

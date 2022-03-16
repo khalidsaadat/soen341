@@ -81,5 +81,17 @@ class Address extends Model{
                         'address_id'=>$this->address_id]);
     }
 
+    public function makePrimary($address_id) {
+        $stmt = self::$_connection->prepare("UPDATE address SET status = :status WHERE address_id = :address_id");
+        $stmt->execute(['status'=>'1', 
+                        'address_id'=>$address_id]);
+    }
+
+    public function makeSecondary($address_id) {
+        $stmt = self::$_connection->prepare("UPDATE address SET status = :status WHERE address_id = :address_id");
+        $stmt->execute(['status'=>'0', 
+                        'address_id'=>$address_id]);
+    }
+
 }
 ?>

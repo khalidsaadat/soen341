@@ -346,42 +346,42 @@
                                                             
                                                                 <div class="checkout__input">
                                                                     <p>Street #<span>*</span></p>
-                                                                    <input type="text" name="street" id="street" value="<?php echo $s_street; ?>">
+                                                                    <input type="text" name="s_street" id="street" value="<?php echo $s_street; ?>">
                                                                 </div>
 
                                                                 <div class="checkout__input">
                                                                     <p>City<span>*</span></p>
-                                                                    <input type="text" name="city" id="city" value="<?php echo $s_city; ?>">
+                                                                    <input type="text" name="s_city" id="city" value="<?php echo $s_city; ?>">
                                                                 </div>
 
                                                                 <div class="checkout__input">
                                                                     <p>Province<span>*</span></p>
-                                                                    <input type="text" name="province" id="province" value="<?php echo $s_province; ?>">
+                                                                    <input type="text" name="s_province" id="province" value="<?php echo $s_province; ?>">
                                                                 </div>
 
                                                                 <div class="checkout__input">
                                                                     <p>Postal Code<span>*</span></p>
-                                                                    <input type="text" name="postal_code" id="postal_code" value="<?php echo $s_postal_code; ?>">
+                                                                    <input type="text" name="s_postal_code" id="postal_code" value="<?php echo $s_postal_code; ?>">
                                                                 </div>
 
                                                                 <div class="checkout__input">
                                                                     <p>Country<span>*</span></p>
-                                                                    <input type="text" name="country" id="country" value="<?php echo $s_country; ?>">
+                                                                    <input type="text" name="s_country" id="country" value="<?php echo $s_country; ?>">
                                                                 </div>
 
                                                                 <div class="checkout__input__checkbox">
-                                                                    <label for="secondary_address">
+                                                                    <label for="s_primary_address">
                                                                         Primary Address?
                                                                         <?php 
                                                                             if($s_status == 1) {
                                                                                 echo "
-                                                                                    <input type='checkbox' id='secondary_address' name='secondary_address' checked='checked'>
+                                                                                    <input type='checkbox' id='s_primary_address' name='s_primary_address' checked='checked'>
                                                                                     <span class='checkmark'></span>
                                                                                 ";
                                                                             }
                                                                             else {
                                                                                 echo "
-                                                                                    <input type='checkbox' id='secondary_address' name='secondary_address'>
+                                                                                    <input type='checkbox' id='s_primary_address' name='s_primary_address'>
                                                                                     <span class='checkmark'></span>
                                                                                 ";
                                                                             }

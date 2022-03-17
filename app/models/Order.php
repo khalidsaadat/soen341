@@ -13,10 +13,10 @@ class Order extends Model{
 		return $stmt->fetchAll();
     }
 
-    public function getAllByUserId($user_id){
-        $stmt = self::$_connection->prepare("SELECT * FROM cart where user_id = :user_id AND status = :status");
+    public function getAllActiveByUserId($user_id){
+        $stmt = self::$_connection->prepare("SELECT * FROM my_order where user_id = :user_id AND status = :status");
         $stmt->execute(['user_id'=>$user_id,
-                        'status'=>'0']);
+                        'status'=>'1']);
     	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Order');
 		return $stmt->fetchAll();
     }
@@ -38,12 +38,13 @@ class Order extends Model{
 
 
     public function insert(){
-	    $stmt = self::$_connection->prepare("INSERT INTO my_order(cart_ids, billing_detail_id, order_number, status) VALUES(:cart_ids, :billing_detail_id, :order_number, :status)");
+	    $stmt = self::$_connection->prepare("INSERT INTO my_order(user_id, cart_ids, address_id, order_number, delivery_date, status) VALUES(:user_id, :cart_ids, :address_id, :order_number, :delivery_date, :status)");
         $stmt->execute(['cart_ids'=>$this->cart_ids,
-                        'billing_detail_id'=>$this->billing_detail_id,
+                        'user_id'=>$this->user_id,
+                        'address_id'=>$this->address_id,
                         'order_number'=>$this->order_number,
+                        'delivery_date'=>$this->delivery_date,
                         'status'=>$this->status]);
-        $_SESSION['last_order'] = self::$_connection->lastInsertId();
     }
 
     public function delete(){

@@ -9,6 +9,9 @@
     $phone = $profile->phone_number;
     $address = $profile->address;
 
+    // Orders
+    $orders = $model['orders'];
+    
     // Addresses
     $p_flag = 0;
     $p_street = '';
@@ -410,101 +413,108 @@
                                     <h2 class="mb-3 font-weight-bold">Orders</h2>
                                     
                                     <div class="col-lg-12">
-                                        <div class="row" style="margin-bottom: 15px;">
-                                            <div class="col-lg-12 order-item">
-                                                <div class="row order-header">
-                                                    <div class="col-lg-6">
-                                                        <span><strong>Order #: </strong>1234x89b</span> 
-                                                        <span class="header-title-divider"> | </span>
-                                                        <span><strong>Total: </strong>$123.99</span> 
-                                                    </div>
-                                                    <div class="col-lg-6 text-right">
-                                                        <span><strong>Order Date: </strong>12 February, 2022</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row pd-10">
-                                                    <div class="col-lg-2">
-                                                        <img src="/assets/products/images/620c78e33d89f.jpg" alt="">
-                                                    </div>
-                                                    <div class="col-lg-7 pd-l-0">
-                                                        <div class="order-item-title">Product Name</div>
-                                                        <div>
-                                                            Size: M
-                                                        </div>
-                                                        <div>
-                                                            Color: Red
-                                                        </div>
-                                                        <div>
-                                                            Quantity: 2
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 text-right">
-                                                        <div class="font-weight-bold"> Expected Delivery</div>
-                                                        <div class="delivery-date">30 February, 2022 by 8pm</div>
-                                                        <hr class="delivery-date-hr">
-                                                        <div data-toggle="modal" data-target="#track-order-modal">
-                                                            <span style="font-weight: bold; cursor: pointer;"><img src="/assets/icons/delivery.png" alt="" style="height: 22px;"> Track Order</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row order-footer text-right">
-                                                    <div class="col-lg-12">
-                                                        <div class="cancel-order">
-                                                            <a href="#" data-toggle="modal" data-target="#cancel-order-modal">Cancel Order</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
+                                        <?php
+                                         
+                                            
+                                            
 
-                                        <div class="row" style="margin-bottom: 15px;">
-                                            <div class="col-lg-12 order-item">
-                                                <div class="row order-header">
-                                                    <div class="col-lg-6">
-                                                        <span><strong>Order #: </strong>1234x89b</span> 
-                                                        <span class="header-title-divider"> | </span>
-                                                        <span><strong>Total: </strong>$123.99</span> 
-                                                    </div>
-                                                    <div class="col-lg-6 text-right">
-                                                        <span><strong>Order Date: </strong>12 February, 2022</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row pd-10">
-                                                    <div class="col-lg-2">
-                                                        <img src="/assets/products/images/620b5f66c9b0d.jpg" alt="">
-                                                    </div>
-                                                    <div class="col-lg-7 pd-l-0">
-                                                        <div class="order-item-title">Product Name</div>
-                                                        <div>
-                                                            Size: M
-                                                        </div>
-                                                        <div>
-                                                            Color: Red
-                                                        </div>
-                                                        <div>
-                                                            Quantity: 2
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 text-right">
-                                                        <div class="font-weight-bold"> Expected Delivery</div>
-                                                        <div class="delivery-date">30 February, 2022 by 8pm</div>
-                                                        <hr class="delivery-date-hr">
-                                                        <div data-toggle="modal" data-target="#track-order-modal">
-                                                            <span style="font-weight: bold; cursor: pointer;"><img src="/assets/icons/delivery.png" alt="" style="height: 22px;"> Track Order</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row order-footer text-right">
-                                                    <div class="col-lg-12">
-                                                        <div class="cancel-order">
-                                                            <a href="#" data-toggle="modal" data-target="#cancel-order-modal">Cancel Order</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            foreach($orders as $order) {
+
+                                                $order_id = $order->order_id;
+                                                $address_id = $order->address_id;
+                                                $cart_ids_serialized = $order->cart_ids;
+                                                $cart_ids_array = unserialize($cart_ids_serialized);
+
+                                                $all_cart_ids_array = array();
+                                                $counter = 0; 
+                                                foreach($cart_ids_array as $id) {
+                                                    $id_array = (array) $id;
+                                                    // $all_keywords_str .= ',' . implode(', ', array_map("ucfirst", $id_array));
+                                                    $id = implode(', ', array_map("ucfirst", $id_array));
+                                                    $all_cart_ids_array[$counter] = $id;
+
+                                                    $counter++;
+                                                }
+
+                                                $order_number = $order->order_number;
+                                                $order_date = $order->order_date; 
+                                                $order_date = date('d F, Y', strtotime($order_date));
+
+                                                $delivery_date = $order->delivery_date;
+                                                $delivery_date = date('d F, Y', strtotime($delivery_date));
                                                 
-                                            </div>
-                                        </div>
+                                                
+                                                foreach($all_cart_ids_array as $cart) {
+                                                    
+                                                    $this_cart = $this->model('Cart')->find($cart);
+                                                    $size = $this_cart->size;
+                                                    $color = $this_cart->color;
+                                                    $quantity = $this_cart->quantity;
+                                                    $product_id = $this_cart->product_id;
+                                                    $price = $this_cart->price;
+                                                    $price = number_format($price, 2);
+
+                                                    $this_product = $this->model('Product')->find($product_id);
+                                                    $images = $this_product->images;
+                                                    $images_names = explode(',', $images);
+                                                    $image_name = $images_names[0];
+                                                    
+                                                    $name = $this_product->name;
+
+                                                    echo "
+                                                        <div class='row' style='margin-bottom: 15px;'>
+                                                            <div class='col-lg-12 order-item'>
+                                                                <div class='row order-header'>
+                                                                    <div class='col-lg-6'>
+                                                                        <span><strong>Order #: </strong>$order_number</span> 
+                                                                        <span class='header-title-divider'> | </span>
+                                                                        <span><strong>Total: </strong>$$price</span> 
+                                                                    </div>
+                                                                    <div class='col-lg-6 text-right'>
+                                                                        <span><strong>Order Date: </strong>$order_date</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class='row pd-10'>
+                                                                    <div class='col-lg-2'>
+                                                                        <img src='/assets/products/images/$image_name' alt=''>
+                                                                    </div>
+                                                                    <div class='col-lg-7 pd-l-0'>
+                                                                        <div class='order-item-title'>$name</div>
+                                                                        <div>
+                                                                            Size: $size
+                                                                        </div>
+                                                                        <div>
+                                                                            Color: $color
+                                                                        </div>
+                                                                        <div>
+                                                                            Quantity: $quantity
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class='col-lg-3 text-right'>
+                                                                        <div class='font-weight-bold'> Expected Delivery</div>
+                                                                        <div class='delivery-date'>$delivery_date by 8pm</div>
+                                                                        <hr class='delivery-date-hr'>
+                                                                        <div data-toggle='modal' data-target='#track-order-modal'>
+                                                                            <span style='font-weight: bold; cursor: pointer;'><img src='/assets/icons/delivery.png' alt='' style='height: 22px;'> Track Order</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class='row order-footer text-right'>
+                                                                    <div class='col-lg-12'>
+                                                                        <div class='cancel-order'>
+                                                                            <a href='#' data-toggle='modal' data-target='#cancel-order-modal'>Cancel Order</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    ";
+                                                }
+                                                
+                                            }
+                                        ?>
+                                        
 
                                     </div>
 

@@ -394,19 +394,18 @@
                                                 $start    = new DateTime('today');
                                                 $interval = new DateInterval('P3W');
                                                 $period   = new DatePeriod($start, $interval, 1, DatePeriod::EXCLUDE_START_DATE);
-                                                foreach($period as $deliveryDate) {
-                                                    echo "Expected Delivery Date: " . $deliveryDate->format('d-m-Y');
-                                                }
+                                                // foreach($period as $deliveryDate) {
+                                                //     $delivery_date = $deliveryDate->format('Y-m-d');
+                                                //     echo "<input type='hidden' value='$delivery_date' name='delivery_date'>";
+                                                //     echo "Expected Delivery Date: " . $delivery_date;
+                                                // }
+
+                                                $delivery_date = Date('Y-m-d', strtotime('+21 days'));
+                                                echo "<input type='hidden' value='$delivery_date' name='delivery_date'>";
+                                                echo "Expected Delivery Date: " . $delivery_date;
                                             ?>
                                         </p>
-                                        <div class="checkout__input__checkbox">
-                                            <label for="acc-or">
-                                                Add as a gift?
-                                                <input type="checkbox" id="acc-or">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </div>
-                                        <p>Thank you for shopping with us! We hope you enjoyed the shopping experience.</p>
+                                        <p>By placing your order, you are agreeing to our terms and condition.</p>
                                         <button type="submit" class="site-btn" name="review_cart">PLACE ORDER</button>
                                     </div>
                                 </div>

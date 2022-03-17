@@ -250,13 +250,26 @@
                                                 <div class="shop__sidebar__tags">
 
                                                     <?php
-                                                    
-                                                        
+                                                    // get the color name from the url
+                                                    // if it matches the one in the list, highlight it
+                                                    $url_keyword = basename($_SERVER['REQUEST_URI']);
+                                                
                                                     $all_keyword = $model['keywords'];
                                                     foreach($all_keyword as $keyword) {
-                                                        echo "
-                                                                <a href='#'>$keyword</a>
-                                                        ";
+                                                        $url_keyword_str = str_replace('-', ' ', $url_keyword);
+
+                                                        $keyword_str = str_replace(' ', '-', $keyword);
+                                                        if($url_keyword_str == $keyword) {
+                                                            echo "
+                                                                <a href='/shop/index/filter/keyword/$keyword_str' class='active'>$keyword</a>
+                                                            ";
+                                                        }
+                                                        else {
+                                                            echo "
+                                                                <a href='/shop/index/filter/keyword/$keyword_str'>$keyword</a>
+                                                            ";
+                                                        }
+                                                        
                                                     }
 
                                                 ?>    

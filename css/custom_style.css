@@ -580,3 +580,8 @@ img.avatar {
 	content: "";
 	border-radius: 50%;
 }
+
+.shop__sidebar__tags a.active {
+	background: #000;
+	color: #fff;
+}

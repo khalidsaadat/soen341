@@ -97,6 +97,11 @@ class ShopController extends Controller{
 			// search product by color name
 			$products = $this->model('Product')->getSearchResultByColor($name);
 		}
+		elseif($filter == 'filter' && $type == 'keyword' && isset($name)) {
+			// search product by keyword name
+			$keyword_str = str_replace('-', ' ', $name);
+			$products = $this->model('Product')->getSearchResultByKeyword($keyword_str);
+		}
 		
 	
 		// Send the 'products' variable to the View for rendering it to the webpage.

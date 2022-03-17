@@ -13,6 +13,13 @@ class Address extends Model{
 		return $stmt->fetchAll();
     }
 
+    public function getBothAddresses($user_id){
+        $stmt = self::$_connection->prepare("SELECT * FROM address WHERE user_id = :user_id");
+        $stmt->execute(['user_id'=>$user_id]);
+    	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Address');
+		return $stmt->fetchAll();
+    }
+
     public function getPrimaryAddress($user_id){
         $stmt = self::$_connection->prepare("SELECT * FROM address WHERE user_id = :user_id AND status = :status");
         $stmt->execute(['user_id'=>$user_id,
@@ -27,6 +34,13 @@ class Address extends Model{
                         'status'=>'0']);
     	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Address');
 		return $stmt->fetch();
+    }
+
+    public function find($address_id){
+        $stmt = self::$_connection->prepare("SELECT * FROM address WHERE address_id = :address_id");
+        $stmt->execute(['address_id'=>$address_id]);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, 'Address');
+        return $stmt->fetch();
     }
 
     public function findPrimary($user_id){

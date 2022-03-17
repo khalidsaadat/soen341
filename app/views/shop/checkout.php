@@ -99,90 +99,141 @@
                         <div class="row">
                             <div class="col-lg-8 col-md-6">
                                 <?php
+                                    // global return msg variable
+                                    $return_msg = '';
+
                                     // Card Number Check 
                                     // get the error model if any
                                     if(isset($model['ccError'])) {
                                         $ccError = $model['ccError'];
                                         if($ccError == 'invalid') {
-                                            echo "
-                                                <span class='error'>* Credit Card Invalid.</span>
-                                            ";
+                                            // <span class='error'>* Credit Card Invalid.</span>
+                                            $return_msg .= 'Invalid Credit Card.<br>';
                                         }
                                     }
-                                ?>
-                                <?php
+
                                     // CVV Check 
                                     // get the error model if any
                                     if(isset($model['cvvError'])) {
                                         $cvvError = $model['cvvError'];
                                         if($cvvError == 'invalid') {
-                                            echo "
-                                                <span class='error'>* CVV Invalid.</span>
-                                            ";
+                                            // <span class='error'>* CVV Invalid.</span>
+                                            $return_msg .= 'Invalid CVC.<br>';
                                         }
-                                    }                             
-                                ?>
-                                <?php
+                                    } 
+
                                     // Expiry Check 
                                     // get the error model if any
                                     if(isset($model['expError'])) {
                                         $expError = $model['expError'];
                                         if($expError == 'invalid') {
-                                            echo "
-                                                <span class='error'>* Card Expired.</span>
-                                            ";
+                                            // <span class='error'>* Card Expired.</span>
+                                            $return_msg .= 'Expired Card.<br>';
                                         }
-                                    }                             
-                                ?>
-                                <br>    
-                                <h6 class="checkout__title">Billing Details</h6>      
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="checkout__input">
-                                            <p>First Name<span>*</span></p>
-                                            <input type="text" name="first">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="checkout__input">
-                                            <p>Last Name<span>*</span></p>
-                                            <input type="text" name="last">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="checkout__input">
-                                    <p>Country<span>*</span></p>
-                                    <input type="text" name="country">
-                                </div>
-                                <div class="checkout__input">
-                                    <p>Address<span>*</span></p>
-                                    <input type="text" name="address" placeholder="Street, Apartment, Suite, Unit" class="checkout__input__add">                            
-                                </div>
-                                <div class="checkout__input">
-                                    <p>Town/City<span>*</span></p>
-                                    <input type="text" name="city">
-                                </div>
-                                <div class="checkout__input">
-                                    <p>State<span>*</span></p>
-                                    <input type="text" name="province">
-                                </div>
-                                <div class="checkout__input">
-                                    <p>Postcode / ZIP<span>*</span></p>
-                                    <input type="text" name="code">
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="checkout__input">
-                                            <p>Phone<span>*</span></p>
-                                            <input type="text" name="phone_num">
-                                        </div>
-                                        <div class="checkout__input">
-                                            <p>Email<span>*</span></p>
-                                            <input type="text" name="email">
-                                        </div>
-                                    </div>
+                                    }   
 
+                                    // Success msg
+                                    if(isset($_SESSION['success-msg'])) {
+                                        $msg = $_SESSION['success-msg'];
+                                        
+                                        $return_msg .= $msg;
+                                        
+                                        unset($_SESSION['success-msg']);
+                                    }
+
+                                    // Print global return msg
+                                    if(strlen($return_msg) > 0) {
+                                        echo "
+                                            <div class='form_error'>
+                                                $return_msg
+                                            </div>
+                                        ";
+                                    }
+                                    
+                                ?>
+                                 
+                                <h6 class="checkout__title">Billing Details</h6>      
+                                <div class="row" style="margin-bottom: 20px;">
+                                    <div class="col-lg-12">
+                                        <div style="background: #e1e5ee; padding: 5px 10px;">
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <span style="font-size: 16px; font-weight: bold;">
+                                                        Your delivery address:
+                                                    </span> 
+                                                </div>
+                                                <div class="col-md-2 text-right" style="font-size: 14px; cursor: pointer;" data-toggle="modal" data-target="#change-address-modal">
+                                                    <span class="icon_pencil"  style="cursor: pointer;"></span> 
+                                                    <span style="color: #2a324b;">Change</span>
+                                                </div>
+
+                                            </div>
+                                            <div style="padding-top: 10px;">
+                                                <?php
+                                                    if(isset($model['primary_address'])) {
+
+                                                        $primary_address = $model['primary_address'];
+                                                        $p_full_address = $primary_address->street . ', ' . $primary_address->city . ', ' . $primary_address->province . ', ' . $primary_address->postal_code . ', ' . $primary_address->country;
+                                                        
+                                                        echo "
+                                                            <input type='radio' id='primary' name='address' checked='checked'> <label for='primary'>$p_full_address</label> <br>
+                                                        ";
+                                                    }
+
+                                                    if(isset($model['secondary_address'])) {
+                                                        $secondary_address = $model['secondary_address'];
+                                                        $s_full_address = $secondary_address->street . ', ' . $secondary_address->city . ', ' . $secondary_address->province . ', ' . $secondary_address->postal_code . ', ' . $secondary_address->country;
+                                                    }
+                                                ?>
+                                                                                        
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+
+                                <!-- Change Address Modal -->
+                                <div class="modal fade" id="change-address-modal" tabindex="-1" role="dialog" aria-labelledby="change-address-modal-label" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title font-weight" id="change-address-modal-label">Select Your Delivery Address</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                        <div class="modal-body">
+                                                            
+                                                                <span style="font-size: 18px;">Your current delivery address is: </span>    
+                                                                <div style="padding-left: 10px; font-style: italic; font-weight: bold;">
+                                                                    <?php echo $p_full_address; ?>
+                                                                </div>
+
+                                                                <hr>
+                                                                <div>
+                                                                    <span style="font-size: 18px;">Available addresses to select: </span>
+                                                                    <div style="padding-left: 10px;">
+                                                                        <?php
+                                                                            echo "
+                                                                                <input type='radio' id='p_address' name='change_address' value='$primary_address->address_id' checked='checked'> <label for='p_address'>$p_full_address</label> <br>
+                                                                                <input type='radio' id='s_address' name='change_address' value='$secondary_address->address_id'> <label for='s_address'>$s_full_address</label> <br>
+                                                                            ";
+                                                                        ?>
+                                                                    </div>
+                                                                </div>
+                                                                <hr>
+                                                                <div>
+                                                                    Want to update your address? Click <a href="/account" style="color: blue;">here</a>
+                                                                </div>
+                                                        
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="site-btn" data-dismiss="modal">Close</button>
+                                                            <button type="submit"  name="update_address" class="site-btn">Confirm Changes</button>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                
                                 <h6 class="checkout__title">Payment <span style="float:right"><a href="#"><img src="../malefashion/img/payment.png" alt=""></a></span></h6>
                                 <div class="row">
                                     <div class="col-lg-6">

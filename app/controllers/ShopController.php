@@ -2,6 +2,15 @@
 // For normal user 
 class ShopController extends Controller{
 
+	// used for multiple header redirection - to fix the probelem
+	private function redirect_to($destination) {
+		if (headers_sent($filename, $line)) {
+			trigger_error("Headers already sent in {$filename} on line {$line}", E_USER_ERROR);
+		  }
+		header("Location: {$destination}");
+		exit;
+	}
+
 	// Function that shows the index page when you type 'localhost'
 	public function index(){
     
@@ -180,15 +189,6 @@ class ShopController extends Controller{
 		
     }
 
-	// used for multiple header redirection - to fix the probelem
-	private function redirect_to($destination) {
-		if (headers_sent($filename, $line)) {
-			trigger_error("Headers already sent in {$filename} on line {$line}", E_USER_ERROR);
-		  }
-		header("Location: {$destination}");
-		exit;
-	}
-
 	public function cart() {
 
 	}
@@ -199,24 +199,57 @@ class ShopController extends Controller{
 			return header('location:/account/login');
 		}
 
+		// user detail
+		$user_profile = $this->model('Profile')->findByUserId($_SESSION['user_id']);
+		
+		// addresses
+		$user_primary_address = $this->model('Address')->getPrimaryAddress($_SESSION['user_id']);
+		$user_secondary_address = $this->model('Address')->getSecondaryAddress($_SESSION['user_id']);
+
 		if(isset($_SESSION['user_id'])) {
+
 			$cart_items = $this->model('Cart')->getAllByUserId($_SESSION['user_id']);
 
+			$redirect_condition = '';
+
+			// to change the delivery address during checkout
+			if(isset($_POST['update_address'])) {
+				$redirect_condition = 1;
+
+				$updated_address_id = $_POST['change_address'];
+				// get the address model based on address id
+				$this_address = $this->model('Address')->find($updated_address_id);
+				// if status is 1 (primary), do nothing; if status is 0 (secondary), make it primary and change the older primary to secondary address
+				$this_address_status = $this_address->status;
+				if($this_address_status == 0) {
+					// change secondary address to primary address
+					$this_address->makePrimary($this_address->address_id);
+
+					// change primary address to secondary address
+					$user_primary_address->makeSecondary($user_primary_address->address_id);
+
+					// update profile table with the new primary address id
+					$user_profile->address = $updated_address_id;
+					$user_profile->updateAddress();
+				}
+
+				$_SESSION['success-msg'] = 'Delivery address updated successfully';
+				
+				if($redirect_condition == 1)
+					$this->redirect_to('/shop/checkout');
+			}
+
+			// review and place order
 			if(!isset($_POST['review_cart'])) {
-				$this->view('shop/checkout', ['cart_items'=>$cart_items]);
+				$this->view('shop/checkout', ['cart_items'=>$cart_items, 'primary_address'=>$user_primary_address, 'secondary_address'=>$user_secondary_address, ]);
 			}
 			else {
+				// redirect condition
+				$redirect_condition = 2;
+
 				// get the user information
 				$order_id = 5;
-				$first_name = $_POST['first'];
-				$last_name = $_POST['last'];
-				$addres = $_POST['address'];
-				$city = $_POST['city'];
-				$province = $_POST['province'];
-				$postal_code = $_POST['code'];
-				$country = $_POST['country'];
-				$phone = $_POST['phone_num'];
-				$email = $_POST['email'];
+				
 				$card = $_POST['credit_card_num'];
 				$name = $_POST['card_holder_name'];
 				$expiry_date = $_POST['expiry_date'];
@@ -268,35 +301,36 @@ class ShopController extends Controller{
 					$last_order_id = $_SESSION['current_order_number'];
 	
 					// Billing detail table
-					$new_detail = $this->model('BillingDetails');
-					// $new_detail->order_id = $last_order_id; --> we dont need it
-					$new_detail->first_name   = $first_name;
-					$new_detail->last_name    = $last_name;
-					$new_detail->address = $addres;
-					$new_detail->city    = $city;
-					$new_detail->province = $province;
-					$new_detail->postal_code     = $postal_code;
-					$new_detail->country  = $country;
-					$new_detail->phone = $phone;
-					$new_detail->email     = $email;
-					$new_detail->user_id  = $detail_user_id; 
+					// $new_detail = $this->model('BillingDetails');
+					// // $new_detail->order_id = $last_order_id; --> we dont need it
+					// $new_detail->first_name   = $first_name;
+					// $new_detail->last_name    = $last_name;
+					// $new_detail->address = $addres;
+					// $new_detail->city    = $city;
+					// $new_detail->province = $province;
+					// $new_detail->postal_code     = $postal_code;
+					// $new_detail->country  = $country;
+					// $new_detail->phone = $phone;
+					// $new_detail->email     = $email;
+					// $new_detail->user_id  = $detail_user_id; 
 	
-					$new_detail->insert();
+					// $new_detail->insert();
 	
 					// success redirect
-					return header('location:/shop/order_confirmation');
+					if($redirect_condition == 2)
+						$this->redirect_to('/shop/order_confirmation');
 			
 				}
 				else {
 					// credit card detail wrong
-					$this->view('shop/checkout', ['cart_items'=>$cart_items, 'ccError'=>$ccResult, 'cvvError'=>$cvvResult, 'expError'=>$expResult]);
+					$this->view('shop/checkout', ['cart_items'=>$cart_items, 'primary_address'=>$user_primary_address, 'secondary_address'=>$user_secondary_address, 'ccError'=>$ccResult, 'cvvError'=>$cvvResult, 'expError'=>$expResult]);
 				}
 	
 			}
 		}
 		else {
 			$cart_items = '';
-			$this->view('shop/checkout', ['cart_items'=>$cart_items]);
+			$this->view('shop/checkout', ['cart_items'=>$cart_items, 'primary_address'=>$user_primary_address, 'secondary_address'=>$user_secondary_address, ]);
 		}
 	}
 

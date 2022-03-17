@@ -9,6 +9,47 @@
     $phone = $profile->phone_number;
     $address = $profile->address;
 
+    // Addresses
+    $p_flag = 0;
+    $p_street = '';
+    $p_city = '';
+    $p_province = '';
+    $p_postal_code = '';
+    $p_country = '';
+    $p_status = '';
+    if($model['primary_address'] == true) {
+        $primary_address = $model['primary_address'];
+        $p_street = $primary_address->street;
+        $p_city = $primary_address->city;
+        $p_province = $primary_address->province;
+        $p_postal_code = $primary_address->postal_code;
+        $p_country = $primary_address->country;
+        $p_status = $primary_address->status;
+
+        $p_flag = 1;
+
+    }
+
+    $s_flag = 0;
+    $s_street = '';
+    $s_city = '';
+    $s_province = '';
+    $s_postal_code = '';
+    $s_country = '';
+    $s_status = '';
+    if($model['secondary_address'] == true) {
+
+        $secondary_address = $model['secondary_address'];
+        $s_street = $secondary_address->street;
+        $s_city = $secondary_address->city;
+        $s_province = $secondary_address->province;
+        $s_postal_code = $secondary_address->postal_code;
+        $s_country = $secondary_address->country;
+        $s_status = $secondary_address->status;
+
+        $s_flag = 1;
+    }
+
     // Order detail
 
     // Wishlist detail
@@ -141,12 +182,12 @@
                                                     <input type="text" name="phone_number" id="phone_number" value="<?php echo $phone; ?>">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <!-- <div class="col-lg-6">
                                                 <div class="checkout__input">
                                                     <p>Address<span>*</span></p>
                                                     <input type="text" name="address" id="address" value="<?php echo $address; ?>">
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
 
                                         <hr>
@@ -173,6 +214,190 @@
                                             </div>
                                         </div>
 
+                                        <hr>
+                                        <h3 class="mb-3 font-weight">Addresses</h3>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="panel panel-1" style="background: #cdedfd; color: #000; border: 1px solid #cfdee7;">
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="heading">Primary Address</div>
+                                                        </div>
+                                                        <div class="col-md-2 text-right">
+                                                            <span class="icon_pencil" style="cursor: pointer;" data-toggle="modal" data-target="#primary-address-modal"></span> &nbsp;
+                                                            <span class="icon_heart" style="cursor: pointer;"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-left" style="margin-top: 10px;">
+                                                        <div>
+                                                            <?php
+                                                                if($p_flag == 1)
+                                                                    echo $p_street . ', ' . $p_city . ', ' . $p_province . ', ' . $p_postal_code . ', ' . $p_country;
+                                                                else
+                                                                    echo 'No primary address.';
+                                                            ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="panel panel-2" style="background: #e7e5e5; color: #000; border: 1px solid #aee5d8;">
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="heading">Secondary Address</div>
+                                                        </div>
+                                                        <div class="col-md-2 text-right">
+                                                            <span class="icon_pencil"  style="cursor: pointer;" data-toggle="modal" data-target="#secondary-address-modal"></span> &nbsp;
+                                                            <span class="icon_heart_alt" style="cursor: pointer;" data-toggle="modal" data-target="#primary-address-modal"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-left" style="margin-top: 10px;">
+                                                        <div>
+                                                            <?php
+                                                                if($s_flag == 1)
+                                                                    echo $s_street . ', ' . $s_city . ', ' . $s_province . ', ' . $s_postal_code . ', ' . $s_country;
+                                                                else
+                                                                    echo 'No secondary address.';
+                                                            ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Primary Address Modal -->
+                                        <div class="modal fade" id="primary-address-modal" tabindex="-1" role="dialog" aria-labelledby="primary-address-modal-label" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title font-weight" id="primary-address-modal-label">Primary Address</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                        <div class="modal-body">
+                                                            
+                                                                <div class="checkout__input">
+                                                                    <p>Street #<span>*</span></p>
+                                                                    <input type="text" name="p_street" id="p_street" value="<?php echo $p_street; ?>">
+                                                                </div>
+
+                                                                <div class="checkout__input">
+                                                                    <p>City<span>*</span></p>
+                                                                    <input type="text" name="p_city" id="p_city" value="<?php echo $p_city; ?>">
+                                                                </div>
+
+                                                                <div class="checkout__input">
+                                                                    <p>Province<span>*</span></p>
+                                                                    <input type="text" name="p_province" id="p_province" value="<?php echo $p_province; ?>">
+                                                                </div>
+
+                                                                <div class="checkout__input">
+                                                                    <p>Postal Code<span>*</span></p>
+                                                                    <input type="text" name="p_postal_code" id="p_postal_code" value="<?php echo $p_postal_code; ?>">
+                                                                </div>
+
+                                                                <div class="checkout__input">
+                                                                    <p>Country<span>*</span></p>
+                                                                    <input type="text" name="p_country" id="p_country" value="<?php echo $p_country; ?>">
+                                                                </div>
+
+                                                                <div class="checkout__input__checkbox">
+                                                                    <label for="p_primary_address">
+                                                                        Primary Address?
+                                                                        <?php 
+                                                                            if($p_status == 1) {
+                                                                                echo "
+                                                                                    <input type='checkbox' id='p_primary_address' name='p_primary_address' checked='checked'>
+                                                                                    <span class='checkmark'></span>
+                                                                                ";
+                                                                            }
+                                                                            else {
+                                                                                echo "
+                                                                                    <input type='checkbox' id='p_primary_address' name='p_primary_address'>
+                                                                                    <span class='checkmark'></span>
+                                                                                ";
+                                                                            }
+                                                                        ?>
+                                                                    </label>
+                                                                </div>
+                                                        
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="site-btn" data-dismiss="modal">Close</button>
+                                                            <button type="submit"  name="update_address" class="site-btn">Save Changes</button>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Secondary Address Modal -->
+                                        <div class="modal fade" id="secondary-address-modal" tabindex="-1" role="dialog" aria-labelledby="secondary-address-modal-label" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title font-weight" id="secondary-address-modal-label">Secondary Address</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                        <div class="modal-body">
+                                                            
+                                                                <div class="checkout__input">
+                                                                    <p>Street #<span>*</span></p>
+                                                                    <input type="text" name="s_street" id="street" value="<?php echo $s_street; ?>">
+                                                                </div>
+
+                                                                <div class="checkout__input">
+                                                                    <p>City<span>*</span></p>
+                                                                    <input type="text" name="s_city" id="city" value="<?php echo $s_city; ?>">
+                                                                </div>
+
+                                                                <div class="checkout__input">
+                                                                    <p>Province<span>*</span></p>
+                                                                    <input type="text" name="s_province" id="province" value="<?php echo $s_province; ?>">
+                                                                </div>
+
+                                                                <div class="checkout__input">
+                                                                    <p>Postal Code<span>*</span></p>
+                                                                    <input type="text" name="s_postal_code" id="postal_code" value="<?php echo $s_postal_code; ?>">
+                                                                </div>
+
+                                                                <div class="checkout__input">
+                                                                    <p>Country<span>*</span></p>
+                                                                    <input type="text" name="s_country" id="country" value="<?php echo $s_country; ?>">
+                                                                </div>
+
+                                                                <div class="checkout__input__checkbox">
+                                                                    <label for="s_primary_address">
+                                                                        Primary Address?
+                                                                        <?php 
+                                                                            if($s_status == 1) {
+                                                                                echo "
+                                                                                    <input type='checkbox' id='s_primary_address' name='s_primary_address' checked='checked'>
+                                                                                    <span class='checkmark'></span>
+                                                                                ";
+                                                                            }
+                                                                            else {
+                                                                                echo "
+                                                                                    <input type='checkbox' id='s_primary_address' name='s_primary_address'>
+                                                                                    <span class='checkmark'></span>
+                                                                                ";
+                                                                            }
+                                                                        ?>
+                                                                    </label>
+                                                                </div>
+                                                        
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="site-btn" data-dismiss="modal">Close</button>
+                                                            <button type="submit"  name="update_address" class="site-btn">Save Changes</button>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
                                         <button type="submit" name="update-account" class="site-btn">UDPATE</button>
                                         
                                     </form>

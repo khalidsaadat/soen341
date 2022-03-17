@@ -80,7 +80,7 @@
                     ?>
                     <h2>THANK YOU FOR PLACING YOUR ORDER! &#128516;</h2> <br>
                     <h4>We appreciate your trust in us. We hope we keep meeting your expectations.</h4>
-                    <h4>You track your order in My Order page of your account.</h4>
+                    <h4>You can track your order in My Order page of your account.</h4>
                     <br>
                     <button class="site-btn" onclick="location.href='/shop/'" style="font-weight: normal;">Continue Shop</button>
                     <br>

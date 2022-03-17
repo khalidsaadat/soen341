@@ -65,244 +65,177 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="shop__sidebar">
-                        <div class="shop__sidebar__search">
-                            <form action="#">
-                                <input type="text" placeholder="Search...">
-                                <button type="submit"><span class="icon_search"></span></button>
-                            </form>
-                        </div>
-                        <div class="shop__sidebar__accordion">
-                            <div class="accordion" id="accordionExample">
-                                <div class="card">
-                                    <div class="card-heading">
-                                        <a data-toggle="collapse" data-target="#collapseOne">Categories</a>
+                        <form method="post">
+                            <div class="shop__sidebar__search">
+                                <input type="text" name="search_query" placeholder="Search...">
+                                <button type="submit" name="search_btn"><span class="icon_search"></span></button>
+
+                            </div>
+                        
+                            
+                            <div class="shop__sidebar__accordion">
+                                <div class="accordion" id="accordionExample">
+                                    <div class="card">
+                                        <div class="card-heading">
+                                            <a data-toggle="collapse" data-target="#collapseOne">Categories</a>
+                                        </div>
+                                        <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="shop__sidebar__categories">
+                                                    <ul class="nice-scroll">
+                                                        <?php
+                                                            $categories = $model['categories'];
+
+                                                            foreach($categories as $test) {
+                                                                $category_name = $test->category_name;
+                                                            
+                                                                echo "
+                                                                    <li><a href='#'>$category_name</a></li>
+                                                                ";
+                                                            }
+                                                        ?>
+
+
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <div class="shop__sidebar__categories">
-                                                <ul class="nice-scroll">
-                                                    <!-- <li><a href="#">Men (20)</a></li>
-                                                    <li><a href="#">Women (20)</a></li>
-                                                    <li><a href="#">Bags (20)</a></li>
-                                                    <li><a href="#">Clothing (20)</a></li>
-                                                    <li><a href="#">Shoes (20)</a></li>
-                                                    <li><a href="#">Accessories (20)</a></li>
-                                                    <li><a href="#">Kids (20)</a></li>
-                                                    <li><a href="#">Kids (20)</a></li>
-                                                    <li><a href="#">Kids (20)</a></li> -->
+                                    <div class="card">
+                                        <div class="card-heading">
+                                            <a data-toggle="collapse" data-target="#collapseTwo">Branding</a>
+                                        </div>
+                                        <div id="collapseTwo" class="collapse show" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="shop__sidebar__brand">
+                                                    <ul>
+
+                                                        <?php
+                                                            $brands = $model['brands'];
+
+                                                            foreach($brands as $test) {
+                                                                $brand_name = $test->brand_name;
+                                                            
+                                                                echo "
+                                                                    <li><a href='#'>$brand_name</a></li>
+                                                                ";
+                                                            }
+                                                        ?>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <!-- <div class="card-heading">
+                                            <a data-toggle="collapse" data-target="#collapseThree">Filter Price</a>
+                                        </div>
+                                        <div id="collapseThree" class="collapse show" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="shop__sidebar__price">
+                                                    <ul>
+                                                        <li><a href="#">$0.00 - $50.00</a></li>
+                                                        <li><a href="#">$50.00 - $100.00</a></li>
+                                                        <li><a href="#">$100.00 - $150.00</a></li>
+                                                        <li><a href="#">$150.00 - $200.00</a></li>
+                                                        <li><a href="#">$200.00 - $250.00</a></li>
+                                                        <li><a href="#">250.00+</a></li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-heading">
+                                            <a data-toggle="collapse" data-target="#collapseFour">Size</a>
+                                        </div>
+                                        <div id="collapseFour" class="collapse show" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="shop__sidebar__size">
 
                                                     <?php
-                                                        $categories = $model['categories'];
-
-                                                        foreach($categories as $test) {
-                                                            $category_name = $test->category_name;
-                                                          
+                                                    
+                                                        
+                                                        $all_si = $model['size'];
+                                                        foreach($all_si as $sizes) {
                                                             echo "
-                                                                <li><a href='#'>$category_name</a></li>
+                                                                <label for='sm'>$sizes
+                                                                    <input type='radio' id='sm'>
+                                                                </label>
                                                             ";
                                                         }
-                                                    ?>
 
 
 
-                                                </ul>
+                                                    ?>    
+
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-heading">
-                                        <a data-toggle="collapse" data-target="#collapseTwo">Branding</a>
+                                    <div class="card">
+                                        <div class="card-heading">
+                                            <a data-toggle="collapse" data-target="#collapseFive">Colors</a>
+                                        </div>
+                                        <div id="collapseFive" class="collapse show" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="shop__sidebar__color">
+                                                    
+                                                    <?php
+                                                    
+                                                        
+                                                        $all_color = $model['colors'];
+                                                        foreach($all_color as $color) {
+                                                            echo "
+                                                                <label style='background: $color;' for='sp-2'>
+                                                                    <input type='radio' id='sp-2'>
+                                                                </label>
+                                                            ";
+                                                        }
+
+                                                    ?>    
+                                                    
+
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div id="collapseTwo" class="collapse show" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <div class="shop__sidebar__brand">
-                                                <ul>
-                                                    <!-- <li><a href="#">Louis Vuitton</a></li>
-                                                    <li><a href="#">Chanel</a></li>
-                                                    <li><a href="#">Hermes</a></li>
-                                                    <li><a href="#">Gucci</a></li> -->
+                                    <div class="card">
+                                        <div class="card-heading">
+                                            <a data-toggle="collapse" data-target="#collapseSix">Tags</a>
+                                        </div>
+                                        <div id="collapseSix" class="collapse show" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="shop__sidebar__tags">
 
                                                     <?php
-                                                        $brands = $model['brands'];
-
-                                                        foreach($brands as $test) {
-                                                            $brand_name = $test->brand_name;
-                                                          
-                                                            echo "
-                                                                <li><a href='#'>$brand_name</a></li>
-                                                            ";
-                                                        }
-                                                    ?>
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <!-- <div class="card-heading">
-                                        <a data-toggle="collapse" data-target="#collapseThree">Filter Price</a>
-                                    </div>
-                                    <div id="collapseThree" class="collapse show" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <div class="shop__sidebar__price">
-                                                <ul>
-                                                    <li><a href="#">$0.00 - $50.00</a></li>
-                                                    <li><a href="#">$50.00 - $100.00</a></li>
-                                                    <li><a href="#">$100.00 - $150.00</a></li>
-                                                    <li><a href="#">$150.00 - $200.00</a></li>
-                                                    <li><a href="#">$200.00 - $250.00</a></li>
-                                                    <li><a href="#">250.00+</a></li>
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div> -->
-                                </div>
-                                <div class="card">
-                                    <div class="card-heading">
-                                        <a data-toggle="collapse" data-target="#collapseFour">Size</a>
-                                    </div>
-                                    <div id="collapseFour" class="collapse show" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <div class="shop__sidebar__size">
-                                                <!-- <label for="xs">xs
-                                                    <input type="radio" id="xs">
-                                                </label>
-                                                <label for="sm">s
-                                                    <input type="radio" id="sm">
-                                                </label>
-                                                <label for="md">m
-                                                    <input type="radio" id="md">
-                                                </label>
-                                                <label for="xl">xl
-                                                    <input type="radio" id="xl">
-                                                </label>
-                                                <label for="2xl">2xl
-                                                    <input type="radio" id="2xl">
-                                                </label>
-                                                <label for="xxl">xxl
-                                                    <input type="radio" id="xxl">
-                                                </label>
-                                                <label for="3xl">3xl
-                                                    <input type="radio" id="3xl">
-                                                </label>
-                                                <label for="4xl">4xl
-                                                    <input type="radio" id="4xl">
-                                                </label> -->
-
-                                                <?php
-                                                 
                                                     
-                                                    $all_si = $model['size'];
-                                                    foreach($all_si as $sizes) {
+                                                        
+                                                    $all_keyword = $model['keywords'];
+                                                    foreach($all_keyword as $keyword) {
                                                         echo "
-                                                            <label for='sm'>$sizes
-                                                                 <input type='radio' id='sm'>
-                                                            </label>
-                                                        ";
-                                                    }
-
-
-
-                                                ?>    
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-heading">
-                                        <a data-toggle="collapse" data-target="#collapseFive">Colors</a>
-                                    </div>
-                                    <div id="collapseFive" class="collapse show" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <div class="shop__sidebar__color">
-                                                <!-- <label class="c-1" for="sp-1">
-                                                    <input type="radio" id="sp-1">
-                                                </label>
-                                                <label class="c-2" for="sp-2">
-                                                    <input type="radio" id="sp-2">
-                                                </label>
-                                                <label class="c-3" for="sp-3">
-                                                    <input type="radio" id="sp-3">
-                                                </label>
-                                                <label class="c-4" for="sp-4">
-                                                    <input type="radio" id="sp-4">
-                                                </label>
-                                                <label class="c-5" for="sp-5">
-                                                    <input type="radio" id="sp-5">
-                                                </label>
-                                                <label class="c-6" for="sp-6">
-                                                    <input type="radio" id="sp-6">
-                                                </label>
-                                                <label class="c-7" for="sp-7">
-                                                    <input type="radio" id="sp-7">
-                                                </label>
-                                                <label class="c-8" for="sp-8">
-                                                    <input type="radio" id="sp-8">
-                                                </label>
-                                                <label class="c-9" for="sp-9">
-                                                    <input type="radio" id="sp-9">
-                                                </label> -->
-                                                
-                                                <?php
-                                                   
-                                                    
-                                                    $all_color = $model['colors'];
-                                                    foreach($all_color as $color) {
-                                                        echo "
-                                                            <label style='background: $color;' for='sp-2'>
-                                                                <input type='radio' id='sp-2'>
-                                                            </label>
+                                                                <a href='#'>$keyword</a>
                                                         ";
                                                     }
 
                                                 ?>    
-                                                
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-heading">
-                                        <a data-toggle="collapse" data-target="#collapseSix">Tags</a>
-                                    </div>
-                                    <div id="collapseSix" class="collapse show" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <div class="shop__sidebar__tags">
-                                                <!-- <a href="#">Product</a>
-                                                <a href="#">Bags</a>
-                                                <a href="#">Shoes</a>
-                                                <a href="#">Fashio</a>
-                                                <a href="#">Clothing</a>
-                                                <a href="#">Hats</a>
-                                                <a href="#">Accessories</a> -->
-
-                                                <?php
-                                                   
-                                                    
-                                                   $all_keyword = $model['keywords'];
-                                                   foreach($all_keyword as $keyword) {
-                                                       echo "
-                                                            <a href='#'>$keyword</a>
-                                                       ";
-                                                   }
-
-                                               ?>    
 
 
 
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
+                            
+                        </form>
                     </div>
                 </div>
                 <div class="col-lg-9">
@@ -327,76 +260,86 @@
                     </div>
                     <div class="row">
                         
-                        <?php                                                             
-                      
-                           foreach($products as $product)
-                           {
-                               $product_id = $product->product_id;
-                               $name = $product->name;
-                               $price = $product->price;
+                        <?php         
 
-                               $colors_serialized = unserialize($product->colors);
-                               $colors_array = array_filter($colors_serialized);
-
-                               $size_serialized = unserialize($product->size);
-                               $size_array = array_filter($size_serialized);
-                             
-                               $image = $product->images;
-                               $images_name = explode(',', $image);
-                               $image_name = $images_name[0];
-                   
-                                    echo "
-                                        <div class='col-lg-4 col-md-6 col-sm-6'>
-                                            <div class='product__item'>
-                                                ";
-                                                ?>
-                                                <div style="cursor: pointer;" onclick="location.href='/shop/product/<?php echo $product_id; ?>'">
-                                                    <?php
-                                                    echo "
-                                                    <div class='product__item__pic set-bg' data-setbg='/assets/products/images/$image_name'>
-                                                        <ul class='product__hover'>
-                                                            <li><a href='#'><img src='/assets/img/icon/heart.png' alt=''></a></li>
-                                                            <li><a href='#'><img src='/assets/img/icon/compare.png' alt=''> <span>Compare</span></a>
-                                                            </li>
-                                                            <!-- To do: make sure to change the product id of each item. Once you loop through the product, just print their id -->
-                                                            <li><a href='/shop/product/1'><img src='/assets/img/icon/search.png' alt=''></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class='product__item__text'>
-                                                    <h6>$name</h6>
-                                                    
-                                                    <h5>$$price</h5>
-
-                                                    <div class='product__color__select'>
-                                                        ";
-                                                        $radio_color_counter = 1;
-                                                        foreach($colors_array as $color) {
-                                                            echo "
-                                                                <label class='active' for='pc-6_$radio_color_counter' style='background:$color;' data-toggle='tooltip' data-placement='top' title='$color'>
-                                                                    <input type='radio' name='color' id='pc-6_$radio_color_counter' value='$color'>
-                                                                </label>
-                                                            ";
-                                                            $radio_color_counter++;
-                                                        }
-                                                        echo"
-                                                    </div>
-
-                                                </div>
-                                            
-                                            </div>
-                                        </div>
-                                    ";
-            
+                            if($products_count > 0) {
+                                foreach($products as $product)
+                                {
+                                    $product_id = $product->product_id;
+                                    $name = $product->name;
+                                    $price = $product->price;
+     
+                                    $colors_serialized = unserialize($product->colors);
+                                    $colors_array = array_filter($colors_serialized);
+     
+                                    $size_serialized = unserialize($product->size);
+                                    $size_array = array_filter($size_serialized);
+                                  
+                                    $image = $product->images;
+                                    $images_name = explode(',', $image);
+                                    $image_name = $images_name[0];
+                        
+                                         echo "
+                                             <div class='col-lg-4 col-md-6 col-sm-6'>
+                                                 <div class='product__item'>
+                                                     ";
+                                                     ?>
+                                                     <div style="cursor: pointer;" onclick="location.href='/shop/product/<?php echo $product_id; ?>'">
+                                                         <?php
+                                                         echo "
+                                                         <div class='product__item__pic set-bg' data-setbg='/assets/products/images/$image_name'>
+                                                             <ul class='product__hover'>
+                                                                 <li><a href='#'><img src='/assets/img/icon/heart.png' alt=''></a></li>
+                                                                 <li><a href='#'><img src='/assets/img/icon/compare.png' alt=''> <span>Compare</span></a>
+                                                                 </li>
+                                                                 <!-- To do: make sure to change the product id of each item. Once you loop through the product, just print their id -->
+                                                                 <li><a href='/shop/product/1'><img src='/assets/img/icon/search.png' alt=''></a></li>
+                                                             </ul>
+                                                         </div>
+                                                     </div>
+                                                     
+                                                     <div class='product__item__text'>
+                                                         <h6>$name</h6>
+                                                         
+                                                         <h5>$$price</h5>
+     
+                                                         <div class='product__color__select'>
+                                                             ";
+                                                             $radio_color_counter = 1;
+                                                             foreach($colors_array as $color) {
+                                                                 echo "
+                                                                     <label class='active' for='pc-6_$radio_color_counter' style='background:$color;' data-toggle='tooltip' data-placement='top' title='$color'>
+                                                                         <input type='radio' name='color' id='pc-6_$radio_color_counter' value='$color'>
+                                                                     </label>
+                                                                 ";
+                                                                 $radio_color_counter++;
+                                                             }
+                                                             echo"
+                                                         </div>
+     
+                                                     </div>
+                                                 
+                                                 </div>
+                                             </div>
+                                         ";
+                 
+                                }
                             }
-                        ?>
-                       
-                   
+                            else {
+                                ?>
+                                <div class="col-lg-12 text-center">
+                                    <div class="text-center" style="margin-top: 20px;">
+                                        <h4>No product found!</h4>
+                                    </div>
 
-                    
-                    
+                                </div>
+                                <?php
+                            }
+                      
+                           
+                        ?>
                    
+                    </div>
                 </div>
             </div>
         </div>

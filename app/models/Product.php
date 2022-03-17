@@ -21,9 +21,17 @@ class Product extends Model{
       return $stmt->fetchAll();
     }
 
-    public function getSearchResult($query)
+    public function getSearchResultByName($query)
     {
       $stmt = self::$_connection->prepare("SELECT * FROM product WHERE name COLLATE UTF8_GENERAL_CI LIKE :query");
+      $stmt->execute(['query'=>'%' . $query . '%']);
+      $stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
+      return $stmt->fetchAll();
+    }
+
+    public function getSearchResultByCategory($query)
+    {
+      $stmt = self::$_connection->prepare("SELECT * FROM product WHERE categories COLLATE UTF8_GENERAL_CI LIKE :query");
       $stmt->execute(['query'=>'%' . $query . '%']);
       $stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
       return $stmt->fetchAll();

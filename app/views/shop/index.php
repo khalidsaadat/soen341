@@ -84,20 +84,33 @@
                                                 <div class="shop__sidebar__categories">
                                                     <ul class="nice-scroll">
                                                         <?php
-                                                            $categories = $model['categories'];
+                                                            // get the category name from the url
+                                                            // if it matches the one in the list, highlight it
+                                                            $url_category = basename($_SERVER['REQUEST_URI']);
 
+                                                            $categories = $model['categories'];
                                                             foreach($categories as $test) {
                                                                 $category_name = $test->category_name;
-                                                            
-                                                                echo "
-                                                                    <li><a href='#'>$category_name</a></li>
-                                                                ";
+                                                                $category_name_lower = strtolower($category_name);
+
+                                                                // if url_category matches the category in the list, highlight it
+                                                                if($url_category == $category_name_lower) {
+                                                                    echo "
+                                                                        <li class='active_filter'><a href='/shop/index/filter/category/$category_name_lower'>$category_name</a></li>
+                                                                    ";
+                                                                }
+                                                                else {
+                                                                    echo "
+                                                                        <li><a href='/shop/index/filter/category/$category_name_lower'>$category_name</a></li>
+                                                                    ";
+                                                                }
                                                             }
                                                         ?>
 
 
 
                                                     </ul>
+                                                    <br>
                                                 </div>
                                             </div>
                                         </div>

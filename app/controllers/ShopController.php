@@ -12,7 +12,7 @@ class ShopController extends Controller{
 	}
 
 	// Function that shows the index page when you type 'localhost'
-	public function index(){
+	public function index($filter="", $category="category", $name="name"){
     
 		// get the products' basic information
 		$products_basic_info = $this->model('Product')->getAllBasicInfo();
@@ -75,7 +75,19 @@ class ShopController extends Controller{
 		if(isset($_POST['search_btn'])) {
 			$search_query = $_POST['search_query'];
 
-			$products = $this->model('Product')->getSearchResult($search_query);
+			// filter product by 'name' field
+			$products = $this->model('Product')->getSearchResultByName($search_query);
+			
+		}
+
+		// filter
+		if($filter == 'filter' && $category == 'category' && isset($name)) {
+			// search product by category name
+			$category_searlized = serialize($name);
+			
+			// filter product by 'name' field
+			$products = $this->model('Product')->getSearchResultByCategory($name);
+
 		}
 	
 		// Send the 'products' variable to the View for rendering it to the webpage.

@@ -514,3 +514,9 @@ img.avatar {
 	border: 2px solid #6e4242 !important;
 	opacity: 1;
 }
+
+/* filter */
+.active_filter a {
+	font-weight: bold; 
+	color: black !important;
+}

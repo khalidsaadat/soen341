@@ -107,8 +107,6 @@
                                                             }
                                                         ?>
 
-
-
                                                     </ul>
                                                     <br>
                                                 </div>
@@ -125,7 +123,7 @@
                                                     <ul>
 
                                                         <?php
-                                                            // get the category name from the url
+                                                            // get the brand name from the url
                                                             // if it matches the one in the list, highlight it
                                                             $url_brand= basename($_SERVER['REQUEST_URI']);
                                                             
@@ -182,15 +180,23 @@
                                                 <div class="shop__sidebar__size">
 
                                                     <?php
+                                                        // get the size name from the url
+                                                        // if it matches the one in the list, highlight it
+                                                        $url_size= basename($_SERVER['REQUEST_URI']);
                                                     
-                                                        
                                                         $all_si = $model['size'];
-                                                        foreach($all_si as $sizes) {
-                                                            echo "
-                                                                <label for='sm'>$sizes
-                                                                    <input type='radio' id='sm'>
-                                                                </label>
-                                                            ";
+                                                        foreach($all_si as $size) {
+                                                            
+                                                            if($url_size == $size) {
+                                                                echo "
+                                                                    <li id='$size' class='size_filter active'><a href='/shop/index/filter/size/$size'>$size</a></li>
+                                                                ";
+                                                            }
+                                                            else {
+                                                                echo "
+                                                                    <li id='$size' class='size_filter'><a href='/shop/index/filter/size/$size'>$size</a></li>
+                                                                ";
+                                                            }
                                                         }
 
 

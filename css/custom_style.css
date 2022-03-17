@@ -520,3 +520,30 @@ img.avatar {
 	font-weight: bold; 
 	color: black !important;
 }
+
+.shop__sidebar__size li {
+	color: #111111 !important;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-block;
+    border: 1px solid #e5e5e5;
+    padding: 6px 25px;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.shop__sidebar__size li.active {
+	background-color: #000;
+	color: #fff !important;
+}
+
+.shop__sidebar__size li.active a {
+	color: #fff !important;
+}
+
+.shop__sidebar__size li a {
+	text-decoration: none;
+	color: #111111 !important;
+}

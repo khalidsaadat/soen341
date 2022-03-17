@@ -36,10 +36,19 @@ class Product extends Model{
       $stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
       return $stmt->fetchAll();
     }
+
     public function getSearchResultByBrand($brand_id)
     {
       $stmt = self::$_connection->prepare("SELECT * FROM product WHERE brand_id = :brand_id");
       $stmt->execute(['brand_id'=>$brand_id]);
+      $stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
+      return $stmt->fetchAll();
+    }
+
+    public function getSearchResultBySize($query)
+    {
+      $stmt = self::$_connection->prepare("SELECT * FROM product WHERE size COLLATE UTF8_GENERAL_CI LIKE :query");
+      $stmt->execute(['query'=>'%' . $query . '%']);
       $stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
       return $stmt->fetchAll();
     }

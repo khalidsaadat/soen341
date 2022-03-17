@@ -89,6 +89,10 @@ class ShopController extends Controller{
 			// search product by category name
 			$products = $this->model('Product')->getSearchResultByBrand($name);
 		}
+		elseif($filter == 'filter' && $type == 'size' && isset($name)) {
+			// search product by category name
+			$products = $this->model('Product')->getSearchResultBySize($name);
+		}
 		
 	
 		// Send the 'products' variable to the View for rendering it to the webpage.

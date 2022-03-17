@@ -134,13 +134,39 @@ class ShopController extends Controller{
 			// to view the product detail page
 			if($type == 'view') {
 				$redirect_condition = 1;
-				$this->view('shop/product_detail', ['product'=>$product, 'type'=>'view']);
+
+				if(!isset($_POST['add_to_cart'])) {
+					$this->view('shop/product_detail', ['product'=>$product, 'type'=>'view']);
+				}
+				else {
+					$cart_item = $this->model('Cart');
+					// get the updated values
+					$size = $_POST['size'];
+					$color = $_POST['color'];
+					$quantity = $_POST['quantity'];
+	
+					// update the product cart
+					$cart_item->product_id = $product_id;
+					$cart_item->size = $size;
+					$cart_item->color = $color;
+					$cart_item->quantity = $quantity;
+					$cart_item->user_id = $_SESSION['user_id'];
+	
+					$cart_item->insert();
+
+					$_SESSION['return-msg'] = "Product added to cart";
+
+					$this->view('shop/product_detail', ['product'=>$product, 'type'=>'view']);
+				}
+
+				
+				if($redirect_condition == 3) {
+					$this->redirect_to('/shop/checkout');
+				} 
 			}
 			// to edit the product in product detail page
 			elseif($type == 'edit') {
 				
-				
-
 				$cart_item = $this->model('Cart')->findByProductIdByUserId($product_id, $_SESSION['user_id']);
 
 				// remove item from the cart

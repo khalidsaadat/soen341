@@ -49,6 +49,19 @@
             customConfig: '/js/config.js'
         });
     </script>  
+
+    <!-- my account tabs - open specific tab -->
+    <script>
+        $(document).ready(function(){
+
+            // $('#pills-tab a[href="#wish-list"]').tab('show') 
+
+        });
+
+        $('a[href="#myaccount_wishlist"]').click(function(){
+            $('#pills-tab a[href="#wish-list"]').tab('show') 
+        });
+    </script>
     
     <!-- user account -->
     <script>

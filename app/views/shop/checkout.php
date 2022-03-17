@@ -228,7 +228,7 @@
                                             </div>
                                     
                                     <h6 class="checkout__title">Payment <span style="float:right"><a href="#"><img src="../malefashion/img/payment.png" alt=""></a></span></h6>
-                                    <div class="row">
+                                    <div class="row authentication_form">
                                         <div class="col-lg-6">
                                             <div class="checkout__input"> 
                                                                                 
@@ -250,11 +250,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row authentication_form">
                                         <div class="col-lg-6">
                                             <div class="checkout__input">
                                                 <p>Expiration Date<span>*</span></p>
-                                                <input type="text" name="expiry_date" placeholder="MM/YY">
+                                                <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">

@@ -1,5 +1,5 @@
 .authentication_form input {
-    color: black;
+    color: black !important;
 }
 
 .to_lower_case {

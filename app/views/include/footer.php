@@ -50,6 +50,18 @@
         });
     </script>  
 
+    <!-- cc expiry date mask -->
+    <script>
+		$(document).ready(function()
+		{
+			var phones = [{"mask": "##/####"}];
+			$('#expiry_date').inputmask({ 
+				mask: phones, 
+				greedy: false, 
+				definitions: { '#': { validator: "[0-9]", cardinality: 1}} });
+		});
+	</script>
+
     <!-- my account tabs - open specific tab -->
     <script>
         $(document).ready(function(){

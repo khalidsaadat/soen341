@@ -199,10 +199,7 @@
                                                             }
                                                         }
 
-
-
                                                     ?>    
-
 
                                                 </div>
                                             </div>
@@ -217,15 +214,23 @@
                                                 <div class="shop__sidebar__color">
                                                     
                                                     <?php
+                                                        // get the color name from the url
+                                                        // if it matches the one in the list, highlight it
+                                                        $url_color= basename($_SERVER['REQUEST_URI']);
                                                     
-                                                        
                                                         $all_color = $model['colors'];
                                                         foreach($all_color as $color) {
-                                                            echo "
-                                                                <label style='background: $color;' for='sp-2'>
-                                                                    <input type='radio' id='sp-2'>
-                                                                </label>
-                                                            ";
+
+                                                            if($url_color == $color) {
+                                                                echo "
+                                                                    <li id='$color' class='color_filter active' style='background: $color' data-toggle='tooltip' data-placement='top' title='$color'></li>
+                                                                ";
+                                                            }
+                                                            else {
+                                                                echo "
+                                                                    <li id='$color' class='color_filter' style='background: $color' data-toggle='tooltip' data-placement='top' title='$color'></li>
+                                                                ";
+                                                            }
                                                         }
 
                                                     ?>    

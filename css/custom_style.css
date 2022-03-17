@@ -547,3 +547,36 @@ img.avatar {
 	text-decoration: none;
 	color: #111111 !important;
 }
+
+.shop__sidebar__color li {
+	height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    position: relative;
+    margin-right: 10px;
+    display: inline-block;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.shop__sidebar__color li:after {
+	position: absolute;
+	left: -3px;
+	top: -3px;
+	height: 36px;
+	width: 36px;
+	border: 1px solid #e5e5e5;
+	content: "";
+	border-radius: 50%;
+}
+
+.shop__sidebar__color li.active:after {
+	position: absolute;
+	left: -3px;
+	top: -3px;
+	height: 36px;
+	width: 36px;
+	border: 1px solid #6e4242;
+	content: "";
+	border-radius: 50%;
+}

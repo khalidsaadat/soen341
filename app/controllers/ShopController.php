@@ -86,12 +86,16 @@ class ShopController extends Controller{
 			$products = $this->model('Product')->getSearchResultByCategory($name);
 		}
 		elseif($filter == 'filter' && $type == 'brand' && isset($name)) {
-			// search product by category name
+			// search product by brand name
 			$products = $this->model('Product')->getSearchResultByBrand($name);
 		}
 		elseif($filter == 'filter' && $type == 'size' && isset($name)) {
-			// search product by category name
+			// search product by size name
 			$products = $this->model('Product')->getSearchResultBySize($name);
+		}
+		elseif($filter == 'filter' && $type == 'color' && isset($name)) {
+			// search product by color name
+			$products = $this->model('Product')->getSearchResultByColor($name);
 		}
 		
 	

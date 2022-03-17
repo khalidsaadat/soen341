@@ -56,8 +56,10 @@ class Cart extends Model{
     }
 
     public function insert(){
-	    $stmt = self::$_connection->prepare("INSERT INTO cart(product_id, quantity, user_id) VALUES(:product_id, :quantity, :user_id)");
+	    $stmt = self::$_connection->prepare("INSERT INTO cart(product_id, color, size, quantity, user_id) VALUES(:product_id, :color, :size, :quantity, :user_id)");
         $stmt->execute(['product_id'=>$this->product_id,
+                        'color'=>$this->color,
+                        'size'=>$this->size,
                         'quantity'=>$this->quantity,
                         'user_id'=>$this->user_id]);
         $_SESSION['cart_last_id'] = self::$_connection->lastInsertId();

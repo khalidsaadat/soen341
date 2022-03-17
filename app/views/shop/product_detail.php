@@ -171,6 +171,22 @@
                     <div class="row d-flex justify-content-center">
                         <div class="col-lg-8">
                             <div class="product__details__text">
+                                <div class="row justify-content-center">
+                                    <div class="col-4">
+                                        <?php 
+                                            if(isset($_SESSION['return-msg'])) {
+                                                $return_msg = $_SESSION['return-msg'];
+                                                echo "
+                                                    <div class='form_error'>
+                                                        $return_msg
+                                                    </div>
+                                                ";
+
+                                                unset($_SESSION['return-msg']);
+                                            }
+                                        ?>
+                                    </div>
+                                </div>
                                 <h4><?php echo $name; ?></h4>
                             
                                 <h3>$<?php echo $price; ?></h3>

@@ -234,7 +234,7 @@
                                                                                 
                                                 <p>Credit/Debit Card<span>*</span></p>
                                                     <select name="cvvType" style= "position: absolute; left:222px; border: 1px solid #e5e5e5;">
-                                                        <option value="Type" disabled>Select Type</option>
+                                                        <option value="Type" selected disabled>Select Type</option>
                                                         <option value="American">American Express</option>
                                                         <option value="Discover">Discover</option>
                                                         <option value="Master">Master Card</option>
@@ -372,10 +372,11 @@
 
                                                     $counter++;
                                                 }
-
+                                                
                                                 // calculating the total amount
+                                                $subtotal_flt = number_format($subtotal, 2);
                                                 $tax_amount = $subtotal * ($tax_percentage / 100);
-                                                $tax_amount = number_format($tax_amount, 2);
+                                                $tax_amount_flt = number_format($tax_amount, 2);
 
                                                 $total = $tax_amount + $subtotal;
                                                 $total = number_format($total, 2);
@@ -384,8 +385,8 @@
                                             
                                         </ul>
                                         <ul class="checkout__total__all">
-                                            <li>Subtotal <span>$<?php echo $subtotal; ?></span></li>
-                                            <li>Tax (<?php echo $tax_percentage; ?>%) <span>$<?php echo $tax_amount; ?></span></li>
+                                            <li>Subtotal <span>$<?php echo $subtotal_flt; ?></span></li>
+                                            <li>Tax (<?php echo $tax_percentage; ?>%) <span>$<?php echo $tax_amount_flt; ?></span></li>
                                             <li>Total <span>$<?php echo $total; ?></span></li>
                                         </ul>
                                         <p>

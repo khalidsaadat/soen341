@@ -36,6 +36,13 @@ class Product extends Model{
       $stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
       return $stmt->fetchAll();
     }
+    public function getSearchResultByBrand($brand_id)
+    {
+      $stmt = self::$_connection->prepare("SELECT * FROM product WHERE brand_id = :brand_id");
+      $stmt->execute(['brand_id'=>$brand_id]);
+      $stmt->setFetchMode(PDO::FETCH_CLASS, 'Product');
+      return $stmt->fetchAll();
+    }
 
     public function find($product_id){
         $stmt = self::$_connection->prepare("SELECT * FROM product WHERE product_id = :product_id");

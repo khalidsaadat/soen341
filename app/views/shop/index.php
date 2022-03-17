@@ -125,14 +125,26 @@
                                                     <ul>
 
                                                         <?php
-                                                            $brands = $model['brands'];
-
-                                                            foreach($brands as $test) {
-                                                                $brand_name = $test->brand_name;
+                                                            // get the category name from the url
+                                                            // if it matches the one in the list, highlight it
+                                                            $url_brand= basename($_SERVER['REQUEST_URI']);
                                                             
-                                                                echo "
-                                                                    <li><a href='#'>$brand_name</a></li>
-                                                                ";
+                                                            $brands = $model['brands'];
+                                                            foreach($brands as $brand) {
+                                                                $brand_name = $brand->brand_name;
+                                                                $brand_id = $brand->brand_id;
+
+                                                                 // if url_category matches the category in the list, highlight it
+                                                                 if($url_brand == $brand_id) {
+                                                                    echo "
+                                                                        <li class='active_filter'><a href='/shop/index/filter/brand/$brand_id'>$brand_name</a></li>
+                                                                    ";
+                                                                }
+                                                                else {
+                                                                    echo "
+                                                                        <li><a href='/shop/index/filter/brand/$brand_id'>$brand_name</a></li>
+                                                                    ";
+                                                                }
                                                             }
                                                         ?>
 
@@ -342,7 +354,8 @@
                                 ?>
                                 <div class="col-lg-12 text-center">
                                     <div class="text-center" style="margin-top: 20px;">
-                                        <h4>No product found!</h4>
+                                        <h4>No product found!</h4><br>
+                                        <button class="site-btn" onclick="location.href='/shop'">Continue Shopping</button>
                                     </div>
 
                                 </div>

@@ -129,6 +129,11 @@ class ShopController extends Controller{
 					$this->view('shop/product_detail', ['product'=>$product, 'type'=>'view']);
 				}
 				else {
+					if(!isset($_SESSION['user_id'])) {
+						$redirect_condition = 100;
+						$_SESSION['login_flag'] = 1;
+						$this->redirect_to('/account/login');
+					}
 					$cart_item = $this->model('Cart');
 					// get the updated values
 					$price = $_POST['price'];

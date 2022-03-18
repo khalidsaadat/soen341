@@ -21,9 +21,9 @@
     <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
     <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/style.css?version=0.2" type="text/css">
+    <link rel="stylesheet" href="/css/style.css?version=0.3" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-steps@%5E1.0/dist/bootstrap-steps.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/custom_style.css?version=2.6" type="text/css">
+    <link rel="stylesheet" href="/css/custom_style.css?version=2.8" type="text/css">
 
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>

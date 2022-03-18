@@ -74,6 +74,21 @@
             $('#pills-tab a[href="#wish-list"]').tab('show') 
         });
     </script>
+
+    <!-- filter -->
+    <script>
+        $('li.size_filter').on('click', function() {
+            var id = $(this).attr("id");
+
+            window.location = "/shop/index/filter/size/" + id;
+        });
+
+        $('li.color_filter').on('click', function() {
+            var id = $(this).attr("id");
+
+            window.location = "/shop/index/filter/color/" + id;
+        });
+    </script>
     
     <!-- user account -->
     <script>

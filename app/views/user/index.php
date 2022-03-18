@@ -9,6 +9,9 @@
     $phone = $profile->phone_number;
     $address = $profile->address;
 
+    // Orders
+    $orders = $model['orders'];
+    
     // Addresses
     $p_flag = 0;
     $p_street = '';
@@ -98,7 +101,18 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb__text">
                         <h4>My Account</h4>
-                       
+                        <?php
+                            if(isset($_SESSION['return-msg'])) {
+                                $msg = $_SESSION['return-msg'];
+                                echo "
+                                    <div class='form_error'>
+                                        $msg
+                                    </div>
+                                ";
+
+                                unset($_SESSION['return-msg']);
+                            }
+                        ?>
                     </div>
                 </div>
             </div>
@@ -410,106 +424,182 @@
                                     <h2 class="mb-3 font-weight-bold">Orders</h2>
                                     
                                     <div class="col-lg-12">
-                                        <div class="row" style="margin-bottom: 15px;">
-                                            <div class="col-lg-12 order-item">
-                                                <div class="row order-header">
-                                                    <div class="col-lg-6">
-                                                        <span><strong>Order #: </strong>1234x89b</span> 
-                                                        <span class="header-title-divider"> | </span>
-                                                        <span><strong>Total: </strong>$123.99</span> 
-                                                    </div>
-                                                    <div class="col-lg-6 text-right">
-                                                        <span><strong>Order Date: </strong>12 February, 2022</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row pd-10">
-                                                    <div class="col-lg-2">
-                                                        <img src="/assets/products/images/620c78e33d89f.jpg" alt="">
-                                                    </div>
-                                                    <div class="col-lg-7 pd-l-0">
-                                                        <div class="order-item-title">Product Name</div>
-                                                        <div>
-                                                            Size: M
-                                                        </div>
-                                                        <div>
-                                                            Color: Red
-                                                        </div>
-                                                        <div>
-                                                            Quantity: 2
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 text-right">
-                                                        <div class="font-weight-bold"> Expected Delivery</div>
-                                                        <div class="delivery-date">30 February, 2022 by 8pm</div>
-                                                        <hr class="delivery-date-hr">
-                                                        <div data-toggle="modal" data-target="#track-order-modal">
-                                                            <span style="font-weight: bold; cursor: pointer;"><img src="/assets/icons/delivery.png" alt="" style="height: 22px;"> Track Order</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row order-footer text-right">
-                                                    <div class="col-lg-12">
-                                                        <div class="cancel-order">
-                                                            <a href="#" data-toggle="modal" data-target="#cancel-order-modal">Cancel Order</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
+                                        <?php
+                                         
+                                            
+                                            
+                                        $modal_counter = 1;
+                                            foreach($orders as $order) {
 
-                                        <div class="row" style="margin-bottom: 15px;">
-                                            <div class="col-lg-12 order-item">
-                                                <div class="row order-header">
-                                                    <div class="col-lg-6">
-                                                        <span><strong>Order #: </strong>1234x89b</span> 
-                                                        <span class="header-title-divider"> | </span>
-                                                        <span><strong>Total: </strong>$123.99</span> 
-                                                    </div>
-                                                    <div class="col-lg-6 text-right">
-                                                        <span><strong>Order Date: </strong>12 February, 2022</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row pd-10">
-                                                    <div class="col-lg-2">
-                                                        <img src="/assets/products/images/620b5f66c9b0d.jpg" alt="">
-                                                    </div>
-                                                    <div class="col-lg-7 pd-l-0">
-                                                        <div class="order-item-title">Product Name</div>
-                                                        <div>
-                                                            Size: M
-                                                        </div>
-                                                        <div>
-                                                            Color: Red
-                                                        </div>
-                                                        <div>
-                                                            Quantity: 2
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 text-right">
-                                                        <div class="font-weight-bold"> Expected Delivery</div>
-                                                        <div class="delivery-date">30 February, 2022 by 8pm</div>
-                                                        <hr class="delivery-date-hr">
-                                                        <div data-toggle="modal" data-target="#track-order-modal">
-                                                            <span style="font-weight: bold; cursor: pointer;"><img src="/assets/icons/delivery.png" alt="" style="height: 22px;"> Track Order</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row order-footer text-right">
-                                                    <div class="col-lg-12">
-                                                        <div class="cancel-order">
-                                                            <a href="#" data-toggle="modal" data-target="#cancel-order-modal">Cancel Order</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                $order_id = $order->order_id;
+                                                $address_id = $order->address_id;
+                                                $status = $order->status;
+                                                $cart_ids_serialized = $order->cart_ids;
+                                                $cart_ids_array = unserialize($cart_ids_serialized);
+
+                                                $all_cart_ids_array = array();
+                                                $counter = 0; 
+                                                foreach($cart_ids_array as $id) {
+                                                    $id_array = (array) $id;
+                                                    // $all_keywords_str .= ',' . implode(', ', array_map("ucfirst", $id_array));
+                                                    $id = implode(', ', array_map("ucfirst", $id_array));
+                                                    $all_cart_ids_array[$counter] = $id;
+
+                                                    $counter++;
+                                                }
+
+                                                $order_number = $order->order_number;
+                                                $order_date = $order->order_date; 
+                                                $order_date = date('d F, Y', strtotime($order_date));
+
+                                                $delivery_date = $order->delivery_date;
+                                                $delivery_date = date('d F, Y', strtotime($delivery_date));
+
+                                                $total = $order->total;
+                                                $total = number_format($total, 2);
                                                 
-                                            </div>
-                                        </div>
+                                                echo "
+                                                <div class='row' style='margin-bottom: 15px;'>
+                                                    <div class='col-lg-12 order-item'>
+                                                        <div class='row order-header'>
+                                                            <div class='col-lg-6'>
+                                                                <span><strong>Order #: </strong>$order_number</span> 
+                                                                <span class='header-title-divider'> | </span>
+                                                                <span><strong>Total: </strong>$$total</span> 
+                                                            </div>
+                                                            <div class='col-lg-6 text-right'>
+                                                                <span><strong>Order Date: </strong>$order_date</span>
+                                                            </div>
+                                                        </div>
+                                                ";
+                                                $delivery_print_flag = 0;
+                                                foreach($all_cart_ids_array as $cart) {
+                                                    
+                                                    $this_cart = $this->model('Cart')->find($cart);
+                                                    $size = $this_cart->size;
+                                                    $color = $this_cart->color;
+                                                    $quantity = $this_cart->quantity;
+                                                    $product_id = $this_cart->product_id;
+                                                    
+
+                                                    $this_product = $this->model('Product')->find($product_id);
+                                                    $images = $this_product->images;
+                                                    $images_names = explode(',', $images);
+                                                    $image_name = $images_names[0];
+                                                    
+                                                    $name = $this_product->name;
+
+                                                    echo "
+                                                        
+                                                                <div class='row pd-10'>
+                                                                    <div class='col-lg-2'>
+                                                                        <img src='/assets/products/images/$image_name' alt=''>
+                                                                    </div>
+                                                                    <div class='col-lg-7 pd-l-0'>
+                                                                        <div class='order-item-title'>$name</div>
+                                                                        <div>
+                                                                            Size: $size
+                                                                        </div>
+                                                                        <div>
+                                                                            Color: $color
+                                                                        </div>
+                                                                        <div>
+                                                                            Quantity: $quantity
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class='col-lg-3 text-right'>";
+                                                                    if($delivery_print_flag == 0) {
+                                                                        echo "
+                                                                            
+                                                                                <div class='font-weight-bold'> Expected Delivery</div>
+                                                                                <div class='delivery-date'>$delivery_date by 8pm</div>
+                                                                                <hr class='delivery-date-hr'>
+                                                                                ";
+                                                                                // <div data-toggle='modal' data-target='#track-order-modal'>
+                                                                                //     <span style='font-weight: bold; cursor: pointer;'><img src='/assets/icons/delivery.png' alt='' style='height: 22px;'> Track Order</span>
+                                                                                // </div>
+                                                                                
+                                                                    }
+                                                                    echo "
+                                                                    </div>
+                                                                </div>
+                                                                   
+                                                    ";
+                                                    
+                                                    // stop from printing more expected delivery date for the rest of the items in the same order number
+                                                    $delivery_print_flag = 1;
+                                                    
+                                                    echo "
+                                                        <div class='modal fade' id='cancel-order-modal-$modal_counter' tabindex='-1' role='dialog' aria-labelledby='cancel-order-modal-label' aria-hidden='true'>
+                                                            <div class='modal-dialog modal-dialog-centered' role='document'>
+                                                                <form method='post'>
+                    
+                                                                    <div class='modal-content'>
+                                                                        <div class='modal-header'>
+                                                                            <h5 class='modal-title font-weight' id='cancel-order-modal-label'>Order #: $order_number</h5>
+                                                                            <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                                                            <span aria-hidden='true'>&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class='modal-body'>
+                                                                            Are you sure you want to cancel your order?
+                                                                        </div>
+                                                                        <div class='modal-footer'>
+                                                                            <button type='button' class='site-btn' data-dismiss='modal'>Close</button> 
+                                                                            ";
+                                                                            ?>
+                                                                            <button type='button' class='site-btn' onclick="location.href='/shop/cancel_order/<?php echo $order_id; ?>'">Cancel Order</button>
+                                                                            <?php
+                                                                            echo "
+                                                                        </div>
+                                                                    </div>
+                    
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    ";
+                                                    
+                                                    
+                                                }
+
+                                                echo "
+
+                                                                
+                                                            <div class='row order-footer text-right'>
+                                                                <div class='col-lg-12'>
+                                                                ";
+                                                                if($status == 1) {
+                                                                    echo "
+                                                                        <div class='cancel-order'>
+                                                                            <a href='#' data-toggle='modal' data-target='#cancel-order-modal-$modal_counter'>Cancel Order</a>
+                                                                        </div>
+                                                                    ";
+                                                                }
+                                                                else {
+                                                                    echo "
+                                                                        <div class='cancel-order'>
+                                                                            Order Cancelled
+                                                                        </div>
+                                                                    ";
+                                                                }
+                                                                echo "
+                                                                </div>
+                                                            </div>
+                                                        
+                                                        </div>
+                                                    </div>
+                                                ";
+                                                
+
+                                                $modal_counter++;
+                                            }
+                                        ?>
+                                        
 
                                     </div>
 
                                     <!-- Track Modal -->
-                                    <div class="modal fade" id="track-order-modal" tabindex="-1" role="dialog" aria-labelledby="track-order-modal-label" aria-hidden="true">
+                                    <!-- <div class="modal fade" id="track-order-modal" tabindex="-1" role="dialog" aria-labelledby="track-order-modal-label" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-body">
@@ -558,28 +648,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
 
-                                    <!-- Cancel Modal -->
-                                    <div class="modal fade" id="cancel-order-modal" tabindex="-1" role="dialog" aria-labelledby="cancel-order-modal-label" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title font-weight" id="cancel-order-modal-label">Product Name</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Are you sure you want to cancel your order?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="site-btn" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="site-btn">Cancel Order</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
 
                                     
 

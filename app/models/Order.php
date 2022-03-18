@@ -14,16 +14,15 @@ class Order extends Model{
     }
 
     public function getAllByUserId($user_id){
-        $stmt = self::$_connection->prepare("SELECT * FROM cart where user_id = :user_id AND status = :status");
-        $stmt->execute(['user_id'=>$user_id,
-                        'status'=>'0']);
+        $stmt = self::$_connection->prepare("SELECT * FROM my_order where user_id = :user_id");
+        $stmt->execute(['user_id'=>$user_id]);
     	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Order');
 		return $stmt->fetchAll();
     }
 
-    public function find($brand_id){
-        $stmt = self::$_connection->prepare("SELECT * FROM brand WHERE brand_id = :brand_id");
-        $stmt->execute(['brand_id'=>$brand_id]);
+    public function find($order_id){
+        $stmt = self::$_connection->prepare("SELECT * FROM my_order WHERE order_id = :order_id");
+        $stmt->execute(['order_id'=>$order_id]);
         $stmt->setFetchMode(PDO::FETCH_CLASS, 'Cart');
         return $stmt->fetch();
     }
@@ -38,12 +37,14 @@ class Order extends Model{
 
 
     public function insert(){
-	    $stmt = self::$_connection->prepare("INSERT INTO my_order(cart_ids, billing_detail_id, order_number, status) VALUES(:cart_ids, :billing_detail_id, :order_number, :status)");
+	    $stmt = self::$_connection->prepare("INSERT INTO my_order(user_id, cart_ids, address_id, order_number, delivery_date, total,  status) VALUES(:user_id, :cart_ids, :address_id, :order_number, :delivery_date, :total, :status)");
         $stmt->execute(['cart_ids'=>$this->cart_ids,
-                        'billing_detail_id'=>$this->billing_detail_id,
+                        'user_id'=>$this->user_id,
+                        'address_id'=>$this->address_id,
                         'order_number'=>$this->order_number,
+                        'total'=>$this->total,
+                        'delivery_date'=>$this->delivery_date,
                         'status'=>$this->status]);
-        $_SESSION['last_order'] = self::$_connection->lastInsertId();
     }
 
     public function delete(){
@@ -54,26 +55,11 @@ class Order extends Model{
     }
 
     public function updateStatus(){
-        $stmt = self::$_connection->prepare("UPDATE brand SET brand_name = :brand_name WHERE brand_id = :brand_id");
-        $stmt->execute(['brand_name'=>$this->brand_name,
-                        'brand_id'=>$this->brand_id]);
+        $stmt = self::$_connection->prepare("UPDATE my_order SET status = :status WHERE order_id = :order_id");
+        $stmt->execute(['status'=>$this->status,
+                        'order_id'=>$this->order_id]);
     }
 
-    public function updateQuantity() {
-        $stmt = self::$_connection->prepare("UPDATE cart SET quantity = :quantity WHERE product_id = :product_id");
-        $stmt->execute(['quantity'=>$this->quantity,
-                        'product_id'=>$this->product_id]);
-    }
-
-    public function updateCart() {
-        $stmt = self::$_connection->prepare("UPDATE cart SET size = :size, color = :color, quantity = :quantity WHERE product_id = :product_id AND user_id = :user_id AND status = :status");
-        $stmt->execute(['size'=>$this->size,
-                        'color'=>$this->color,
-                        'quantity'=>$this->quantity,
-                        'product_id'=>$this->product_id,
-                        'user_id'=>$this->user_id,
-                        'status'=>'0',]);
-    }
 
 }
 ?>  

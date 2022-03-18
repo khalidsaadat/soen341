@@ -16,6 +16,9 @@ class AccountController extends Controller{
 		$primary_address = $this->model('Address')->getPrimaryAddress($_SESSION['user_id']);
 		$secondary_address = $this->model('Address')->getSecondaryAddress($_SESSION['user_id']);
 
+		// Orders
+		$orders = $this->model('Order')->getAllByUserId($_SESSION['user_id']);
+
 		// wishlist
 		$wishlists = $this->model('Wishlist')->getAllActiveForUserId($_SESSION['user_id']);
 
@@ -150,7 +153,7 @@ class AccountController extends Controller{
 			// redirection condition
 			$redirect_condition = 1;
 
-			$this->view('user/index', ['user_profile'=>$user_profile, 'wishlists'=>$wishlists, 'primary_address'=>$primary_address, 'secondary_address'=>$secondary_address]);
+			$this->view('user/index', ['user_profile'=>$user_profile, 'orders'=>$orders, 'wishlists'=>$wishlists, 'primary_address'=>$primary_address, 'secondary_address'=>$secondary_address]);
 		}
 		else {
 			
@@ -207,17 +210,17 @@ class AccountController extends Controller{
 						}
 						else {
 							$error_msg = 'Passwords do not match!';
-							$this->view('user/index', ['user_profile'=>$user_profile, 'error_msg'=>$error_msg, 'wishlists'=>$wishlists, 'primary_address'=>$primary_address, 'secondary_address'=>$secondary_address]);	
+							$this->view('user/index', ['user_profile'=>$user_profile, 'error_msg'=>$error_msg, 'orders'=>$orders, 'wishlists'=>$wishlists, 'primary_address'=>$primary_address, 'secondary_address'=>$secondary_address]);	
 						}
 					}
 					else {
 						$error_msg = 'To change your password, enter your new password!';
-						$this->view('user/index', ['user_profile'=>$user_profile, 'error_msg'=>$error_msg, 'wishlists'=>$wishlists, 'primary_address'=>$primary_address, 'secondary_address'=>$secondary_address]);	
+						$this->view('user/index', ['user_profile'=>$user_profile, 'error_msg'=>$error_msg, 'orders'=>$orders, 'wishlists'=>$wishlists, 'primary_address'=>$primary_address, 'secondary_address'=>$secondary_address]);	
 					}
 				}
 				else {
 					$error_msg = 'Current password is wrong!';
-					$this->view('user/index', ['user_profile'=>$user_profile, 'error_msg'=>$error_msg, 'wishlists'=>$wishlists, 'primary_address'=>$primary_address, 'secondary_address'=>$secondary_address]);
+					$this->view('user/index', ['user_profile'=>$user_profile, 'error_msg'=>$error_msg, 'orders'=>$orders, 'wishlists'=>$wishlists, 'primary_address'=>$primary_address, 'secondary_address'=>$secondary_address]);
 				}
 			}
 			else {

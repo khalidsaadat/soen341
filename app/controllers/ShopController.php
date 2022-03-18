@@ -141,15 +141,18 @@ class ShopController extends Controller{
 				else {
 					$cart_item = $this->model('Cart');
 					// get the updated values
+					$price = $_POST['price'];
 					$size = $_POST['size'];
 					$color = $_POST['color'];
 					$quantity = $_POST['quantity'];
+					$total_amount = $quantity * $price;
 	
 					// update the product cart
 					$cart_item->product_id = $product_id;
 					$cart_item->size = $size;
 					$cart_item->color = $color;
 					$cart_item->quantity = $quantity;
+					$cart_item->price = $total_amount;
 					$cart_item->user_id = $_SESSION['user_id'];
 	
 					$cart_item->insert();
@@ -191,14 +194,17 @@ class ShopController extends Controller{
 					// redirect condition number for editing product
 					$redirect_condition = 3;
 					// get the updated values
+					$price = $_POST['price'];
 					$size = $_POST['size'];
 					$color = $_POST['color'];
 					$quantity = $_POST['quantity'];
+					$total_amount = $quantity * $price;
 
 					// update the product cart
 					$cart_item->size = $size;
 					$cart_item->color = $color;
 					$cart_item->quantity = $quantity;
+					$cart_item->price = $total_amount;
 
 					$cart_item->updateCart();
 					
@@ -276,6 +282,8 @@ class ShopController extends Controller{
 				// get the user information
 				$order_id = 5;
 				
+				$total = $_POST['total'];
+				$delivery_date = $_POST['delivery_date'];
 				$card = $_POST['credit_card_num'];
 				$name = $_POST['card_holder_name'];
 				$expiry_date = $_POST['expiry_date'];
@@ -296,51 +304,43 @@ class ShopController extends Controller{
 				$expResult = ($this->validateCCExpDate($expiry_date)) ? 'valid' : 'invalid';
 		
 				if($ccResult == 'valid' && $cvvResult == 'valid' && $expResult == 'valid') { 
-					// it is safe to continue
+					// it is safe to continue and place the order
+					$address_id = $user_primary_address->address_id;
 	
-					// Order table
-					// $last_order_id = '5';
-	
-					// get the information
-					$cart_ids = $this->model('Cart')->getAllIdsByUserId($_SESSION['user_id']);	// {1,2,3,4}
-					// $billing_detail = $_SESSION['billing_detail_id'];
-					// $order_number = $_POST['order_number'];
-					// $status = $_POST['status'];
-					
+					// get cart detail
+					$cart_ids_obj = $this->model('Cart')->getAllIdsByUserId($_SESSION['user_id']);	// object => {1,2,3,4}	
+					$cart_ids_array = array(); // {1,2,3,4}
+
+					$counter = 0;
+					foreach($cart_ids_obj as $cart) {
+						$cart_ids_array[$counter] = $cart->cart_id;
+						
+						// Update cart items' status to 1 (they are no longer in cart)
+						$current_cart_item = $this->model('Cart')->find($cart->cart_id);
+						$current_cart_item->status = '1';
+						$current_cart_item->updateStatus();
+
+						$counter++;
+					}
+					$cart_ids_serialized = serialize($cart_ids_array);
 							
 					$order_number = $this->getToken();
-
 					$_SESSION['current_order_number'] = $order_number;
+
+					// Create a new order
+					$my_order = $this->model('Order');
+
+					$my_order->cart_ids = $cart_ids_serialized;
+					$my_order->user_id = $_SESSION['user_id'];
+					$my_order->address_id = $address_id;
+					$my_order->order_number = $order_number;
+					$my_order->delivery_date = $delivery_date;
+					$my_order->total = $total;
+					$my_order->status = '1';
+
+					$my_order->insert();
+
 					
-					// $order->order_number = $order_number;
-					// echo "$order_number";
-	
-	
-					//Order Table
-					// $new_order = $this->model('Order');
-					// $new_order->cart_ids = $cart_ids;
-					// $new_order->order_number  = $order_number;
-					// $new_order->status  = $status;
-	
-					// $new_order->insert();
-	
-					$last_order_id = $_SESSION['current_order_number'];
-	
-					// Billing detail table
-					// $new_detail = $this->model('BillingDetails');
-					// // $new_detail->order_id = $last_order_id; --> we dont need it
-					// $new_detail->first_name   = $first_name;
-					// $new_detail->last_name    = $last_name;
-					// $new_detail->address = $addres;
-					// $new_detail->city    = $city;
-					// $new_detail->province = $province;
-					// $new_detail->postal_code     = $postal_code;
-					// $new_detail->country  = $country;
-					// $new_detail->phone = $phone;
-					// $new_detail->email     = $email;
-					// $new_detail->user_id  = $detail_user_id; 
-	
-					// $new_detail->insert();
 	
 					// success redirect
 					if($redirect_condition == 2)
@@ -507,6 +507,19 @@ class ShopController extends Controller{
 
 		return header('location:/shop/checkout');
 
+	}
+
+	public function cancel_order($order_id) {
+		// order model object
+		$order = $this->model('Order');
+
+		$order->order_id = $order_id;
+		$order->status = 0;
+		$order->updateStatus();
+
+		$_SESSION['return-msg'] = 'Order cancelled successfully.';
+
+		return header('location:/account/');
 	}
 
 }

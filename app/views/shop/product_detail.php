@@ -190,6 +190,7 @@
                                 <h4><?php echo $name; ?></h4>
                             
                                 <h3>$<?php echo $price; ?></h3>
+                                <input type="hidden" value="<?php echo $price; ?>" name="price">
                                 
                                 <?php echo html_entity_decode($description); ?>
                                 

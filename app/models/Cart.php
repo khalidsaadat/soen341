@@ -30,9 +30,9 @@ class Cart extends Model{
     }
 
 
-    public function find($brand_id){
-        $stmt = self::$_connection->prepare("SELECT * FROM brand WHERE brand_id = :brand_id");
-        $stmt->execute(['brand_id'=>$brand_id]);
+    public function find($cart_id){
+        $stmt = self::$_connection->prepare("SELECT * FROM cart WHERE cart_id = :cart_id");
+        $stmt->execute(['cart_id'=>$cart_id]);
         $stmt->setFetchMode(PDO::FETCH_CLASS, 'Cart');
         return $stmt->fetch();
     }
@@ -56,11 +56,12 @@ class Cart extends Model{
     }
 
     public function insert(){
-	    $stmt = self::$_connection->prepare("INSERT INTO cart(product_id, color, size, quantity, user_id) VALUES(:product_id, :color, :size, :quantity, :user_id)");
+	    $stmt = self::$_connection->prepare("INSERT INTO cart(product_id, color, size, quantity, price, user_id) VALUES(:product_id, :color, :size, :quantity, :price, :user_id)");
         $stmt->execute(['product_id'=>$this->product_id,
                         'color'=>$this->color,
                         'size'=>$this->size,
                         'quantity'=>$this->quantity,
+                        'price'=>$this->price,
                         'user_id'=>$this->user_id]);
         $_SESSION['cart_last_id'] = self::$_connection->lastInsertId();
     }
@@ -73,9 +74,9 @@ class Cart extends Model{
     }
 
     public function updateStatus(){
-        $stmt = self::$_connection->prepare("UPDATE brand SET brand_name = :brand_name WHERE brand_id = :brand_id");
-        $stmt->execute(['brand_name'=>$this->brand_name,
-                        'brand_id'=>$this->brand_id]);
+        $stmt = self::$_connection->prepare("UPDATE cart SET status = :status WHERE cart_id = :cart_id");
+        $stmt->execute(['status'=>$this->status,
+                        'cart_id'=>$this->cart_id]);
     }
 
     public function updateQuantity() {
@@ -85,10 +86,11 @@ class Cart extends Model{
     }
 
     public function updateCart() {
-        $stmt = self::$_connection->prepare("UPDATE cart SET size = :size, color = :color, quantity = :quantity WHERE product_id = :product_id AND user_id = :user_id AND status = :status");
+        $stmt = self::$_connection->prepare("UPDATE cart SET size = :size, color = :color, quantity = :quantity, price = :price WHERE product_id = :product_id AND user_id = :user_id AND status = :status");
         $stmt->execute(['size'=>$this->size,
                         'color'=>$this->color,
                         'quantity'=>$this->quantity,
+                        'price'=>$this->price,
                         'product_id'=>$this->product_id,
                         'user_id'=>$this->user_id,
                         'status'=>'0',]);

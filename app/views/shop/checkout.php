@@ -380,6 +380,7 @@
 
                                                 $total = $tax_amount + $subtotal;
                                                 $total = number_format($total, 2);
+                                                echo "<input type='hidden' name='total' value='$total'>";
                                             ?>
                                             
                                             

@@ -282,6 +282,7 @@ class ShopController extends Controller{
 				// get the user information
 				$order_id = 5;
 				
+				$total = $_POST['total'];
 				$delivery_date = $_POST['delivery_date'];
 				$card = $_POST['credit_card_num'];
 				$name = $_POST['card_holder_name'];
@@ -334,6 +335,7 @@ class ShopController extends Controller{
 					$my_order->address_id = $address_id;
 					$my_order->order_number = $order_number;
 					$my_order->delivery_date = $delivery_date;
+					$my_order->total = $total;
 					$my_order->status = '1';
 
 					$my_order->insert();
@@ -505,6 +507,19 @@ class ShopController extends Controller{
 
 		return header('location:/shop/checkout');
 
+	}
+
+	public function cancel_order($order_id) {
+		// order model object
+		$order = $this->model('Order');
+
+		$order->order_id = $order_id;
+		$order->status = 0;
+		$order->updateStatus();
+
+		$_SESSION['return-msg'] = 'Order cancelled successfully.';
+
+		return header('location:/account/');
 	}
 
 }

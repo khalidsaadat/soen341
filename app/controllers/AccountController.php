@@ -17,7 +17,7 @@ class AccountController extends Controller{
 		$secondary_address = $this->model('Address')->getSecondaryAddress($_SESSION['user_id']);
 
 		// Orders
-		$orders = $this->model('Order')->getAllActiveByUserId($_SESSION['user_id']);
+		$orders = $this->model('Order')->getAllByUserId($_SESSION['user_id']);
 
 		// wishlist
 		$wishlists = $this->model('Wishlist')->getAllActiveForUserId($_SESSION['user_id']);

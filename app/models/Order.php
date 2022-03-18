@@ -14,7 +14,7 @@ class Order extends Model{
     }
 
     public function getAllByUserId($user_id){
-        $stmt = self::$_connection->prepare("SELECT * FROM my_order where user_id = :user_id");
+        $stmt = self::$_connection->prepare("SELECT * FROM my_order where user_id = :user_id ORDER BY order_date desc");
         $stmt->execute(['user_id'=>$user_id]);
     	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Order');
 		return $stmt->fetchAll();

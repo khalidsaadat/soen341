@@ -479,6 +479,32 @@ class ShopController extends Controller{
 
 	}
 
+	public function add_wishlist($product_id) {
+
+		if(!isset($_SESSION['user_id'])) {
+			$_SESSION['login_flag'] = 1;
+			return header('location:/shop');
+		}
+
+		$user_id = '';
+		if(isset($_SESSION['user_id'])) {
+			$user_id = $_SESSION['user_id'];
+		}
+
+		// wishlist object
+		$wishlist = $this->model('Wishlist');
+		$wishlist->product_id = $product_id;
+		$wishlist->user_id = $user_id;
+
+		$wishlist->insert();
+
+		// success session msg
+		$_SESSION['wishlist_added'] = 1;
+
+		return header('location:/shop');
+
+	}
+
 	public function remove_from_wishlist($product_id) {
 
 		if(!isset($_SESSION['user_id'])) {
@@ -501,6 +527,31 @@ class ShopController extends Controller{
 		$_SESSION['wishlist_removed'] = 1;
 
 		return header('location:/shop/checkout');
+
+	}
+
+	public function remove_wishlist($product_id) {
+
+		if(!isset($_SESSION['user_id'])) {
+			return header('location:/shop');
+		}
+		
+		$user_id = '';
+		if(isset($_SESSION['user_id'])) {
+			$user_id = $_SESSION['user_id'];
+		}
+
+		// wishlist object
+		$wishlist = $this->model('Wishlist');
+		$wishlist->product_id = $product_id;
+		$wishlist->user_id = $user_id;
+
+		$wishlist->delete();
+
+		// success session msg
+		$_SESSION['wishlist_removed'] = 1;
+
+		return header('location:/shop');
 
 	}
 

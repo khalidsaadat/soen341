@@ -293,6 +293,32 @@
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="shop__product__option__left">
                                     <p>Showing <?php echo $products_count; ?> products</p>
+                                    <?php
+                                        if(isset($_SESSION['login_flag'])) {
+                                            $msg = 'You must login to add a product to wishlist!';
+
+                                            echo "
+                                                <div class='form_error'>
+                                                    $msg
+                                                </div>
+                                            ";
+
+                                            unset($_SESSION['login_flag']);
+                                        }
+
+                                        if(isset($_SESSION['wishlist_added'])) {
+                                            $msg = 'Product added to wishlist successfully.';
+
+                                            echo "
+                                                <div class='form_error'>
+                                                    $msg
+                                                </div>
+                                            ";
+
+                                            unset($_SESSION['wishlist_added']);
+                                        }
+                                    ?>
+                                    
                                 </div>
                             </div>
                             <!-- <div class="col-lg-6 col-md-6 col-sm-6">
@@ -338,11 +364,7 @@
                                                          echo "
                                                          <div class='product__item__pic set-bg' data-setbg='/assets/products/images/$image_name'>
                                                              <ul class='product__hover'>
-                                                                 <li><a href='#'><img src='/assets/img/icon/heart.png' alt=''></a></li>
-                                                                 <li><a href='#'><img src='/assets/img/icon/compare.png' alt=''> <span>Compare</span></a>
-                                                                 </li>
-                                                                 <!-- To do: make sure to change the product id of each item. Once you loop through the product, just print their id -->
-                                                                 <li><a href='/shop/product/1'><img src='/assets/img/icon/search.png' alt=''></a></li>
+                                                                 <li><a href='/shop/add_wishlist/$product_id'><img src='/assets/img/icon/heart.png' alt=''></a></li>
                                                              </ul>
                                                          </div>
                                                      </div>

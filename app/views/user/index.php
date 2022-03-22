@@ -116,8 +116,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="tabs-to-dropdown">
-                        <div class="nav-wrapper" style="text-align: center;">
-                            <ul class="nav nav-pills d-md-flex " id="pills-tab" role="tablist">
+                        <div class="nav-wrapper d-md-flex justify-content-center" style="text-align: center;">
+                            <ul class="nav nav-pills  " id="pills-tab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link active" id="account-detail-tab" data-toggle="pill" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true">Account Detail</a>
                                 </li>

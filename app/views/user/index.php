@@ -66,17 +66,7 @@
                         <ul>
                             <li><a href="/">Home</a></li>
                             <li><a href="/shop">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./about.html">About Us</a></li>
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shopping-cart.html">Shopping Cart</a></li>
-                                    <li><a href="/shop/checkout">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contacts</a></li>
+                            <li><a href="/">Baby Registry</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -136,9 +126,6 @@
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link" id="wish-list-tab" data-toggle="pill" href="#wish-list" role="tab" aria-controls="wish-list" aria-selected="false">Wish Lists</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="rewards-tab" data-toggle="pill" href="#rewards" role="tab" aria-controls="rewards" aria-selected="false">Rewards</a>
                                 </li>
                             </ul>
 
@@ -783,12 +770,6 @@
 
                                     
 
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="rewards" role="tabpanel" aria-labelledby="rewards-tab">
-                                <div class="container-fluid">
-                                    <h2 class="mb-3 font-weight-bold">Rewards</h2>
-                                    
                                 </div>
                             </div>
                         </div>

@@ -22,3 +22,6 @@ jobs:
       
     - name: Run phpstan on Views
       run: vendor/bin/phpstan analyse app/views
+
+    - name: PHPUnit testing
+      run: php vendor/bin/phpunit test/ExampleAsssertionsTest.php

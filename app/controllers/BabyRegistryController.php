@@ -8,7 +8,7 @@ class BabyRegistryController extends Controller{
 		$this->view('baby_registry/index');
 	}
 
-	public function empty_view() {
+	public function add() {
 		$this->view('BASE_STRUCTURES/empty_view');
 	}
 

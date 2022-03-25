@@ -1,5 +1,5 @@
 # SOEN 341
-[![php-composer](https://github.com/khalidsaadat/soen341/actions/workflows/php.yml/badge.svg?branch=main)](https://github.com/khalidsaadat/soen341/actions/workflows/php.yml)
+[![php-composer](https://github.com/khalidsaadat/soen341/actions/workflows/php.yml/badge.svg)](https://github.com/khalidsaadat/soen341/actions/workflows/php.yml)
 
 
 ## :bulb:Objective

@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
             $string3 = 'Match';
 
-            $this->assertSame($string1, $string3);
+            $this->assertSame($string1, $string2);
             // $this->assertSame($string1, $string3);
         }
 

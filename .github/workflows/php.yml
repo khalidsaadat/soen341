@@ -24,4 +24,4 @@ jobs:
       run: vendor/bin/phpstan analyse app/views
 
     - name: PHPUnit testing
-      run: php vendor/bin/phpunit test/ExampleAsssertionsTest.php
+      run: php vendor/bin/phpunit tests/LoginTest.php

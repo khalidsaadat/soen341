@@ -8,7 +8,7 @@
                         <ul>
                             <li><a href="/">Home</a></li>
                             <li><a href="/shop">Shop</a></li>
-                            <li><a href="/">Baby Registry</a></li>
+                            <li><a href="/babyregistry">Baby Registry</a></li>
                         </ul>
                     </nav>
                 </div>

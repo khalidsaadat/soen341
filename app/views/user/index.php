@@ -532,6 +532,7 @@
                                                                             Are you sure you want to cancel your order?
                                                                         </div>
                                                                         <div class='modal-footer'>
+                                                                        
                                                                             <button type='button' class='site-btn' data-dismiss='modal'>Close</button> 
                                                                             ";
                                                                             ?>
@@ -570,6 +571,9 @@
                                                                     ";
                                                                 }
                                                                 echo "
+                                                                </div>
+                                                                <div>
+                                                                    <a href='/babyregistry/generate/$order_id'>Generate</a>
                                                                 </div>
                                                             </div>
                                                         

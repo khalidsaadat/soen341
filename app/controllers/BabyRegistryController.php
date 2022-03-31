@@ -46,32 +46,12 @@ class BabyRegistryController extends Controller{
 			$new_registry->address_id = $address_id;
 			$new_registry->description = $description;
 		
-
 			$new_registry->insert();
 
 			$this->view('baby_registry/add');
 		}
 	    
 
-	}
-
-	private function Delivery_date($date)
-	{
-	   
-		 // get the expiry date from the babyRegistry view
-		$delivery_date_post = $date;
-		$delivery_date = str_replace('/', '-', $delivery_date_post);
-
-		// Creating timestamp from given date
-		$timestamp = strtotime($delivery_date);
-
-		// Creating new date format from that timestamp
-		$new_date = date("Y/m/d", $timestamp);
-
-		// echo $new_date;
-		// $current_date = date("Y/m/d");
-		 return $new_date;
-	
 	}
 
 }

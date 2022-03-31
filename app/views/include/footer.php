@@ -179,6 +179,46 @@
 
     </script>
 
+    <!-- generate baby reg link using jquery -->
+    <script>
+        $('form.share_form').submit(function(event) {
+            event.preventDefault();
+
+            var $form = $(this);
+
+            var serialized_data = $form.serialize();
+
+            request = $.ajax({
+                url: "/babyregistry/generate",
+                type: "post",
+                data: serialized_data,
+                dataType: "json",
+                encode: true,
+            }).done(function(response) {
+                if(!response.success) {
+                    console.log('error');
+                }
+                else {
+                    // get the token and show it
+                    console.log(response.token);
+                    
+                    var url = "/babyregistry/shareable/" + response.token;
+                    $("#shareable_link_url").attr({href: url});
+                    $("#shareable_link_url").html("");
+                    $("#shareable_link_url").append("/babyregistry/shareable/" + response.token);
+                }
+             });
+        });
+    </script>
+
+    <!-- Copy a text -->
+    <script>
+        function copyText() {
+            
+        }
+    </script>
+    
+
     <script>
         $(document).ready(function () {
             //Initialize tooltips

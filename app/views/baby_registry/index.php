@@ -58,9 +58,6 @@
                                     <a class="nav-link active" id="my-registry-tab" data-toggle="pill" href="#my-registry" role="tab" aria-controls="my-registry" aria-selected="true">My Registry</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="add-items-tab" data-toggle="pill" href="#add-items" role="tab" aria-controls="add-items" aria-selected="false">Add Items</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
                                     <a class="nav-link" id="settings-tab" data-toggle="pill" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
                                 </li>
                             </ul>
@@ -72,19 +69,75 @@
                                 <div class="container-fluid">
                                     <h2 class="mb-3 font-weight-bold">My Baby Registry</h2>
                                     
-                                    something
+                                    <form class="share_form" method="post">
+                                        <div class="col-lg-12" style="background: #f5f7f7; border: 1px solid #EFF2F2; border-radius: 5px; padding: 15px; margin-bottom: 15px;">
+                                            <input type="hidden" name="baby_registry_id" id="baby_registry_id" value="1">
+                                            <div>
+                                                <span style="font-weight: bold; font-size: 18px;">Baby Registry Title</span>
+                                            </div>
+                                            <div>
+                                                <span style="color: #575959; font-size: 14px;">
+                                                    Created by <strong>Anum and Shabia</strong> on 1 April, 2022
+                                                </span>
+                                            </div>
 
-                                    
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="add-items" role="tabpanel" aria-labelledby="add-items-tab">
-                                <div class="container-fluid">
-                                    <h2 class="mb-3 font-weight-bold">Add Items</h2>
-                                    
-                                    sometihng
+                                            <hr>
+                                            <div style="display: flex; align-items: center;">
+                                                <img src="/assets/icons/settings.png" height="14" style="vertical-align:middle; padding-right: 5px;"><span style="font-size: 11px;">SETTINGS</span>
+                                                <span style="padding-left: 10px; padding-right: 10px;"></span>
 
-                                    
+                                                <button type="submit" style="background: none; border: none;" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    <img src="/assets/icons/link.png" height="14" style="vertical-align:middle; padding-right: 5px;">
+                                                    <span style="font-size: 11px;" onclick="">SHARE</span>
+                                                </button>
+                                                
+                                                
+                                                <span style="padding-left: 10px; padding-right: 10px;"></span>
+                                                
+                                                <img src="/assets/icons/option.png" height="14" style="vertical-align:middle; padding-right: 5px;"><span style="font-size: 11px;">MORE</span>
+                                            </div>
 
+                                            <div class="collapse" id="collapseExample">
+                                                <div class="card card-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-7">
+                                                            <a href="" id="shareable_link_url" style="color: blue;"></a>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <img src="/assets/icons/copy.png" height="14" style="vertical-align:middle; padding-right: 5px;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            
+                                        </div>
+                                    </form>
+
+                                    <div class="col-lg-12" style="background: #f5f7f7; border: 1px solid #EFF2F2; border-radius: 5px; padding: 15px;">
+                                        <div>
+                                            <span style="font-weight: bold; font-size: 18px;">Another Title</span>
+                                        </div>
+                                        <div>
+                                            <span style="color: #575959; font-size: 14px;">
+                                                Created by <strong>Khalid</strong> on 1 February, 2022
+                                            </span>
+                                        </div>
+
+                                        <hr>
+                                        <div style="display: flex; align-items: center;">
+                                            <img src="/assets/icons/settings.png" height="14" style="vertical-align:middle; padding-right: 5px;"><span style="font-size: 11px;">SETTINGS</span>
+                                            <span style="padding-left: 10px; padding-right: 10px;"></span>
+
+                                            <img src="/assets/icons/link.png" height="14" style="vertical-align:middle; padding-right: 5px;">
+                                            <span style="font-size: 11px;" onclick="">SHARE</span>
+                                            
+                                            <span style="padding-left: 10px; padding-right: 10px;"></span>
+                                            
+                                            <img src="/assets/icons/option.png" height="14" style="vertical-align:middle; padding-right: 5px;"><span style="font-size: 11px;">MORE</span>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
@@ -102,6 +155,8 @@
         </div>
     </section>
     <!-- Checkout Section End -->
+
+    
 
 <?php
     // global footer - do not write file extension (.php)

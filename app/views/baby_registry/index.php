@@ -66,36 +66,41 @@
                             </ul>
 
                         </div>
+                             <form method="post">
+                                <div class="tab-content authentication_form" id="pills-tabContent">
+                                    <div class="tab-pane fade show active" id="my-registry" role="tabpanel" aria-labelledby="my-registry-tab">
+                                        <div class="container-fluid">
+                                            <div>
+                                                <h2 class="mb-3 font-weight-bold">My Baby Registry</h2>
+                                                <button type="submit" name="createRegistry" class="site-btn" style="margin-left: 900px;">Create Registry</button>
+                                            </div>
+                                            
+                                            something
 
-                        <div class="tab-content authentication_form" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="my-registry" role="tabpanel" aria-labelledby="my-registry-tab">
-                                <div class="container-fluid">
-                                    <h2 class="mb-3 font-weight-bold">My Baby Registry</h2>
-                                    
-                                    something
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="add-items" role="tabpanel" aria-labelledby="add-items-tab">
+                                        <div class="container-fluid">
+                                            <h2 class="mb-3 font-weight-bold">Add Items</h2>
+                                            
+                                            sometihng
 
-                                    
+                                            
+
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                                        <div class="container-fluid">
+                                            <h2 class="mb-3 font-weight-bold">Settings</h2>
+                                            
+                                            something
+
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="tab-pane fade" id="add-items" role="tabpanel" aria-labelledby="add-items-tab">
-                                <div class="container-fluid">
-                                    <h2 class="mb-3 font-weight-bold">Add Items</h2>
-                                    
-                                    sometihng
-
-                                    
-
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-                                <div class="container-fluid">
-                                    <h2 class="mb-3 font-weight-bold">Settings</h2>
-                                    
-                                    something
-
-                                </div>
-                            </div>
-                        </div>
+                            </form>
+                        
                     </div>
                 </div>
             </div>

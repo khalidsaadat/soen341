@@ -62,6 +62,22 @@
 		});
 	</script>
 
+    <!-- date picker -->
+    <script>
+        $(document).ready(function(){
+        var date_input=$('input[name="date"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        var options={
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+            orientation: "top",
+        };
+        date_input.datepicker(options);
+        })
+    </script>
+
     <!-- my account tabs - open specific tab -->
     <script>
         $(document).ready(function(){

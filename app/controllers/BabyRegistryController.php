@@ -28,19 +28,30 @@ class BabyRegistryController extends Controller{
 	// Generate shareable uniqe key
 	public function generate() {
 		$data = [];
-		$token = $this->getToken(37);
-
 		$baby_reg_id = $_POST['baby_registry_id'];
 
-		// Baby reg token
-		$baby_reg_token = $this->model('BabyRegistryToken');
-		$baby_reg_token->baby_registry_id = $baby_reg_id;
-		$baby_reg_token->token = $token;
-		$baby_reg_token->status = 1;
-		$baby_reg_token->insert();
+		// check the baby registry token; if the baby reg id exists, return the existing token; otherwise, create a new one and return that
+		$baby_reg_token = $this->model('BabyRegistryToken')->findByBabyRegistryId($baby_reg_id);
+		if($baby_reg_token == false) {
+			$new_token = $this->getToken(37);
 
-		$data['success'] = true;
-		$data['token'] = $token;
+			// make a new baby reg token
+			$baby_reg_token = $this->model('BabyRegistryToken');
+			$baby_reg_token->baby_registry_id = $baby_reg_id;
+			$baby_reg_token->token = $new_token;
+			$baby_reg_token->status = 1;
+			$baby_reg_token->insert();
+			
+			$data['success'] = true;
+			$data['token'] = $new_token;
+		}
+		else {
+			// return the existing token
+			$existing_token = $baby_reg_token->token;
+
+			$data['success'] = false;
+			$data['token'] = $existing_token;
+		}
 
 		echo json_encode($data);
 	}

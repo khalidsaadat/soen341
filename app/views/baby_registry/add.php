@@ -9,8 +9,8 @@
                     <nav class="header__menu mobile-menu">
                         <ul>
                             <li><a href="/">Home</a></li>
-                            <li class="active"><a href="/shop">Shop</a></li>
-                            <li><a href="/babyregistry">Baby Registry</a></li>
+                            <li><a href="/shop">Shop</a></li>
+                            <li class="active"><a href="/babyregistry">Baby Registry</a></li>
                         </ul>
                     </nav>
                 </div>

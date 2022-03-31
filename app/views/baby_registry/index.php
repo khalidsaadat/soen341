@@ -58,33 +58,26 @@
                                     <a class="nav-link active" id="my-registry-tab" data-toggle="pill" href="#my-registry" role="tab" aria-controls="my-registry" aria-selected="true">My Registry</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="add-items-tab" data-toggle="pill" href="#add-items" role="tab" aria-controls="add-items" aria-selected="false">Add Items</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
                                     <a class="nav-link" id="settings-tab" data-toggle="pill" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
                                 </li>
                             </ul>
 
                         </div>
-
                         <div class="tab-content authentication_form" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="my-registry" role="tabpanel" aria-labelledby="my-registry-tab">
                                 <div class="container-fluid">
-                                    <h2 class="mb-3 font-weight-bold">My Baby Registry</h2>
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-lg-10">
+                                                <h2 class="mb-3 font-weight-bold">My Baby Registry</h2>
+                                            </div>
+                                            <div class="col-lg-2 text-right" style="display: flex; justify-content: center; align-items: center;">  
+                                                <img src="/assets/icons/add.png" height="30" onclick="location.href='/babyregistry/add'" style="cursor: pointer;">
+                                            </div>
+                                        </div>
+                                    </div>
                                     
                                     something
-
-                                    
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="add-items" role="tabpanel" aria-labelledby="add-items-tab">
-                                <div class="container-fluid">
-                                    <h2 class="mb-3 font-weight-bold">Add Items</h2>
-                                    
-                                    sometihng
-
-                                    
-
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">

@@ -6,7 +6,7 @@ class ShopController extends Controller{
 	private function redirect_to($destination) {
 		if (headers_sent($filename, $line)) {
 			trigger_error("Headers already sent in {$filename} on line {$line}", E_USER_ERROR);
-		  }
+		}
 		header("Location: {$destination}");
 		exit;
 	}

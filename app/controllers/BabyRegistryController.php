@@ -15,7 +15,7 @@ class BabyRegistryController extends Controller{
         return $min + $rnd;
     }
     
-    private function getToken($length=12){
+    private function get_token($length=12){
         $token = "";
         $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         $codeAlphabet.= "0123456789";
@@ -33,7 +33,7 @@ class BabyRegistryController extends Controller{
 		// check the baby registry token; if the baby reg id exists, return the existing token; otherwise, create a new one and return that
 		$baby_reg_token = $this->model('BabyRegistryToken')->findByBabyRegistryId($baby_reg_id);
 		if($baby_reg_token == false) {
-			$new_token = $this->getToken(37);
+			$new_token = $this->get_token(37);
 
 			// make a new baby reg token
 			$baby_reg_token = $this->model('BabyRegistryToken');
@@ -65,6 +65,10 @@ class BabyRegistryController extends Controller{
 
 	public function add() {
 		$this->view('BASE_STRUCTURES/empty_view');
+	}
+
+	public function add_products($token) {
+
 	}
 
 

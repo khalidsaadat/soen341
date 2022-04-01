@@ -63,11 +63,17 @@
                             </ul>
 
                         </div>
-
                         <div class="tab-content authentication_form" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="my-registry" role="tabpanel" aria-labelledby="my-registry-tab">
                                 <div class="container-fluid">
-                                    <h2 class="mb-3 font-weight-bold">My Baby Registry</h2>
+                                        <div class="row">
+                                            <div class="col-lg-10">
+                                                <h2 class="mb-3 font-weight-bold">My Baby Registry</h2>
+                                            </div>
+                                            <div class="col-lg-2 text-right" style="display: flex; justify-content: center; align-items: center;">  
+                                                <img src="/assets/icons/add.png" height="30" onclick="location.href='/babyregistry/add'" style="cursor: pointer;">
+                                            </div>
+                                        </div>
                                     <?php
                                         // get the existing token if exists by the baby reg id
                                         $baby_reg_token = $this->model('BabyRegistryToken')->findByBabyRegistryId('1');

@@ -176,46 +176,46 @@
 
                                     <!-- Change Address Modal -->
                                     <div class="modal fade" id="change-address-modal" tabindex="-1" role="dialog" aria-labelledby="change-address-modal-label" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title font-weight" id="change-address-modal-label">Select Your Delivery Address</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                            <div class="modal-body">
-                                                                
-                                                                    <span style="font-size: 18px;">Your current delivery address is: </span>    
-                                                                    <div style="padding-left: 10px; font-style: italic; font-weight: bold;">
-                                                                        <?php echo $p_full_address; ?>
-                                                                    </div>
-
-                                                                    <hr>
-                                                                    <div>
-                                                                        <span style="font-size: 18px;">Available addresses to select: </span>
-                                                                        <div style="padding-left: 10px;">
-                                                                            <?php
-                                                                                echo "
-                                                                                    <input type='radio' id='p_address' name='change_address' value='$primary_address->address_id' checked='checked'> <label for='p_address'>$p_full_address</label> <br>
-                                                                                    <input type='radio' id='s_address' name='change_address' value='$secondary_address->address_id'> <label for='s_address'>$s_full_address</label> <br>
-                                                                                ";
-                                                                            ?>
-                                                                        </div>
-                                                                    </div>
-                                                                    <hr>
-                                                                    <div>
-                                                                        Want to update your address? Click <a href="/account" style="color: blue;">here</a>
-                                                                    </div>
-                                                            
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="site-btn" data-dismiss="modal">Close</button>
-                                                                <button type="submit"  name="update_address" class="site-btn">Confirm Changes</button>
-                                                            </div>
-                                                    </div>
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title font-weight" id="change-address-modal-label">Select Your Delivery Address</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
                                                 </div>
+                                                    <div class="modal-body">
+                                                        
+                                                            <span style="font-size: 18px;">Your current delivery address is: </span>    
+                                                            <div style="padding-left: 10px; font-style: italic; font-weight: bold;">
+                                                                <?php echo $p_full_address; ?>
+                                                            </div>
+
+                                                            <hr>
+                                                            <div>
+                                                                <span style="font-size: 18px;">Available addresses to select: </span>
+                                                                <div style="padding-left: 10px;">
+                                                                    <?php
+                                                                        echo "
+                                                                            <input type='radio' id='p_address' name='change_address' value='$primary_address->address_id' checked='checked'> <label for='p_address'>$p_full_address</label> <br>
+                                                                            <input type='radio' id='s_address' name='change_address' value='$secondary_address->address_id'> <label for='s_address'>$s_full_address</label> <br>
+                                                                        ";
+                                                                    ?>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div>
+                                                                Want to update your address? Click <a href="/account" style="color: blue;">here</a>
+                                                            </div>
+                                                    
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="site-btn" data-dismiss="modal">Close</button>
+                                                        <button type="submit"  name="update_address" class="site-btn">Confirm Changes</button>
+                                                    </div>
                                             </div>
+                                        </div>
+                                    </div>
                                     
                                     <h6 class="checkout__title">Payment <span style="float:right"><a href="#"><img src="../malefashion/img/payment.png" alt=""></a></span></h6>
                                     <div class="row authentication_form">

@@ -61,7 +61,7 @@
                                 if(isset($_SESSION['login_flag'])) {
                                     echo "
                                         <div class='form_success'>
-                                            You must login first to purchase products
+                                            You must login first
                                         </div>
                                     ";
 

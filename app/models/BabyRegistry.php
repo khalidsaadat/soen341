@@ -13,6 +13,13 @@ class BabyRegistry extends Model{
 		return $stmt->fetchAll();
     }
 
+    public function getAllByUserId($user_id){
+        $stmt = self::$_connection->prepare("SELECT * FROM baby_registry WHERE user_id = :user_id");
+        $stmt->execute(['user_id'=>$user_id]);
+    	$stmt->setFetchMode(PDO::FETCH_CLASS, 'BabyRegistry');
+		return $stmt->fetchAll();
+    }
+
     public function find($baby_registry_id){
         $stmt = self::$_connection->prepare("SELECT * FROM baby_registry WHERE baby_registry_id = :baby_registry_id");
         $stmt->execute(['baby_registry_id'=>$baby_registry_id]);

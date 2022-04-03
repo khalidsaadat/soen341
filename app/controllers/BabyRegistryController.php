@@ -66,8 +66,11 @@ class BabyRegistryController extends Controller{
 			return header('location:/account/login');
 		}
 
+		// get the all the baby registries for the current logged in user
+		$baby_registeries = $this->model('BabyRegistry')->getAllByUserId($_SESSION['user_id']);
+
 		// Send the 'products' variable to the View for rendering it to the webpage.
-		$this->view('baby_registry/index');
+		$this->view('baby_registry/index', ['baby_registeries'=>$baby_registeries]);
 	}
 
 	public function add() {
@@ -88,7 +91,7 @@ class BabyRegistryController extends Controller{
 			$organizer_name = $first_name . ' ' . $last_name;
 			$email = $_POST['email'];
 			$delivery_date = $_POST['date'];
-			$address_id = 8; // default id until we fix it
+			$address_id = $_POST['change_address'];
 			$description = $_POST['description'];
 		
 

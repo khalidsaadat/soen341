@@ -21,6 +21,7 @@ class Product extends Model{
       return $stmt->fetchAll();
     }
 
+
     public function getSearchResultByName($query)
     {
       $stmt = self::$_connection->prepare("SELECT * FROM product WHERE name COLLATE UTF8_GENERAL_CI LIKE :query");

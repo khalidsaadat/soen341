@@ -134,6 +134,21 @@ class BabyRegistryController extends Controller{
 		// anum's task
 	}
 
+	public function shareable($token) {
+		
+		// get the baby reg id by the token if exists
+		$baby_reg_token = $this->model('BabyRegistryToken')->find($token);
+
+		if($baby_reg_token) {
+			// get the baby registry
+			$baby_reg_id = $baby_reg_token->baby_registry_id;
+
+			$baby_registry = $this->model('BabyRegistry')->find($baby_reg_id);
+
+			$this->view('baby_registry/shareable_page', ['baby_registry'=>$baby_registry]);
+		}
+	}
+
 
 
 }

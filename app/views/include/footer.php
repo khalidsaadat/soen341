@@ -228,7 +228,7 @@
                     var url = "/babyregistry/shareable/" + response.token;
                     $("#shareable_link_url").attr({href: url});
                     $("#shareable_link_url").html("");
-                    $("#shareable_link_url").append("/babyregistry/shareable/" + response.token);
+                    $("#shareable_link_url").append("localhost/babyregistry/shareable/" + response.token);
                     
                     location.reload();
                     

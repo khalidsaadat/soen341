@@ -10,7 +10,7 @@
                         <ul>
                             <li><a href="/">Home</a></li>
                             <li><a href="/shop">Shop</a></li>
-                            <li class="active"><a href="/babyregistry">Registry</a></li>
+                            <li class="active"><a href="/babyregistry">Baby Registry</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -18,7 +18,7 @@
                     <div class="header__nav__option">
                         <a href="#" class="search-switch"><img src="/assets/img/icon/search.png" alt=""></a>
                         <a href="#"><img src="/assets/img/icon/heart.png" alt=""></a>
-                        <a href="/shop/checkout"><img src="/assets/img/icon/cart.png" alt=""> <span>0</span></a>
+                        <a href="/shop/checkout"><img src="/assets/img/icon/cart.png" alt=""> <span><?php echo $_SESSION['cart_items_count']; ?></span></a>
                         <div class="price">$0.00</div>
                     </div>
                 </div>

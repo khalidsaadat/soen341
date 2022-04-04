@@ -64,6 +64,11 @@
                     else {
                         echo "<a href='/account/login'>My Account</a>";
                     }
+
+                    // get the number of items in the cart
+                    $cart_items = $this->model('Cart')->getAllByUserId($_SESSION['user_id']);
+                    $cart_items = ($cart_items) ? count($cart_items) : 0;
+                    $_SESSION['cart_items_count'] = $cart_items;
                 ?>
             </div>
             

@@ -19,7 +19,7 @@
                     <div class="header__nav__option">
                         <a href="#" class="search-switch"><img src="/assets/img/icon/search.png" alt=""></a>
                         <a href="#"><img src="/assets/img/icon/heart.png" alt=""></a>
-                        <a href="/shop/checkout"><img src="/assets/img/icon/cart.png" alt=""> <span>0</span></a>
+                        <a href="/shop/checkout"><img src="/assets/img/icon/cart.png" alt=""> <span><?php echo $_SESSION['cart_items_count']; ?></span></a>
                         <div class="price">$0.00</div>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                                             <h2 class="mb-3 font-weight-bold">My Baby Registry</h2>
                                         </div>
                                         <div class="col-lg-2 text-right" style="display: flex; justify-content: center; align-items: center;">  
-                                            <img src="/assets/icons/add.png" height="30" onclick="location.href='/babyregistry/add'" style="cursor: pointer;">
+                                            <img src="/assets/icons/add.png" height="30" onclick="location.href='/babyregistry/add'" data-toggle="tooltip" data-placement="left" data-original-title="Add a baby registry" style="cursor: pointer;">
                                         </div>
                                     </div>
                                     <?php
@@ -80,7 +80,13 @@
                                         $baby_registeries = $model['baby_registeries'];
                                         if(count($baby_registeries) == 0) {
                                             // baby registry is empty for this user
-                                            echo 'nothing to show';
+                                            echo "
+                                            <div class='col-lg-12 text-center'>
+                                                <div class='text-center' style='margin-top: 20px;'>
+                                                    <h4>You do not have any baby registry</h4><br>
+                                                </div>
+                                            </div>
+                                            ";
                                         }
                                         else {
                                             // there are baby registeries for this user
@@ -148,7 +154,7 @@
                                                                                 <span style='font-size: 11px;'>SHARE</span>
                                                                             </div>
                                                                         ";
-                                                                        $url = '/babyregistry/shareable/' . $token;
+                                                                        $url = 'localhost/babyregistry/shareable/' . $token;
                                                                     }
                                                                     else {
                                                                         // generate a new one and display it
@@ -173,7 +179,7 @@
                                                             <div class="collapse" id="collapseExample-<?php echo $baby_reg_id; ?>">
                                                                 <div class="card card-body">
                                                                     <div id="my_links" class="row">
-                                                                        <div class="col-lg-7">
+                                                                        <div class="col-lg-8">
                                                                             <input type="hidden" style="width: 700px;" id="<?php echo $url; ?>" value="<?php echo $baby_reg_id; ?>">
                                                                             <a href="<?php echo $url; ?>" id="shareable_link_url" style="color: blue;"><?php echo $url; ?></a>
                                                                         </div>

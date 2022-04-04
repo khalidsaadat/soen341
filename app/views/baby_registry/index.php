@@ -133,6 +133,7 @@
                                                             </div>
 
                                                             <hr>
+
                                                             <div style="display: flex; align-items: center;">
                                                                 <img src="/assets/icons/settings.png" height="14" style="vertical-align:middle; padding-right: 5px;"><span style="font-size: 11px;">SETTINGS</span>
                                                                 <span style="padding-left: 10px; padding-right: 10px;"></span>

@@ -97,6 +97,7 @@ class BabyRegistryController extends Controller{
 
 			$new_registry = $this->model('BabyRegistry'); // create registry model
 
+			$new_registry->user_id = $_SESSION['user_id'];
 			$new_registry->name = $name;
 			$new_registry->email = $email;
 			$new_registry->delivery_date = $delivery_date;
@@ -106,7 +107,8 @@ class BabyRegistryController extends Controller{
 		
 			$new_registry->insert();
 
-			$this->view('baby_registry/add');
+			// $this->view('baby_registry/add');
+			return header('location:/babyregistry');
 		}
 	    
 

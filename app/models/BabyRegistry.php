@@ -14,7 +14,7 @@ class BabyRegistry extends Model{
     }
 
     public function getAllByUserId($user_id){
-        $stmt = self::$_connection->prepare("SELECT * FROM baby_registry WHERE user_id = :user_id");
+        $stmt = self::$_connection->prepare("SELECT * FROM baby_registry WHERE user_id = :user_id ORDER BY delivery_date DESC");
         $stmt->execute(['user_id'=>$user_id]);
     	$stmt->setFetchMode(PDO::FETCH_CLASS, 'BabyRegistry');
 		return $stmt->fetchAll();
@@ -35,8 +35,9 @@ class BabyRegistry extends Model{
     }
 
     public function insert(){
-	    $stmt = self::$_connection->prepare("INSERT INTO baby_registry(name ,delivery_date, organizer_name, address_id, description) VALUES(:name, :delivery_date, :organizer_name, :address_id, :description)");
-        $stmt->execute(['name'=>$this->name,
+	    $stmt = self::$_connection->prepare("INSERT INTO baby_registry(user_id, name ,delivery_date, organizer_name, address_id, description) VALUES(:user_id, :name, :delivery_date, :organizer_name, :address_id, :description)");
+        $stmt->execute(['user_id'=>$this->user_id,
+                        'name'=>$this->name,
                         'delivery_date'=>$this->delivery_date,
                         'organizer_name'=>$this->organizer_name,
                         'address_id'=>$this->address_id,

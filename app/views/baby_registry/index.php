@@ -142,7 +142,7 @@
                                                                     if($baby_reg_token == true) {
                                                                         // show the existing token
                                                                         echo "
-                                                                            <div style='cursor: pointer;' data-toggle='collapse' href='#collapseExample-$collapse_counter' role='button' aria-expanded='false' aria-controls='collapseExample'>
+                                                                            <div style='cursor: pointer;' data-toggle='collapse' href='#collapseExample-$baby_reg_id' role='button' aria-expanded='false' aria-controls='collapseExample'>
                                                                                 <img src='/assets/icons/link.png' height='14' style='vertical-align:middle;'>
                                                                                 <span style='font-size: 11px;'>SHARE</span>
                                                                             </div>
@@ -152,7 +152,7 @@
                                                                     else {
                                                                         // generate a new one and display it
                                                                         echo "
-                                                                            <button type='submit' style='background: none; border: none;' data-toggle='collapse' href='#collapseExample-$collapse_counter' role='button' aria-expanded='false' aria-controls='collapseExample'>
+                                                                            <button type='submit' style='background: none; border: none;' data-toggle='collapse' href='#collapseExample-$baby_reg_id' role='button' aria-expanded='false' aria-controls='collapseExample'>
                                                                                 <img src='/assets/icons/link.png' height='14' style='vertical-align:middle; padding-right: 5px;'>
                                                                                 <span style='font-size: 11px;'>SHARE</span>
                                                                             </button>
@@ -167,17 +167,20 @@
                                                             </div>
 
                                                             <!-- Shareable link collapse -->
-                                                            <div class="collapse" id="collapseExample-$collapse_counter">
+                                                            <div class="collapse" id="collapseExample-<?php echo $baby_reg_id; ?>">
                                                                 <div class="card card-body">
-                                                                    <div class="row">
+                                                                    <div id="my_links" class="row">
                                                                         <div class="col-lg-7">
-                                                                            <input type="hidden" value="<?php echo $url; ?>" id="shareable_url">
+                                                                            <input type="hidden" style="width: 700px;" id="<?php echo $url; ?>" value="<?php echo $baby_reg_id; ?>">
                                                                             <a href="<?php echo $url; ?>" id="shareable_link_url" style="color: blue;"><?php echo $url; ?></a>
                                                                         </div>
                                                                         <div class="col-lg-4">
-                                                                            <img src="/assets/icons/copy.png" height="14" onclick="copyText()" onmousemove="changeTooltip()" data-toggle="tooltip" data-placement="top" data-original-title="Copy link" style="vertical-align:middle; padding-right: 5px; cursor: pointer;">
+                                                                            <!-- <img src="/assets/icons/copy.png" height="14" onclick="copyText()" onmousemove="changeTooltip()" data-toggle="tooltip" data-placement="top" data-original-title="Copy link" style="vertical-align:middle; padding-right: 5px; cursor: pointer;"> -->
+                                                                            <img id="<?php echo $url; ?>" src="/assets/icons/copy.png" onmousemove="changeTooltip()" height="14" data-toggle="tooltip" data-placement="top" data-original-title="Copy link" style="vertical-align:middle; padding-right: 5px; cursor: pointer;">
                                                                         </div>
                                                                     </div>
+
+                                                                    <div id="log"></div>
                                                                 </div>
                                                             </div>
 

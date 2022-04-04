@@ -134,7 +134,7 @@
                                             
                                                 <span style="padding-left: 10px; padding-right: 10px;"></span>
                                                 
-                                                <img src="/assets/icons/add_sign.png" height="14" style="vertical-align:middle; padding-right: 5px;"><span style="font-size: 11px;">ADD PRODUCTS</span>
+                                                <img src="/assets/icons/add_sign.png" height="14" onclick="location.href='/babyregistry/add_products'" style="vertical-align:middle; padding-right: 5px;"><span style="font-size: 11px;">ADD PRODUCTS</span>                                   
                                             </div>
 
                                             <!-- Shareable link collapse -->

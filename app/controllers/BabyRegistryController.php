@@ -82,7 +82,7 @@ class BabyRegistryController extends Controller{
            
 		// if the create_Registry button is clicked 
 		if(!isset($_POST['create_registry'])) {
-			$this->view('baby_registry/add', ['primary_address'=>$user_primary_address, 'secondary_address'=>$user_secondary_address]);
+			$this->view('baby_registry/add', ['primary_address'=>$user_primary_address, 'secondary_address'=>$user_secondary_address]);			
 		}
 		else {
 			$name = $_POST['title'];
@@ -111,11 +111,27 @@ class BabyRegistryController extends Controller{
 			return header('location:/babyregistry');
 		}
 	    
-
 	}
 
-	public function add_products($token) {
+	public function add_products() {
 
+		// if not logged in, go to the login page
+		if(!isset($_SESSION['user_id'])) {
+
+			$_SESSION['login_flag'] = 1;
+			return header('location:/account/login');
+		}
+
+		// get the products' basic information
+		$babies_products = $this->model('Product')->getSearchResultByCategory('babies');
+
+		// // $this->view('baby_registry/add_products');
+		$this->view('baby_registry/add_products', ['babies_products'=>$babies_products]);
+	
+	}
+
+	public function add_to_registry($product_id) {
+		// anum's task
 	}
 
 

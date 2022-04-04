@@ -38,7 +38,7 @@
                         <div class="breadcrumb__links">
                             <a href="./index.html">Home</a>
                             <a href="./shop.html">Baby Registry</a>
-                            <span>Baby Registry Settings</span>
+                            <span>Create Baby Registry</span>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
     <!-- Checkout Section Begin -->
     <section class="checkout spad">
         <div class="container">
-            <div class="checkout__form">
+            <div class="checkout__form authentication_form">
                 <form method="post">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
@@ -84,21 +84,12 @@
                             <div class="checkout__input">
                                 <p>Expected Arrival Date<span>*</span></p>
                                 <div class="form-group">
-                                    <label class="control-label" for="date">Date</label>
-                                    <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
+                                    <input class="" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
                                 </div>
                             </div>
 
-                            <div class="checkout__input__checkbox">
-                                <br>
-                                <p>Is This Your First Baby ?</p>
-                                <input type="radio" name = "ans" value="yes"> Yes </br>
-                                <input type="radio" name = "ans" value="no"> No </br>
-                                 
-                            </div>
-
                             <!-- shipping address -->
-                            <div class="row" style="margin-bottom: 20px;">
+                            <div class="row" style="margin-bottom: 20px; margin-top: 20px;">
                                 <div class="col-lg-12">
                                     <div style="background: #e1e5ee; padding: 5px 10px;">
                                         <div class="row">
@@ -106,10 +97,6 @@
                                                 <span style="font-size: 16px; font-weight: bold;">
                                                     Your delivery address:
                                                 </span> 
-                                            </div>
-                                            <div class="col-md-2 text-right" style="font-size: 14px; cursor: pointer;" data-toggle="modal" data-target="#change-address-modal">
-                                                <span class="icon_pencil"  style="cursor: pointer;"></span> 
-                                                <span style="color: #2a324b;">Change</span>
                                             </div>
 
                                         </div>
@@ -119,16 +106,17 @@
 
                                                     $primary_address = $model['primary_address'];
                                                     $p_full_address = $primary_address->street . ', ' . $primary_address->city . ', ' . $primary_address->province . ', ' . $primary_address->postal_code . ', ' . $primary_address->country;
-                                                    
-                                                    echo "
-                                                        <input type='radio' id='primary' name='address' checked='checked'> <label for='primary'>$p_full_address</label> <br>
-                                                    ";
                                                 }
 
                                                 if(isset($model['secondary_address'])) {
                                                     $secondary_address = $model['secondary_address'];
                                                     $s_full_address = $secondary_address->street . ', ' . $secondary_address->city . ', ' . $secondary_address->province . ', ' . $secondary_address->postal_code . ', ' . $secondary_address->country;
                                                 }
+                                                
+                                                echo "
+                                                    <input type='radio' id='p_address' name='change_address' value='$primary_address->address_id' checked='checked'> <label for='p_address'>$p_full_address</label> <br>
+                                                    <input type='radio' id='s_address' name='change_address' value='$secondary_address->address_id'> <label for='s_address'>$s_full_address</label> <br>
+                                                ";
                                             ?>
                                                                                     
                                         </div>
@@ -136,16 +124,28 @@
                                 </div>
                             </div>
 
-                            <!-- Change Address Modal -->
-                            <div class="modal fade" id="change-address-modal" tabindex="-1" role="dialog" aria-labelledby="change-address-modal-label" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title font-weight" id="change-address-modal-label">Select Your Delivery Address</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
+                            <div class="checkout__input">
+                                <p>Add a greetings to your friends and family at the top of your registry</p>
+                                <input type="text" name= "description" id = "description"
+                                placeholder="E.g Thank you so much for visiting our Baby Registry.">
+                            </div>
+
+                            <button type="submit" name="create_registry" class="site-btn">Create my Baby Registry</button>
+                           
+                    
+                        </div>
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Checkout Section End -->
+
+<?php
+    // global footer - do not write file extension (.php)
+    $this->view('include/footer');
+?>                                      </div>
                                             <div class="modal-body">
                                                 
                                                     <span style="font-size: 18px;">Your current delivery address is: </span>    

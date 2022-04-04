@@ -230,6 +230,8 @@
                     $("#shareable_link_url").html("");
                     $("#shareable_link_url").append("/babyregistry/shareable/" + response.token);
                     
+                    location.reload();
+                    
                     generate_flag = 0;
                 }
             });
@@ -239,10 +241,33 @@
 
     <!-- Copy a text -->
     <script>
+
+        $(document).ready(function () {
+            var baby_reg_id = null;
+            $( "#my_links img" ).on( "click", function( event ) {
+                event.preventDefault();
+                console.log( $( this ).attr('id') );
+                baby_reg_id = $( this ).attr('id');
+                
+                copyToClipboard(baby_reg_id);
+
+                // changeTooltip();
+            });
+
+            $( "#"+baby_reg_id ).mousemove(function( event ) {
+                var msg = "Handler for .mousemove() called at ";
+                msg += event.pageX + ", " + event.pageY;
+                $( "#log" ).append( "<div>" + msg + "</div>" );
+            });
+            
+        });
+
         function copyText() {
             
-            var copyText = document.getElementById("shareable_url");
-            copyToClipboard(copyText.value);
+            var baby_reg_id = document.getElementById("baby_registry_id");
+            console.log(baby_reg_id);
+            // var copyText = document.getElementById("shareable_url");
+            // copyToClipboard(copyText.value);
             
             
             

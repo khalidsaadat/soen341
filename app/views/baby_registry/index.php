@@ -20,7 +20,7 @@
                         <a href="#" class="search-switch"><img src="/assets/img/icon/search.png" alt=""></a>
                         <a href="#"><img src="/assets/img/icon/heart.png" alt=""></a>
                         <a href="/shop/checkout"><img src="/assets/img/icon/cart.png" alt=""> <span><?php echo $_SESSION['cart_items_count']; ?></span></a>
-                        <div class="price">$0.00</div>
+                        <div class="price">$<?php echo $_SESSION['cart_items_price']; ?></div>
                     </div>
                 </div>
             </div>

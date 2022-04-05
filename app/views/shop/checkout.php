@@ -16,7 +16,7 @@
                         <a href="#" class="search-switch"><img src="/assets/img/icon/search.png" alt=""></a>
                         <a href="/account" id="myaccount_wishlist"><img src="/assets/img/icon/heart.png" alt=""></a>
                         <a href="/shop/checkout"><img src="/assets/img/icon/cart.png" alt=""><span style="font-size: 10px; padding: 0px;"><?php echo $_SESSION['cart_items_count']; ?></span></a>
-                        <div class="price">$0.00</div>
+                        <div class="price">$<?php echo $_SESSION['cart_items_price']; ?></div>
                     </div>
                 </div>
             </div>
@@ -364,19 +364,19 @@
                                                 
                                                 // calculating the total amount
                                                 $subtotal_flt = number_format($subtotal, 2);
-                                                $tax_amount = $subtotal * ($tax_percentage / 100);
-                                                $tax_amount_flt = number_format($tax_amount, 2);
-
-                                                $total = $tax_amount + $subtotal;
-                                                $total = number_format($total, 2);
-                                                echo "<input type='hidden' name='total' value='$total'>";
+                                                $tax_amount_flt = $subtotal * ($tax_percentage / 100);
+                                                $total_flt = $tax_amount_flt + $subtotal;
+                                                
+                                                $tax_amount = number_format($tax_amount_flt, 2);
+                                                $total = number_format($total_flt, 2);
+                                                echo "<input type='hidden' name='total' value='$total_flt'>";
                                             ?>
                                             
                                             
                                         </ul>
                                         <ul class="checkout__total__all">
                                             <li>Subtotal <span>$<?php echo $subtotal_flt; ?></span></li>
-                                            <li>Tax (<?php echo $tax_percentage; ?>%) <span>$<?php echo $tax_amount_flt; ?></span></li>
+                                            <li>Tax (<?php echo $tax_percentage; ?>%) <span>$<?php echo $tax_amount; ?></span></li>
                                             <li>Total <span>$<?php echo $total; ?></span></li>
                                         </ul>
                                         <p>

@@ -13,9 +13,9 @@ class BabyRegistryToken extends Model{
 		return $stmt->fetchAll();
     }
 
-    public function find($token_id){
-        $stmt = self::$_connection->prepare("SELECT * FROM baby_registry_tokens WHERE token_id = :token_id");
-        $stmt->execute(['token_id'=>$token_id]);
+    public function find($token){
+        $stmt = self::$_connection->prepare("SELECT * FROM baby_registry_tokens WHERE token = :token");
+        $stmt->execute(['token'=>$token]);
         $stmt->setFetchMode(PDO::FETCH_CLASS, 'BabyRegistryToken');
         return $stmt->fetch();
     }

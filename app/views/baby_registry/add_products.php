@@ -1,6 +1,14 @@
 <?php
     $this->view('include/header');
 
+    // baby registry
+    $baby_registry = $model['baby_registry'];
+    $baby_reg_title = $baby_registry->name;
+    $organizer_name = $baby_registry->organizer_name;
+    $delivery_date = $baby_registry->delivery_date;
+    $delivery_date = date('d F, Y', strtotime($delivery_date));
+
+    // baby products
     $products = $model['babies_products'];
     $products_count = count($products);
 ?>
@@ -32,7 +40,7 @@
     <section class="breadcrumb-option">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-8">
                     <div class="breadcrumb__text">
                         <h4>Add Products</h4>
                         <div class="breadcrumb__links">
@@ -41,6 +49,23 @@
                             <span>Add Products</span>
                         </div>
                     </div>
+                </div>
+                <div class="col-lg-4">
+                    <?php 
+
+                    echo "
+                        <div>
+                            <span>Title: $baby_reg_title</span>
+                        </div>    
+                        <div>
+                            <span>Organizer: $organizer_name</span>
+                        </div>
+                        <div>
+                            <span>Event date: $delivery_date</span>
+                        </div>
+                    ";
+
+                    ?>
                 </div>
             </div>
         </div>
@@ -103,7 +128,7 @@
                                                             <div class='product__item__pic set-bg' data-setbg='/assets/products/images/$image_name'>
                                                                 <ul class='product__hover'>
                                                                     <li style='background: #000; color: #fff; padding: 10px 5px;'>
-                                                                        <a href='/babyregistry/add_to_registry/$product_id'>Add to registry</a>
+                                                                        <a href='/babyregistry/add_to_registry/$product_id' style='color: #fff;'>Add to registry</a>
                                                                     </li>
                                                                 </ul>
                                                             </div>

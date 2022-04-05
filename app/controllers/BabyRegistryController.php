@@ -113,7 +113,7 @@ class BabyRegistryController extends Controller{
 	    
 	}
 
-	public function add_products() {
+	public function add_products($token) {
 
 		// if not logged in, go to the login page
 		if(!isset($_SESSION['user_id'])) {
@@ -121,22 +121,35 @@ class BabyRegistryController extends Controller{
 			$_SESSION['login_flag'] = 1;
 			return header('location:/account/login');
 		}
+		
+		
+		$baby_registry_token = $this->model('BabyRegistryToken')->find($token);
 
-		// get the products' basic information
-		$babies_products = $this->model('Product')->getSearchResultByCategory('babies');
+		if($baby_registry_token) {
+			$baby_registry_id = $baby_registry_token->baby_registry_id;
 
-		// Search product
-		if(isset($_POST['search_btn'])) {
-			$search_query = $_POST['search_query'];
+			// get the baby registry
+			$baby_registry = $this->model('BabyRegistry')->find($baby_registry_id);
 
-			// filter product by 'name' field
-			$babies_products = $this->model('Product')->getSearchResultByName($search_query);
-			
+			// get the products' basic information
+			$babies_products = $this->model('Product')->getSearchResultByCategory('babies');
+
+			// Search product
+			if(isset($_POST['search_btn'])) {
+				$search_query = $_POST['search_query'];
+
+				// filter product by 'name' field
+				$babies_products = $this->model('Product')->getSearchResultByName($search_query);
+				
+			}
+
+			// // $this->view('baby_registry/add_products');
+			$this->view('baby_registry/add_products', ['baby_registry'=>$baby_registry, 'babies_products'=>$babies_products]);
+		
 		}
-
-		// // $this->view('baby_registry/add_products');
-		$this->view('baby_registry/add_products', ['babies_products'=>$babies_products]);
-	
+		else {
+			echo 'nothing to show';
+		}
 	}
 
 	public function add_to_registry($product_id) {

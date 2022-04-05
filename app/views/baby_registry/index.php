@@ -173,7 +173,7 @@
                                                                 </div>
                                                                 <div class="col-lg-4">
                                                                     <!-- <img src="/assets/icons/copy.png" height="14" onclick="copyText()" onmousemove="changeTooltip()" data-toggle="tooltip" data-placement="top" data-original-title="Copy link" style="vertical-align:middle; padding-right: 5px; cursor: pointer;"> -->
-                                                                    <img id="<?php echo $url; ?>" src="/assets/icons/copy.png" onmousemove="changeTooltip()" height="14" data-toggle="tooltip" data-placement="top" data-original-title="Copy link" style="vertical-align:middle; padding-right: 5px; cursor: pointer;">
+                                                                    <img id="<?php echo 'localhost' . $url; ?>" src="/assets/icons/copy.png" onmousemove="changeTooltip()" height="14" data-toggle="tooltip" data-placement="top" data-original-title="Copy link" style="vertical-align:middle; padding-right: 5px; cursor: pointer;">
                                                                 </div>
                                                             </div>
 

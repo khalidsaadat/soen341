@@ -125,6 +125,15 @@ class BabyRegistryController extends Controller{
 		// get the products' basic information
 		$babies_products = $this->model('Product')->getSearchResultByCategory('babies');
 
+		// Search product
+		if(isset($_POST['search_btn'])) {
+			$search_query = $_POST['search_query'];
+
+			// filter product by 'name' field
+			$babies_products = $this->model('Product')->getSearchResultByName($search_query);
+			
+		}
+
 		// // $this->view('baby_registry/add_products');
 		$this->view('baby_registry/add_products', ['babies_products'=>$babies_products]);
 	

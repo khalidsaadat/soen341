@@ -51,101 +51,110 @@
 
 
     <!-- Shop Section Begin -->
-    <section class="shop spad">
+    <section class="shop" style="margin-top: 20px; padding-bottom: 20px;">
         <div class="container" style="padding-left: 120px; padding-top: 0px; padding-right: 120px; padding-bottom: 0px;">
-            
-            <div class="shop__product__option">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="shop__product__option__left">
-                            <p>Showing <?php echo $products_count; ?> products</p>
+            <div class="shop__sidebar">
+                <form method="post">
+                
+                    <div class="shop__sidebar__search authentication_form">
+                        <input type="text" name="search_query" placeholder="Search...">
+                        <button type="submit" name="search_btn"><span class="icon_search"></span></button>
+
+                    </div>
+
+                    <div class="shop__product__option">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="shop__product__option__left">
+                                    <p>Showing <?php echo $products_count; ?> products</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                
-                <?php         
+            
+                    <div class="row">
+                        <?php         
 
-                    if($products_count > 0) {
-                        foreach($products as $product)
-                        {
-                            $product_id = $product->product_id;
-                            $name = $product->name;
-                            $price = $product->price;
+                            if($products_count > 0) {
+                                foreach($products as $product)
+                                {
+                                    $product_id = $product->product_id;
+                                    $name = $product->name;
+                                    $price = $product->price;
 
-                            $colors_serialized = unserialize($product->colors);
-                            $colors_array = array_filter($colors_serialized);
+                                    $colors_serialized = unserialize($product->colors);
+                                    $colors_array = array_filter($colors_serialized);
 
-                            $size_serialized = unserialize($product->size);
-                            $size_array = array_filter($size_serialized);
-                            
-                            $image = $product->images;
-                            $images_name = explode(',', $image);
-                            $image_name = $images_name[0];
-                
-                                    echo "
-                                        <div class='col-lg-4 col-md-6 col-sm-6'>
-                                            <div class='product__item'>
-                                                ";
-                                                ?>
-                                                <div style="cursor: pointer;" onclick="location.href='/shop/product/<?php echo $product_id; ?>'">
-                                                    <?php
-                                                    echo "
-                                                    <div class='product__item__pic set-bg' data-setbg='/assets/products/images/$image_name'>
-                                                        <ul class='product__hover'>
-                                                            <li style='background: #000; color: #fff; padding: 10px 5px;'>
-                                                                <a href='/babyregistry/add_to_registry/$product_id'>Add to registry</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class='product__item__text'>
-                                                    <h6>$name</h6>
-                                                    
-                                                    <h5>$$price</h5>
-
-                                                    <div class='product__color__select'>
+                                    $size_serialized = unserialize($product->size);
+                                    $size_array = array_filter($size_serialized);
+                                    
+                                    $image = $product->images;
+                                    $images_name = explode(',', $image);
+                                    $image_name = $images_name[0];
+                        
+                                            echo "
+                                                <div class='col-lg-4 col-md-6 col-sm-6'>
+                                                    <div class='product__item'>
                                                         ";
-                                                        $radio_color_counter = 1;
-                                                        foreach($colors_array as $color) {
+                                                        ?>
+                                                        <div style="cursor: pointer;" onclick="location.href='/shop/product/<?php echo $product_id; ?>'">
+                                                            <?php
                                                             echo "
-                                                                <label class='active' for='pc-6_$radio_color_counter' style='background:$color;' data-toggle='tooltip' data-placement='top' title='$color'>
-                                                                    <input type='radio' name='color' id='pc-6_$radio_color_counter' value='$color'>
-                                                                </label>
-                                                            ";
-                                                            $radio_color_counter++;
-                                                        }
-                                                        echo"
+                                                            <div class='product__item__pic set-bg' data-setbg='/assets/products/images/$image_name'>
+                                                                <ul class='product__hover'>
+                                                                    <li style='background: #000; color: #fff; padding: 10px 5px;'>
+                                                                        <a href='/babyregistry/add_to_registry/$product_id'>Add to registry</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class='product__item__text'>
+                                                            <h6>$name</h6>
+                                                            
+                                                            <h5>$$price</h5>
+
+                                                            <div class='product__color__select'>
+                                                                ";
+                                                                $radio_color_counter = 1;
+                                                                foreach($colors_array as $color) {
+                                                                    echo "
+                                                                        <label class='active' for='pc-6_$radio_color_counter' style='background:$color;' data-toggle='tooltip' data-placement='top' title='$color'>
+                                                                            <input type='radio' name='color' id='pc-6_$radio_color_counter' value='$color'>
+                                                                        </label>
+                                                                    ";
+                                                                    $radio_color_counter++;
+                                                                }
+                                                                echo"
+                                                            </div>
+
+                                                        </div>
+                                                    
                                                     </div>
-
                                                 </div>
-                                            
-                                            </div>
-                                        </div>
-                                    ";
-            
-                        }
-                    }
-                    else {
-                        ?>
-                        <div class="col-lg-12 text-center">
-                            <div class="text-center" style="margin-top: 20px;">
-                                <h4>No product found!</h4><br>
-                                <button class="site-btn" onclick="location.href='/shop'">Continue Shopping</button>
-                            </div>
-
-                        </div>
-                        <?php
-                    }
-                
+                                            ";
                     
-                ?>
-            
+                                }
+                            }
+                            else {
+                                ?>
+                                <div class="col-lg-12 text-center">
+                                    <div class="text-center" style="margin-top: 20px;">
+                                        <h4>No product found!</h4><br>
+                                        <button class="site-btn" onclick="location.href='/babyregistry/add_products'">Search Again</button>
+                                    </div>
+
+                                </div>
+                                <?php
+                            }
+                        
+                            
+                        ?>
+                    
+                    </div>
+
+                </form>    
             </div>
-
-
         </div>
     </section>
     <!-- Shop Section End -->

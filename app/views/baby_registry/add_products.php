@@ -11,6 +11,8 @@
     // baby products
     $products = $model['babies_products'];
     $products_count = count($products);
+
+    $token = $model['token'];
 ?>
 <title>Browse Products</title>
                 <div class="col-lg-6 col-md-6">
@@ -128,7 +130,7 @@
                                                             <div class='product__item__pic set-bg' data-setbg='/assets/products/images/$image_name'>
                                                                 <ul class='product__hover'>
                                                                     <li style='background: #000; color: #fff; padding: 10px 5px;'>
-                                                                        <a href='/babyregistry/add_to_registry/$product_id' style='color: #fff;'>Add to registry</a>
+                                                                        <a href='/babyregistry/add_to_registry/$token/$product_id' style='color: #fff;'>Add to registry</a>
                                                                     </li>
                                                                 </ul>
                                                             </div>

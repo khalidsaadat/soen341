@@ -3,6 +3,8 @@
 
     $products = $model['babies_products'];
     $products_count = count($products);
+
+    $token = $model['token'];
 ?>
 <title>Browse Products</title>
                 <div class="col-lg-6 col-md-6">
@@ -59,6 +61,19 @@
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="shop__product__option__left">
                             <p>Showing <?php echo $products_count; ?> products</p>
+                            <?php
+                                    if(isset($_SESSION['registry_added'])) {
+                                        $msg = 'Product added to registry successfully.';
+
+                                        echo "
+                                            <div class='form_error'>
+                                                $msg
+                                            </div>
+                                        ";
+
+                                            unset($_SESSION['registry_added']);
+                                    }
+                             ?>
                         </div>
                     </div>
                 </div>
@@ -95,7 +110,7 @@
                                                     <div class='product__item__pic set-bg' data-setbg='/assets/products/images/$image_name'>
                                                         <ul class='product__hover'>
                                                             <li style='background: #000; color: #fff; padding: 10px 5px;'>
-                                                                <a href='/babyregistry/add_to_registry/$product_id'>Add to registry</a>
+                                                                <a href='/babyregistry/add_to_registry/$token/$product_id'>Add to registry</a>
                                                             </li>
                                                         </ul>
                                                     </div>

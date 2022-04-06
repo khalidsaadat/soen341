@@ -159,7 +159,10 @@ class BabyRegistryController extends Controller{
 				$search_query = $_POST['search_query'];
 
 				// filter product by 'name' field
-				$babies_products = $this->model('Product')->getSearchResultByName($search_query);
+				if(empty($search_query))
+					$babies_products = $this->model('Product')->getSearchResultByCategory('babies');
+				else 
+					$babies_products = $this->model('Product')->getSearchResultByName($search_query);
 				
 			}
 

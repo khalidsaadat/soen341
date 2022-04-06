@@ -59,7 +59,7 @@
                                 <div class="col-lg-10">
                                     <h2 class="mb-3 font-weight-bold">My Baby Registries</h2>
                                 </div>
-                                <div class="col-lg-2 text-right" style="display: flex; justify-content: center; align-items: center;">  
+                                <div class="col-lg-2" style="display: flex; justify-content: right; align-items: center;">  
                                     <img src="/assets/icons/add.png" height="30" onclick="location.href='/babyregistry/add'" data-toggle="tooltip" data-placement="left" data-original-title="Add a baby registry" style="cursor: pointer;">
                                 </div>
                             </div>
@@ -80,9 +80,14 @@
                                     // there are baby registeries for this user
                                     // loop through the baby registry
                                     foreach($baby_registeries as $baby_registry) {
+                                        // baby registry detail
                                         $baby_reg_id = $baby_registry->baby_registry_id;
                                         $name = $baby_registry->name;
+                                        
                                         $product_ids = $baby_registry->product_ids;
+                                        $product_ids_array = unserialize($product_ids);
+                                        $products_count = (!empty($product_ids_array) > 0) ? count($product_ids_array) : 0;
+
                                         $organizer_name = $baby_registry->organizer_name;
                                         $delivery_date = $baby_registry->delivery_date;
                                         $delivery_date = date('d F, Y', strtotime($delivery_date));
@@ -109,22 +114,29 @@
 
                                         // shareable url
                                         $url = '';
-
-                                        $collapse_counter = 1;
-                                        
                                     
                                     ?>
                                                 <div class="col-lg-12" style="background: #f5f7f7; border: 1px solid #EFF2F2; border-radius: 5px; padding: 15px; margin-bottom: 15px;">
                                                     <input type="hidden" name="baby_registry_id" id="baby_registry_id" value="<?php echo $baby_reg_id; ?>">
-                                                    <div>
-                                                        <span style="font-weight: bold; font-size: 18px;"><?php echo $name; ?></span>
+                                                    <div class="row">
+                                                        <div class="col-lg-8">
+                                                            <div>
+                                                                <span style="font-weight: bold; font-size: 18px;"><?php echo $name; ?></span>
+                                                            </div>
+                                                            <div>
+                                                                <span style="color: #575959; font-size: 14px;">
+                                                                    Organized by <strong><?php echo $organizer_name; ?></strong> <br>
+                                                                    Event date: <strong><?php echo $delivery_date; ?></strong>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="text-right">
+                                                                # of products: <?php echo $products_count; ?>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div>
-                                                        <span style="color: #575959; font-size: 14px;">
-                                                            Organized by <strong><?php echo $organizer_name; ?></strong> <br>
-                                                            Event date: <strong><?php echo $delivery_date; ?></strong>
-                                                        </span>
-                                                    </div>
+                                                    
 
                                                     <hr>
 
@@ -184,7 +196,6 @@
                                                     
                                                 </div>
                                     <?php
-                                        $collapse_counter++;
 
                                         if($baby_reg_token == false) {
                                             echo "

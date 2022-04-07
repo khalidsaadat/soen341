@@ -118,8 +118,11 @@
                                         $images_name = explode(',', $image);
                                         $image_name = $images_name[0];
 
+                                        // baby registry id
+		                                $baby_registry_id = $this->model('BabyRegistryToken')->find($token)->baby_registry_id;
+
                                         // check if the product is already in the cart
-                                        $cart_exist = $this->model('Cart')->findByProductIdByUserId($product_id, $user_id);
+                                        $cart_exist = $this->model('Cart')->findByProductIdByUserIdByRegId($product_id, $user_id, $baby_registry_id);
                                         $cart_exist_flag = ($cart_exist) ? 1 : 0;
                             
                                         echo "

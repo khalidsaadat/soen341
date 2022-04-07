@@ -55,6 +55,17 @@ class Cart extends Model{
         return $stmt->fetch();
     }
 
+    public function findByProductIdByUserIdByRegId($product_id, $user_id, $baby_reg_id)
+    {
+        $stmt = self::$_connection->prepare("SELECT * FROM cart WHERE product_id = :product_id AND user_id =:user_id AND status = :status AND baby_reg_id = :baby_reg_id");
+        $stmt->execute(['product_id'=>$product_id,
+                        'user_id'=>$user_id,
+                        'baby_reg_id'=>$baby_reg_id,
+                        'status'=>'0']);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, 'Cart');
+        return $stmt->fetch();
+    }
+
     public function insert(){
 	    $stmt = self::$_connection->prepare("INSERT INTO cart(product_id, color, size, quantity, price, user_id) VALUES(:product_id, :color, :size, :quantity, :price, :user_id)");
         $stmt->execute(['product_id'=>$this->product_id,
@@ -63,6 +74,20 @@ class Cart extends Model{
                         'quantity'=>$this->quantity,
                         'price'=>$this->price,
                         'user_id'=>$this->user_id]);
+        $_SESSION['cart_last_id'] = self::$_connection->lastInsertId();
+    }
+
+    public function insertForBabyRegistry(){
+	    $stmt = self::$_connection->prepare("INSERT INTO cart(product_id, color, size, quantity, price, user_id, baby_reg_flag, baby_reg_id) 
+                                            VALUES(:product_id, :color, :size, :quantity, :price, :user_id, :baby_reg_flag, :baby_reg_id)");
+        $stmt->execute(['product_id'=>$this->product_id,
+                        'color'=>$this->color,
+                        'size'=>$this->size,
+                        'quantity'=>$this->quantity,
+                        'price'=>$this->price,
+                        'user_id'=>$this->user_id,
+                        'baby_reg_flag'=>$this->baby_reg_flag,
+                        'baby_reg_id'=>$this->baby_reg_id]);
         $_SESSION['cart_last_id'] = self::$_connection->lastInsertId();
     }
 

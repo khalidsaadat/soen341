@@ -1,5 +1,7 @@
 <?php
     $this->view('include/header');
+
+    $existing_baby_reg_flag = $model['existing_baby_reg'];
 ?>
 <title>Checkout</title>
                 <div class="col-lg-6 col-md-6">
@@ -144,10 +146,16 @@
                                                             Your delivery address:
                                                         </span> 
                                                     </div>
-                                                    <div class="col-md-2 text-right" style="font-size: 14px; cursor: pointer;" data-toggle="modal" data-target="#change-address-modal">
-                                                        <span class="icon_pencil"  style="cursor: pointer;"></span> 
-                                                        <span style="color: #2a324b;">Change</span>
-                                                    </div>
+                                                    <?php
+                                                        if($existing_baby_reg_flag == 0) {
+                                                            ?>
+                                                             <div class="col-md-2 text-right" style="font-size: 14px; cursor: pointer;" data-toggle="modal" data-target="#change-address-modal">
+                                                                <span class="icon_pencil"  style="cursor: pointer;"></span> 
+                                                                <span style="color: #2a324b;">Change</span>
+                                                            </div>
+                                                            <?php
+                                                        }
+                                                    ?>
 
                                                 </div>
                                                 <div style="padding-top: 10px;">

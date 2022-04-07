@@ -239,6 +239,18 @@ class ShopController extends Controller{
 
 			$redirect_condition = '';
 
+			$existing_baby_reg = $this->model('Cart')->getExistingBabyRegProducts();
+			$existing_baby_reg_flag = ($existing_baby_reg) ? 1 : 0;
+			if($existing_baby_reg) {
+				$baby_registry = $this->model('BabyRegistry')->find($existing_baby_reg->baby_reg_id);
+
+				$delivery_address_id = $baby_registry->address_id;
+				$delivery_address = $this->model('Address')->find($delivery_address_id);
+
+				// chagne the primary address to the baby reg's delivery address
+				$user_primary_address = $delivery_address;
+			}
+
 			// to change the delivery address during checkout
 			if(isset($_POST['update_address'])) {
 				$redirect_condition = 1;
@@ -268,7 +280,7 @@ class ShopController extends Controller{
 
 			// review and place order
 			if(!isset($_POST['review_cart'])) {
-				$this->view('shop/checkout', ['cart_items'=>$cart_items, 'primary_address'=>$user_primary_address, 'secondary_address'=>$user_secondary_address, ]);
+				$this->view('shop/checkout', ['cart_items'=>$cart_items, 'primary_address'=>$user_primary_address, 'secondary_address'=>$user_secondary_address, 'existing_baby_reg'=>$existing_baby_reg_flag]);
 			}
 			else {
 				// redirect condition
@@ -344,14 +356,14 @@ class ShopController extends Controller{
 				}
 				else {
 					// credit card detail wrong
-					$this->view('shop/checkout', ['cart_items'=>$cart_items, 'primary_address'=>$user_primary_address, 'secondary_address'=>$user_secondary_address, 'ccError'=>$ccResult, 'cvvError'=>$cvvResult, 'expError'=>$expResult]);
+					$this->view('shop/checkout', ['cart_items'=>$cart_items, 'primary_address'=>$user_primary_address, 'secondary_address'=>$user_secondary_address, 'existing_baby_reg'=>$existing_baby_reg_flag, 'ccError'=>$ccResult, 'cvvError'=>$cvvResult, 'expError'=>$expResult]);
 				}
 	
 			}
 		}
 		else {
 			$cart_items = '';
-			$this->view('shop/checkout', ['cart_items'=>$cart_items, 'primary_address'=>$user_primary_address, 'secondary_address'=>$user_secondary_address, ]);
+			$this->view('shop/checkout', ['cart_items'=>$cart_items, 'primary_address'=>$user_primary_address, 'secondary_address'=>$user_secondary_address, 'existing_baby_reg'=>$existing_baby_reg_flag, ]);
 		}
 	}
 

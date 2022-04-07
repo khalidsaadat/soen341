@@ -140,7 +140,6 @@ class BabyRegistryController extends Controller{
 			return header('location:/account/login');
 		}
 		
-		
 		$baby_registry_token = $this->model('BabyRegistryToken')->find($token);
 
 		if($baby_registry_token) {
@@ -191,7 +190,6 @@ class BabyRegistryController extends Controller{
 	}
 
 	public function add_to_registry($token, $product_id) {
-		// anum's task
 
 		if(!isset($_SESSION['user_id'])) {
 			$_SESSION['login_flag'] = 1;
@@ -234,6 +232,36 @@ class BabyRegistryController extends Controller{
 
 		}
 
+	}
+
+	public function remove_from_registry($token, $product_id) {
+		
+		if(!isset($_SESSION['user_id'])) {
+			$_SESSION['login_flag'] = 1;
+			return header('location:/registry');
+		}
+
+		// baby registry token object
+		$baby_reg_token = $this->model('BabyRegistryToken')->find($token);
+
+		if($baby_reg_token) {
+			// get the baby registry id from the baby registry token object
+			$baby_reg_id = $baby_reg_token->baby_registry_id;
+
+			// make a baby registry object from baby registry id
+			$baby_registry = $this->model('BabyRegistry')->find($baby_reg_id);
+
+			// update baby registry to add the new product
+			$baby_reg_product_ids_serialized = $baby_registry->product_ids; 
+			$baby_reg_product_ids_unserialized = unserialize($baby_reg_product_ids_serialized); 
+
+			
+			// // append to array
+			// array_push($baby_reg_product_ids_unserialized, $product_id);
+
+			// // serialize the product ids array
+			// $updated_baby_reg_product_ids = serialize($baby_reg_product_ids_unserialized);
+		}
 	}
 
 }

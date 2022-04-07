@@ -131,18 +131,6 @@ use Symfony\Component\VarDumper\VarDumper;
 
                                         // Users should not be able to add a new baby registry's product to cart if there is already another baby registry's product in the cart
                                         // Except the existing baby registry can add the products
-                                        $other_product = $this->model('Cart')->getExistingBabyRegProducts($baby_registry_id);
-                                        $other_product_baby_reg_id = '';
-
-                                        if($other_product) {
-                                            $other_product_baby_reg_id = $other_product->baby_reg_id;
-                                        }
-
-                                        $other_products_flag = ($other_product) ? 1 : 0;
-                                        
-                                        // echo $other_products_flag;
-                                        // echo $other_product_baby_reg_id;
-
                                         $existing_product = $this->model('Cart')->getAllForBabyRegistries();
                                         $existing_product_baby_reg_id = '';
                                         if($existing_product) 
@@ -179,24 +167,6 @@ use Symfony\Component\VarDumper\VarDumper;
                                                                     }
                                                                     else {
                                                                         // Warning: user should be informed that they cannot add a new product because of the existing products belong to another baby reg
-                                                                        // if($other_products_flag == 0) {
-                                                                        //     // add the item in the cart
-                                                                        //     echo "
-                                                                        //         <a href='/babyregistry/add_to_cart/$token/$product_id' style='color: #fff;'>Add to cart</a>
-                                                                        //     ";
-                                                                        // }
-                                                                        // else {
-                                                                        //     // there is an existing baby reg product in the cart
-                                                                        //     if($other_product_baby_reg_id == $baby_registry_id) {
-                                                                        //         // add the item in the cart
-                                                                        //         echo "
-                                                                        //             <a href='/babyregistry/add_to_cart/$token/$product_id' style='color: #fff;'>Add to cart</a>
-                                                                        //         ";
-                                                                        //     }
-                                                                        //     else {
-                                                                        //         echo 'hi';
-                                                                        //     }
-                                                                        // }
                                                                         if($existing_product_flag == 1 && $existing_product_baby_reg_id == $baby_registry_id) {
                                                                             // for existing baby registry's products
                                                                             echo "

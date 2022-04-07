@@ -203,16 +203,13 @@
                                                 else {
                                                     echo "
                                                         <label for='size_ratio_$radio_size_counter'>
-                                                            <input type='radio' name='size' id='size_ratio_$radio_size_counter' value='$size' /> $size
+                                                            <input type='radio' name='size' id='size_ratio_$radio_size_counter' value='$size' required/> $size
                                                         </label>  
                                                     ";
                                                      
                                                     // increment the ratio counter to move to the next size
                                                     $radio_size_counter++;
                                                 }
-                                                
-                                               
-                                                
                                             }
                                         ?>
                                         
@@ -235,7 +232,7 @@
                                                 else {
                                                     echo "
                                                         <label style='background: $color;' for='color_radio_$radio_color_counter' data-toggle='tooltip' data-placement='top' title='$color_name'>
-                                                            <input type='radio' id='color_radio_$radio_color_counter' name='color' value='$color_name'>
+                                                            <input type='radio' id='color_radio_$radio_color_counter' name='color' value='$color_name' required>
                                                         </label>
                                                     ";
                                                      
@@ -254,7 +251,28 @@
                                             <input type="text" name="quantity" value="<?php echo $cart_quantity; ?>">
                                         </div>
                                     </div>
-                                    <button type="submit" name="<?php echo $cart_btn_action_name; ?>" class="site-btn"><?php echo $cart_button_name; ?></button>
+                                    <?php
+
+                                        // Users should not be able to add a new baby registry's product to cart if there is already another baby registry's product in the cart
+                                        // Except the existing baby registry can add the products
+                                        $existing_product = $this->model('Cart')->getAllForBabyRegistries();
+                                        $existing_product_baby_reg_id = '';
+                                        if($existing_product) 
+                                            $existing_product_baby_reg_id = $existing_product->baby_reg_id;
+
+                                        $existing_product_flag = ($existing_product) ? 1 : 0;
+
+                                        if($existing_product_flag == 1) {
+                                            echo "
+                                                <a href='#' data-toggle='modal' data-target='#existing-modal' class='site-btn'>$cart_button_name</a>
+                                            ";
+                                        }
+                                        else {
+                                            echo "
+                                                <button type='submit' name='$cart_btn_action_name' class='site-btn'>$cart_button_name</a>
+                                            ";
+                                        }
+                                    ?>
                                 </div>
                                 <div class="product__details__btns__option">
                                     <a href="#"><i class="fa fa-heart"></i> add to wishlist</a>
@@ -274,6 +292,40 @@
                             </div>
                         </div>
                     </div>
+                                
+                    <!-- existing products modal -->
+                    <?php 
+                        $cart_item_count = $_SESSION['cart_items_count'];
+                        $items_text = ($cart_item_count > 1) ? 'items' : 'item';
+                        
+                        echo "
+                            <div class='modal fade' id='existing-modal' tabindex='-1' role='dialog' aria-labelledby='existing-modal-label' aria-hidden='true'>
+                                <div class='modal-dialog modal-dialog-centered' role='document'>
+                                    <form method='post'>
+        
+                                        <div class='modal-content'>
+                                            <div class='modal-header'>
+                                                <span class='badge badge-warning' style='font-size: 15px;'>Attention!</span>
+                                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class='modal-body'>
+                                                You already have <span style='font-weight: bold;'>$cart_item_count</span> $items_text in your cart from another baby registry or personal shop. <br><br>
+                                                <div>
+                                                    Kindly, checkout the current items or remove them to continue.
+                                                </div>
+                                            </div>
+                                            <div class='modal-footer'>
+                                                <button type='button' class='site-btn' data-dismiss='modal'>Close</button> 
+                                            </div>
+                                        </div>
+        
+                                    </form>
+                                </div>
+                            </div>
+                        ";
+                    ?>
 
                     <hr>
                     <!-- TODO: sprint 3 -->

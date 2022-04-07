@@ -20,6 +20,15 @@ class BabyRegistry extends Model{
 		return $stmt->fetchAll();
     }
 
+    public function findByProductId($product_id, $baby_registry_id)
+    {
+      $stmt = self::$_connection->prepare("SELECT * FROM baby_registry WHERE product_ids COLLATE UTF8_GENERAL_CI LIKE :product_id AND baby_registry_id = :baby_registry_id");
+      $stmt->execute(['product_id'=>'%' . $product_id . '%',
+                      'baby_registry_id'=>$baby_registry_id]);
+      $stmt->setFetchMode(PDO::FETCH_CLASS, 'BabyRegistry');
+      return $stmt->fetchAll();
+    }
+
     public function find($baby_registry_id){
         $stmt = self::$_connection->prepare("SELECT * FROM baby_registry WHERE baby_registry_id = :baby_registry_id");
         $stmt->execute(['baby_registry_id'=>$baby_registry_id]);

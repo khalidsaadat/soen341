@@ -65,10 +65,22 @@
                         echo "<a href='/account/login'>My Account</a>";
                     }
 
-                    // get the number of items in the cart
+                    // get the number of items in the cart + the total amount
                     $cart_items = $this->model('Cart')->getAllByUserId($_SESSION['user_id']);
+                    $cart_price = 0;
+                    foreach($cart_items as $cart) {
+                        $cart_price += $cart->price;
+                    }
+                    // calculate tax and total amount
+                    $tax_amount_flt = $cart_price * (14.975 / 100);
+
+                    $cart_price_flt = $tax_amount_flt + $cart_price;
+
+                    $cart_price = number_format($cart_price_flt, 2);
+
                     $cart_items = ($cart_items) ? count($cart_items) : 0;
                     $_SESSION['cart_items_count'] = $cart_items;
+                    $_SESSION['cart_items_price'] = $cart_price;
                 ?>
             </div>
             

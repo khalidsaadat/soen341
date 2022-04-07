@@ -29,7 +29,7 @@
                         <a href="#" class="search-switch"><img src="/assets/img/icon/search.png" alt=""></a>
                         <a href="#"><img src="/assets/img/icon/heart.png" alt=""></a>
                         <a href="/shop/checkout"><img src="/assets/img/icon/cart.png" alt=""> <span><?php echo $_SESSION['cart_items_count']; ?></span></a>
-                        <div class="price">$0.00</div>
+                        <div class="price">$<?php echo $_SESSION['cart_items_price']; ?></div>
                     </div>
                 </div>
             </div>
@@ -118,6 +118,12 @@
                                     $image = $product->images;
                                     $images_name = explode(',', $image);
                                     $image_name = $images_name[0];
+
+                                    // baby reg id
+                                    $baby_reg_id = $this->model('BabyRegistryToken')->find($token)->baby_registry_id;
+
+                                    $product_exist = $this->model('BabyRegistry')->findByProductId($product_id, $baby_reg_id);
+                                    $product_exist_flag = ($product_exist) ? 1 : 0;
                         
                                             echo "
                                                 <div class='col-lg-4 col-md-6 col-sm-6'>
@@ -130,7 +136,20 @@
                                                             <div class='product__item__pic set-bg' data-setbg='/assets/products/images/$image_name'>
                                                                 <ul class='product__hover'>
                                                                     <li style='background: #000; color: #fff; padding: 10px 5px;'>
-                                                                        <a href='/babyregistry/add_to_registry/$token/$product_id' style='color: #fff;'>Add to registry</a>
+                                                                        ";
+                                                                        if($product_exist_flag == 1) {
+                                                                            // remove the item from the cart
+                                                                            echo "
+                                                                                <a href='/babyregistry/remove_from_cart/$token/$product_id' style='color: #fff;'>Remove from registry</a>
+                                                                            ";
+                                                                        }
+                                                                        else {
+                                                                            // add the item in the cart
+                                                                            echo "
+                                                                                <a href='/babyregistry/add_to_registry/$token/$product_id' style='color: #fff;'>Add to registry</a>
+                                                                            ";
+                                                                        }
+                                                                        echo "
                                                                     </li>
                                                                 </ul>
                                                             </div>

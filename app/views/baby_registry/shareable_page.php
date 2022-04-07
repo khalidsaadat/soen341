@@ -1,4 +1,7 @@
 <?php
+
+use Symfony\Component\VarDumper\VarDumper;
+
     $this->view('include/header');
 
     // Baby registry info
@@ -100,6 +103,7 @@
                         <div class="row">
                             <?php
                                 if($products_count > 0) {
+                                    $modal_counter = 1;
                                     foreach($product_ids as $product_id)
                                     {
                                         $user_id = $_SESSION['user_id'];
@@ -124,13 +128,43 @@
                                         // check if the product is already in the cart
                                         $cart_exist = $this->model('Cart')->findByProductIdByUserIdByRegId($product_id, $user_id, $baby_registry_id);
                                         $cart_exist_flag = ($cart_exist) ? 1 : 0;
+
+                                        // Users should not be able to add a new baby registry's product to cart if there is already another baby registry's product in the cart
+                                        // Except the existing baby registry can add the products
+                                        $other_product = $this->model('Cart')->getExistingBabyRegProducts($baby_registry_id);
+                                        $other_product_baby_reg_id = '';
+
+                                        if($other_product) {
+                                            $other_product_baby_reg_id = $other_product->baby_reg_id;
+                                        }
+
+                                        $other_products_flag = ($other_product) ? 1 : 0;
+                                        
+                                        // echo $other_products_flag;
+                                        // echo $other_product_baby_reg_id;
+
+                                        $existing_product = $this->model('Cart')->getAllForBabyRegistries();
+                                        $existing_product_baby_reg_id = '';
+                                        if($existing_product) 
+                                            $existing_product_baby_reg_id = $existing_product->baby_reg_id;
+
+                                        $existing_product_flag = ($existing_product) ? 1 : 0;
                             
                                         echo "
                                             <div class='col-lg-4 col-md-6 col-sm-6'>
                                                 <div class='product__item'>
                                                     ";
+                                                    if($existing_product_flag == 1) {
+                                                        echo "
+                                                            <div style='cursor: pointer;'>
+                                                        ";
+                                                    }
+                                                    else {
+                                                        ?>
+                                                        <div style="cursor: pointer;" onclick="location.href='/shop/product/<?php echo $product_id; ?>'">
+                                                        <?php
+                                                    }
                                                     ?>
-                                                    <div style="cursor: pointer;" onclick="location.href='/shop/product/<?php echo $product_id; ?>'">
                                                         <?php
                                                         echo "
                                                         <div class='product__item__pic set-bg' data-setbg='/assets/products/images/$image_name'>
@@ -144,10 +178,44 @@
                                                                         ";
                                                                     }
                                                                     else {
-                                                                        // add the item in the cart
-                                                                        echo "
-                                                                            <a href='/babyregistry/add_to_cart/$token/$product_id' style='color: #fff;'>Add to cart</a>
-                                                                        ";
+                                                                        // Warning: user should be informed that they cannot add a new product because of the existing products belong to another baby reg
+                                                                        // if($other_products_flag == 0) {
+                                                                        //     // add the item in the cart
+                                                                        //     echo "
+                                                                        //         <a href='/babyregistry/add_to_cart/$token/$product_id' style='color: #fff;'>Add to cart</a>
+                                                                        //     ";
+                                                                        // }
+                                                                        // else {
+                                                                        //     // there is an existing baby reg product in the cart
+                                                                        //     if($other_product_baby_reg_id == $baby_registry_id) {
+                                                                        //         // add the item in the cart
+                                                                        //         echo "
+                                                                        //             <a href='/babyregistry/add_to_cart/$token/$product_id' style='color: #fff;'>Add to cart</a>
+                                                                        //         ";
+                                                                        //     }
+                                                                        //     else {
+                                                                        //         echo 'hi';
+                                                                        //     }
+                                                                        // }
+                                                                        if($existing_product_flag == 1 && $existing_product_baby_reg_id == $baby_registry_id) {
+                                                                            // for existing baby registry's products
+                                                                            echo "
+                                                                                <a href='/babyregistry/add_to_cart/$token/$product_id' style='color: #fff;'>Add to cart</a>
+                                                                            ";
+                                                                        }
+                                                                        elseif($existing_product_flag == 1 && $existing_product_baby_reg_id != $baby_registry_id) {
+                                                                            // do not allow other baby registry's products to be added
+                                                                            echo "
+                                                                                <a href='#' data-toggle='modal' data-target='#existing-modal-$modal_counter' style='color: #fff;'>Add to cart</a>
+                                                                            ";
+                                                                        }
+                                                                        else {
+                                                                            // when there is nothing in the cart from any baby registeries
+                                                                            echo "
+                                                                                <a href='/babyregistry/add_to_cart/$token/$product_id' style='color: #fff;'>Add to cart</a>
+                                                                            ";
+                                                                        }
+                                                                        
                                                                     }
                                                                     echo "
                                                                 </li>
@@ -179,6 +247,38 @@
                                                 </div>
                                             </div>
                                         ";
+                                        
+                                        $cart_item_count = $_SESSION['cart_items_count'];
+                                        $items_text = ($cart_item_count > 1) ? 'items' : 'item';
+                                        echo "
+                                            <div class='modal fade' id='existing-modal-$modal_counter' tabindex='-1' role='dialog' aria-labelledby='existing-modal-label' aria-hidden='true'>
+                                                <div class='modal-dialog modal-dialog-centered' role='document'>
+                                                    <form method='post'>
+
+                                                        <div class='modal-content'>
+                                                            <div class='modal-header'>
+                                                                <span class='badge badge-warning' style='font-size: 15px;'>Attention!</span>
+                                                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                                                <span aria-hidden='true'>&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class='modal-body'>
+                                                                You already have <span style='font-weight: bold;'>$cart_item_count</span> $items_text in your cart from another baby registry or personal shop. <br><br>
+                                                                <div>
+                                                                    Kindly, checkout the current items or remove them to continue.
+                                                                </div>
+                                                            </div>
+                                                            <div class='modal-footer'>
+                                                                <button type='button' class='site-btn' data-dismiss='modal'>Close</button> 
+                                                            </div>
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        ";
+
+                                        $modal_counter++;
                         
                                     }
                                 }

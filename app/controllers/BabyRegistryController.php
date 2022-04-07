@@ -178,6 +178,7 @@ class BabyRegistryController extends Controller{
 		
 		// get the baby reg id by the token if exists
 		$baby_reg_token = $this->model('BabyRegistryToken')->find($token);
+		
 
 		if($baby_reg_token) {
 			// get the baby registry

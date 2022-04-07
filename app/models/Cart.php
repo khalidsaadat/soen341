@@ -46,10 +46,9 @@ class Cart extends Model{
 		return $stmt->fetch();
     }
 
-    public function getExistingBabyRegProducts($baby_reg_id){
-        $stmt = self::$_connection->prepare("SELECT * FROM cart where baby_reg_flag = :baby_reg_flag AND baby_reg_id = :baby_reg_id AND status = :status LIMIT 1");
+    public function getExistingBabyRegProducts(){
+        $stmt = self::$_connection->prepare("SELECT * FROM cart where baby_reg_flag = :baby_reg_flag AND status = :status LIMIT 1");
         $stmt->execute(['baby_reg_flag'=>'1',
-                        'baby_reg_id'=>$baby_reg_id,
                         'status'=>'0']);
     	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Cart');
 		return $stmt->fetch();

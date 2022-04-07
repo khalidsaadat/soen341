@@ -308,8 +308,11 @@ class BabyRegistryController extends Controller{
 
 	public function remove_from_cart($token, $product_id) {
 
-		$cart_item = $this->model('Cart')->findByProductIdByUserId($product_id, $_SESSION['user_id']);
-		$cart_item->delete();
+		// baby registry id
+		$baby_registry_id = $this->model('BabyRegistryToken')->find($token)->baby_registry_id;
+
+		$cart_item = $this->model('Cart')->findByProductIdByUserIdByRegId($product_id, $_SESSION['user_id'], $baby_registry_id);
+		$cart_item->deleteForBabyRegistry();
 
 		$_SESSION['return-msg'] = "Product removed from cart";
 

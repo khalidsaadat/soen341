@@ -98,6 +98,14 @@ class Cart extends Model{
                         'status'=>'0']);
     }
 
+    public function deleteForBabyRegistry(){
+        $stmt = self::$_connection->prepare("DELETE FROM cart WHERE product_id = :product_id AND user_id = :user_id AND status = :status AND baby_reg_id = :baby_reg_id");
+        $stmt->execute(['product_id'=>$this->product_id,
+                        'user_id'=>$this->user_id,
+                        'baby_reg_id'=>$this->baby_reg_id,
+                        'status'=>'0']);
+    }
+
     public function updateStatus(){
         $stmt = self::$_connection->prepare("UPDATE cart SET status = :status WHERE cart_id = :cart_id");
         $stmt->execute(['status'=>$this->status,

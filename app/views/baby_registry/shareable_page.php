@@ -131,18 +131,23 @@ use Symfony\Component\VarDumper\VarDumper;
 
                                         // Users should not be able to add a new baby registry's product to cart if there is already another baby registry's product in the cart
                                         // Except the existing baby registry can add the products
-                                        $existing_product = $this->model('Cart')->getAllForBabyRegistries();
+                                        $existing_baby_product = $this->model('Cart')->getAllForBabyRegistries();
                                         $existing_product_baby_reg_id = '';
-                                        if($existing_product) 
-                                            $existing_product_baby_reg_id = $existing_product->baby_reg_id;
+                                        if($existing_baby_product) 
+                                            $existing_product_baby_reg_id = $existing_baby_product->baby_reg_id;
 
-                                        $existing_product_flag = ($existing_product) ? 1 : 0;
+                                        $existing_baby_product_flag = ($existing_baby_product) ? 1 : 0;
+
+                                        // Users should not be able to add to cart if there is already another item from user's personal shop
+                                        $existing_shop_product = $this->model('Cart')->getAllForUserPersonal($user_id);
+                                        $existing_shop_product_flag = ($existing_shop_product) ? 1 : 0;
+                                        
                             
                                         echo "
                                             <div class='col-lg-4 col-md-6 col-sm-6'>
                                                 <div class='product__item'>
                                                     ";
-                                                    if($existing_product_flag == 1) {
+                                                    if($existing_baby_product_flag == 1 OR $existing_shop_product_flag == 1) {
                                                         echo "
                                                             <div style='cursor: pointer;'>
                                                         ";
@@ -167,13 +172,19 @@ use Symfony\Component\VarDumper\VarDumper;
                                                                     }
                                                                     else {
                                                                         // Warning: user should be informed that they cannot add a new product because of the existing products belong to another baby reg
-                                                                        if($existing_product_flag == 1 && $existing_product_baby_reg_id == $baby_registry_id) {
+                                                                        if($existing_baby_product_flag == 1 && $existing_product_baby_reg_id == $baby_registry_id) {
                                                                             // for existing baby registry's products
                                                                             echo "
                                                                                 <a href='/babyregistry/add_to_cart/$token/$product_id' style='color: #fff;'>Add to cart</a>
                                                                             ";
                                                                         }
-                                                                        elseif($existing_product_flag == 1 && $existing_product_baby_reg_id != $baby_registry_id) {
+                                                                        elseif($existing_baby_product_flag == 1 && $existing_product_baby_reg_id != $baby_registry_id) {
+                                                                            // do not allow other baby registry's products to be added
+                                                                            echo "
+                                                                                <a href='#' data-toggle='modal' data-target='#existing-modal-$modal_counter' style='color: #fff;'>Add to cart</a>
+                                                                            ";
+                                                                        }
+                                                                        elseif($existing_shop_product_flag == 1) {
                                                                             // do not allow other baby registry's products to be added
                                                                             echo "
                                                                                 <a href='#' data-toggle='modal' data-target='#existing-modal-$modal_counter' style='color: #fff;'>Add to cart</a>

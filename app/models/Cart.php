@@ -21,6 +21,15 @@ class Cart extends Model{
 		return $stmt->fetchAll();
     }
 
+    public function getAllForUserPersonal($user_id){
+        $stmt = self::$_connection->prepare("SELECT * FROM cart where user_id = :user_id AND baby_reg_flag = :baby_reg_flag AND status = :status LIMIT 1");
+        $stmt->execute(['user_id'=>$user_id,
+                        'baby_reg_flag'=>'0',
+                        'status'=>'0']);
+    	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Cart');
+		return $stmt->fetchAll();
+    }
+
     public function getAllIdsByUserId($user_id){
         $stmt = self::$_connection->prepare("SELECT cart_id FROM cart where user_id = :user_id AND status = :status");
         $stmt->execute(['user_id'=>$user_id,

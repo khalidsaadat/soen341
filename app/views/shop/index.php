@@ -56,7 +56,7 @@
                 <div class="col-lg-3">
                     <div class="shop__sidebar">
                         <form method="post">
-                            <div class="shop__sidebar__search">
+                            <div class="shop__sidebar__search authentication_form">
                                 <input type="text" name="search_query" placeholder="Search...">
                                 <button type="submit" name="search_btn"><span class="icon_search"></span></button>
 

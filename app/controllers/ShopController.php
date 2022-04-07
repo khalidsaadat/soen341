@@ -157,10 +157,6 @@ class ShopController extends Controller{
 					$this->view('shop/product_detail', ['product'=>$product, 'type'=>'view']);
 				}
 
-				
-				if($redirect_condition == 3) {
-					$this->redirect_to('/shop/checkout');
-				} 
 			}
 			// to edit the product in product detail page
 			elseif($type == 'edit') {

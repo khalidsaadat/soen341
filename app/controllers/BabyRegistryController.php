@@ -178,6 +178,7 @@ class BabyRegistryController extends Controller{
 		
 		// get the baby reg id by the token if exists
 		$baby_reg_token = $this->model('BabyRegistryToken')->find($token);
+		
 
 		if($baby_reg_token) {
 			// get the baby registry
@@ -274,6 +275,8 @@ class BabyRegistryController extends Controller{
 			return header('location:/registry');
 		}
 
+		// baby registry id
+		$baby_registry_id = $this->model('BabyRegistryToken')->find($token)->baby_registry_id;
 		
 		// get the updated values
 		$product = $this->model('Product')->find($product_id);
@@ -282,9 +285,7 @@ class BabyRegistryController extends Controller{
 		$color = unserialize($product->colors);
 		$quantity = 1;
 		$price = $product->price;
-		
-		// if the product exists in the cart, show the remove it; otherwise, add it
-		
+	
 		
 		// update the product cart
 		$add_cart = $this->model('Cart');
@@ -295,8 +296,10 @@ class BabyRegistryController extends Controller{
 		$add_cart->quantity = $quantity;
 		$add_cart->price = $price;
 		$add_cart->user_id = $_SESSION['user_id'];
+		$add_cart->baby_reg_flag = 1;
+		$add_cart->baby_reg_id = $baby_registry_id;
 
-		$add_cart->insert();
+		$add_cart->insertForBabyRegistry();
 
 		$_SESSION['return-msg'] = "Product added to cart";
 
@@ -306,8 +309,11 @@ class BabyRegistryController extends Controller{
 
 	public function remove_from_cart($token, $product_id) {
 
-		$cart_item = $this->model('Cart')->findByProductIdByUserId($product_id, $_SESSION['user_id']);
-		$cart_item->delete();
+		// baby registry id
+		$baby_registry_id = $this->model('BabyRegistryToken')->find($token)->baby_registry_id;
+
+		$cart_item = $this->model('Cart')->findByProductIdByUserIdByRegId($product_id, $_SESSION['user_id'], $baby_registry_id);
+		$cart_item->deleteForBabyRegistry();
 
 		$_SESSION['return-msg'] = "Product removed from cart";
 

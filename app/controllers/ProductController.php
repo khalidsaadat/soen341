@@ -72,7 +72,7 @@ class ProductController extends Controller{
                     
                     $images_name = explode(',', $image_list_str); // this is array
 
-                     // get the information
+                    // get the information
                     $name = $_POST['name'];
                     $brand = $_POST['brand'];
                     $categories = serialize($_POST['categories']);
@@ -133,7 +133,23 @@ class ProductController extends Controller{
     }
 
     public function edit_product($product_id) {
+        // only admin users are allowed to visit this page
+		if($_SESSION['role'] != 'admin') {
+			return header('location:/');
+		}
+
+        $brands = $this->model('Brand')->getAll();
         
+        $categories = $this->model('Category')->getAll();
+
+        $product = $this->model('Product')->find($product_id);
+
+        if(!isset($_POST['update'])) {
+            $this->view('product/edit_product', ['brands'=>$brands, 'categories'=>$categories, 'product'=>$product]);
+        }
+        else {
+
+        }
     }
 
 

@@ -45,8 +45,11 @@
 
     <?php
         $products = $model['products'];
+        $products_count = count($model['products']);
+
         $promotions = $model['promotions'];
         $promotions_count = (sizeof($promotions) > 0) ? sizeof($promotions) : '0';
+        
         $new_products = $model['new_products'];
         $new_products_count = (sizeof($new_products) > 0) ? sizeof($new_products) : '0';
     ?>
@@ -59,10 +62,10 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="panel panel-1">
-                                <div class="heading">Top Products</div>
+                                <div class="heading">Total Product</div>
                                 <div class="text-right">
                                     <div class="static_number">
-                                        14
+                                        <?php echo $products_count; ?>
                                     </div>
                                     <div>
                                         <span class="static_percentage"><span class="font-weight-bold arrow_up"></span> 25%</span> from last month
@@ -130,7 +133,9 @@
                                         
                                         
                                         <?php 
+                                            $counter = 1;
                                             foreach($products as $product) {
+                                                $product_id = $product->product_id;
                                                 $product_name = $product->name;
                                                 $brand_name = $this->model('Brand')->find($product->brand_id)->brand_name;
                                                 $price = $product->price;
@@ -138,18 +143,24 @@
                                                 $promotion = ($product->promotion == 1) ? 'Sale' : '-';
                                                 $status = ($product->status == 1) ? 'In Stock' : 'Out of stock';
                                                 
+                                                $image = $product->images;
+                                                $images_name = explode(',', $image);
+                                                $image_name = $images_name[0];
+
                                                 echo "
                                                     <tr>
-                                                        <td>1</td>
-                                                        <td><a href='#'><img src='/assets/img/product/product-1.jpg' class='avatar' alt=''>$product_name</a></td>
+                                                        <td>$counter</td>
+                                                        <td><a href='#'><img src='/assets/products/images/$image_name' class='avatar' alt=''>$product_name</a></td>
                                                         <td class='text-center'>$brand_name</td>
                                                         <td class='text-center'>$$price</td>                        
                                                         <td class='text-center'>$quantity</td>
                                                         <td  class='text-center'>$promotion</td>
                                                         <td><span class='status text-success'>&bull;</span> $status</td>
-                                                        <td><a href='' class='view' title='View Details' data-toggle='tooltip'><i class='material-icons'>&#xE5C8;</i></a></td>
+                                                        <td><a href='/product/edit_product/$product_id' class='view' title='View Details' data-toggle='tooltip'><i class='material-icons'>&#xE5C8;</i></a></td>
                                                     </tr>
                                                 ";
+
+                                                $counter++;
                                             }
                                         ?>
                                     </tbody>

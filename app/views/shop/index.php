@@ -142,26 +142,6 @@
                                         </div>
                                     </div>
                                     <div class="card">
-                                        <!-- <div class="card-heading">
-                                            <a data-toggle="collapse" data-target="#collapseThree">Filter Price</a>
-                                        </div>
-                                        <div id="collapseThree" class="collapse show" data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <div class="shop__sidebar__price">
-                                                    <ul>
-                                                        <li><a href="#">$0.00 - $50.00</a></li>
-                                                        <li><a href="#">$50.00 - $100.00</a></li>
-                                                        <li><a href="#">$100.00 - $150.00</a></li>
-                                                        <li><a href="#">$150.00 - $200.00</a></li>
-                                                        <li><a href="#">$200.00 - $250.00</a></li>
-                                                        <li><a href="#">250.00+</a></li>
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                    </div>
-                                    <div class="card">
                                         <div class="card-heading">
                                             <a data-toggle="collapse" data-target="#collapseFour">Size</a>
                                         </div>
@@ -311,16 +291,6 @@
                                     
                                 </div>
                             </div>
-                            <!-- <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="shop__product__option__right">
-                                    <p>Sort by Price:</p>
-                                    <select>
-                                        <option value="">Low To High</option>
-                                        <option value="">$0 - $55</option>
-                                        <option value="">$55 - $100</option>
-                                    </select>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                     <div class="row">

@@ -12,6 +12,11 @@
 
     $products_count = (($product_ids)) ? count($product_ids) : 0;
     
+    // to get the token from the url
+    $uri_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $uri_segments = explode('/', $uri_path);
+
+    $token = end($uri_segments);
     
     
 ?>
@@ -79,12 +84,26 @@
                         </div>
                     </div>
                     <div class="col-lg-12">
+                        <?php
+                            if(isset($_SESSION['return-msg'])) {
+                                $error_msg = $_SESSION['return-msg'];
+                                echo "
+                                    <div class='form_error'>
+                                        $error_msg
+                                    </div>
+                                ";
+
+                                unset($_SESSION['return-msg']);
+                            }
+                        ?>
                         <hr>
                         <div class="row">
                             <?php
                                 if($products_count > 0) {
                                     foreach($product_ids as $product_id)
                                     {
+                                        $user_id = $_SESSION['user_id'];
+
                                         $product = $this->model('Product')->find($product_id);
                                         $name = $product->name;
                                         $price = $product->price;
@@ -98,6 +117,10 @@
                                         $image = $product->images;
                                         $images_name = explode(',', $image);
                                         $image_name = $images_name[0];
+
+                                        // check if the product is already in the cart
+                                        $cart_exist = $this->model('Cart')->findByProductIdByUserId($product_id, $user_id);
+                                        $cart_exist_flag = ($cart_exist) ? 1 : 0;
                             
                                         echo "
                                             <div class='col-lg-4 col-md-6 col-sm-6'>
@@ -110,7 +133,20 @@
                                                         <div class='product__item__pic set-bg' data-setbg='/assets/products/images/$image_name'>
                                                             <ul class='product__hover'>
                                                                 <li style='background: #000; color: #fff; padding: 10px 5px;'>
-                                                                    <a href='/babyregistry/add_to_registry/$product_id' style='color: #fff;'>Add to cart</a>
+                                                                    ";
+                                                                    if($cart_exist_flag == 1) {
+                                                                        // remove the item from the cart
+                                                                        echo "
+                                                                            <a href='/babyregistry/remove_from_cart/$token/$product_id' style='color: #fff;'>Remove from cart</a>
+                                                                        ";
+                                                                    }
+                                                                    else {
+                                                                        // add the item in the cart
+                                                                        echo "
+                                                                            <a href='/babyregistry/add_to_cart/$token/$product_id' style='color: #fff;'>Add to cart</a>
+                                                                        ";
+                                                                    }
+                                                                    echo "
                                                                 </li>
                                                             </ul>
                                                         </div>

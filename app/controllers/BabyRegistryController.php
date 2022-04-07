@@ -264,4 +264,56 @@ class BabyRegistryController extends Controller{
 		}
 	}
 
+	public function add_to_cart($token, $product_id){
+		
+		$user_id = '';
+		if(!isset($_SESSION['user_id'])) {
+			$_SESSION['login_flag'] = 1;
+			$user_id = $_SESSION['user_id'];
+
+			return header('location:/registry');
+		}
+
+		
+		// get the updated values
+		$product = $this->model('Product')->find($product_id);
+		
+		$size = unserialize($product->size);
+		$color = unserialize($product->colors);
+		$quantity = 1;
+		$price = $product->price;
+		
+		// if the product exists in the cart, show the remove it; otherwise, add it
+		
+		
+		// update the product cart
+		$add_cart = $this->model('Cart');
+		
+		$add_cart->product_id = $product_id;
+		$add_cart->size = $size[0];
+		$add_cart->color = $color[0];
+		$add_cart->quantity = $quantity;
+		$add_cart->price = $price;
+		$add_cart->user_id = $_SESSION['user_id'];
+
+		$add_cart->insert();
+
+		$_SESSION['return-msg'] = "Product added to cart";
+
+
+		return header('location:/babyregistry/shareable/' . $token);
+	}
+
+	public function remove_from_cart($token, $product_id) {
+
+		$cart_item = $this->model('Cart')->findByProductIdByUserId($product_id, $_SESSION['user_id']);
+		$cart_item->delete();
+
+		$_SESSION['return-msg'] = "Product removed from cart";
+
+		return header('location:/babyregistry/shareable/' . $token);
+
+	}
+
+
 }

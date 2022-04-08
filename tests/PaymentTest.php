@@ -14,13 +14,6 @@ use PHPUnit\Framework\TestCase;
                 ['type' => 'american_express', 'length' => 15],
             ];
 
-
-            // Test user
-            $correct_test_user = ['user_id' => 1, 'username' => 'siar@hotmail.com', 'password' => 'siar'];
-            $correct_test_username = $correct_test_user['username'];
-            $correct_test_password = $correct_test_user['password'];
-            $incorrect_test_username = 'siar@gmail.com';
-
             return ['payments'=>$mockPayments];
         }
 
@@ -29,9 +22,23 @@ use PHPUnit\Framework\TestCase;
             $payments = $mockData['payments'];
             $visa = $payments[0];
 
-            $correct_visa_length = $visa[2];
+            $correct_visa_length = $visa['length'];
+            $entered_visa_number = '4111111111111111';
+            $visa_length = strlen($entered_visa_number);
 
-            // equals
+            $this->assertEquals($visa_length, $correct_visa_length, 'Invalid credit card number');
+        }
+
+        public function testIncorrectVisaLength() {
+            $mockData = $this->mockData();
+            $payments = $mockData['payments'];
+            $visa = $payments[0];
+
+            $correct_visa_length = $visa['length'];
+            $entered_visa_number = '41111111111111111';
+            $visa_length = strlen($entered_visa_number);
+
+            $this->assertEquals($visa_length, $correct_visa_length, 'Invalid credit card number');
         }
     }
 

@@ -8,22 +8,12 @@ use PHPUnit\Framework\TestCase;
             $mockRepo = $this->createMock(\App\Payment::class);
             
             // mock (sample) array that is used for testing purpose
-            $mockUsersArray = [
-                ['user_id' => 1, 'username' => 'siar@hotmail.com', 'password' => 'siar'],
-                ['user_id' => 2, 'username' => 'anum@hotmail.com', 'password' => 'anum'],
+            $mockPayments = [
+                ['type' => 'visa', 'length' => 16],
+                ['type' => 'mastercard', 'length' => 16],
+                ['type' => 'american_express', 'length' => 15],
             ];
 
-            // it will uses the mock array as if it is returned from the 'user' table from db
-            $mockRepo->method('fetchUsers')->willReturn($mockUsersArray);
-
-            $users = $mockRepo->fetchUsers();
-
-            $mockUsernames = array();
-            $user_counter = 0;
-            foreach($users as $user) {
-                $mockUsernames[$user_counter] = $user['username'];
-                $user_counter++;
-            }
 
             // Test user
             $correct_test_user = ['user_id' => 1, 'username' => 'siar@hotmail.com', 'password' => 'siar'];
@@ -31,11 +21,17 @@ use PHPUnit\Framework\TestCase;
             $correct_test_password = $correct_test_user['password'];
             $incorrect_test_username = 'siar@gmail.com';
 
-            return ['users'=>$users, 
-                    'usernames'=>$mockUsernames, 
-                    'correct_test_user'=>$correct_test_user, 
-                    'correct_username'=>$correct_test_username,
-                    'correct_password'=>$correct_test_password];
+            return ['payments'=>$mockPayments];
+        }
+
+        public function testCorrectVisaLength() {
+            $mockData = $this->mockData();
+            $payments = $mockData['payments'];
+            $visa = $payments[0];
+
+            $correct_visa_length = $visa[2];
+
+            // equals
         }
     }
 

@@ -3,7 +3,7 @@
 
     class Payment {
         public static string $cc_number;
-        public  static string $expiry_date;
+        public static string $type;
 
         protected function getPdo(): \PDO {
             if ($this->pdo === null) {
@@ -19,16 +19,5 @@
             }
             return $this->pdo;
         }
-
-        public function correct_username_and_password() {
-            
-        }
-
-        public function fetchUsers(): array {
-            dd("this is inside fetchusers method");
-            
-            return $this->getPdo()->prepare("SELECT * FROM user")->fetchAll(\PDO::FETCH_ASSOC);
-        }
-
     }
 ?>

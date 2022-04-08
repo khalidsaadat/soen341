@@ -17,11 +17,11 @@ jobs:
     - name: Install Composer
       run: composer install
     
-    - name: Run phpstan on Controller
-      run: vendor/bin/phpstan analyse app
+#     - name: Run phpstan on Controller
+#       run: vendor/bin/phpstan analyse app
       
-    - name: Run phpstan on Views
-      run: vendor/bin/phpstan analyse app/views
+#     - name: Run phpstan on Views
+#       run: vendor/bin/phpstan analyse app/views
 
     - name: PHPUnit Login Testing
       run: php vendor/bin/phpunit tests/LoginTest.php

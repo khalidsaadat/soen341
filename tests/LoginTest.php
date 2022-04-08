@@ -38,6 +38,7 @@ use PHPUnit\Framework\TestCase;
                     'correct_password'=>$correct_test_password];
         }
 
+        // Test#1: Correct User
         public function testCorrectUser() {
             $mockData = $this->mockData();
             $users = $mockData['users'];

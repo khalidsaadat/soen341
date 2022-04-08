@@ -15,8 +15,7 @@
                 </div>
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
-                        <a href="#" class="search-switch"><img src="/assets/img/icon/search.png" alt=""></a>
-                        <a href="/account" id="myaccount_wishlist"><img src="/assets/img/icon/heart.png" alt=""></a>
+                        
                         <a href="/shop/checkout"><img src="/assets/img/icon/cart.png" alt=""><span style="font-size: 10px; padding: 0px;"><?php echo $_SESSION['cart_items_count']; ?></span></a>
                         <div class="price">$<?php echo $_SESSION['cart_items_price']; ?></div>
                     </div>

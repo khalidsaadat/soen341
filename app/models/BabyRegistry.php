@@ -44,9 +44,8 @@ class BabyRegistry extends Model{
     }
 
     public function insert(){
-	    $stmt = self::$_connection->prepare("INSERT INTO baby_registry(user_id, product_ids, name ,delivery_date, organizer_name, address_id, description) VALUES(:user_id, :product_ids, :name, :delivery_date, :organizer_name, :address_id, :description)");
+	    $stmt = self::$_connection->prepare("INSERT INTO baby_registry(user_id, name ,delivery_date, organizer_name, address_id, description) VALUES(:user_id, :name, :delivery_date, :organizer_name, :address_id, :description)");
         $stmt->execute(['user_id'=>$this->user_id,
-                        'product_id'=>$this->product_ids,
                         'name'=>$this->name,
                         'delivery_date'=>$this->delivery_date,
                         'organizer_name'=>$this->organizer_name,

@@ -17,8 +17,8 @@ jobs:
     - name: Install Composer
       run: composer install
     
-#     - name: Run phpstan on Controller
-#       run: vendor/bin/phpstan analyse app
+    - name: Run phpstan on Controller
+      run: vendor/bin/phpstan analyse app
       
     - name: Run phpstan on Views
       run: vendor/bin/phpstan analyse app/views
@@ -28,6 +28,9 @@ jobs:
 
     - name: PHPUnit Cart Testing
       run: php vendor/bin/phpunit tests/CartTest.php
+
+    - name: PHPUnit Payment Testing
+      run: php vendor/bin/phpunit tests/PaymentTest.php
 
     - name: PHP MD Account Controller (Design)
       run: vendor/bin/phpmd app/controllers/AccountController.php xml rulesets/design.xml

@@ -36,12 +36,9 @@ class AccountController extends Controller{
 			$p_province = $_POST['p_province'];
 			$p_postal_code = $_POST['p_postal_code'];
 			$p_country = $_POST['p_country'];
-			$p_status = '';
+			$p_status = 0;
 			if(isset($_POST['p_primary_address'])) {
 				$p_status = 1;
-			}
-			else {
-				$p_status = 0;
 			}
 
 			// get secondary address info
@@ -51,12 +48,9 @@ class AccountController extends Controller{
 			$s_province = $_POST['s_province'];
 			$s_postal_code = $_POST['s_postal_code'];
 			$s_country = $_POST['s_country'];
-			$s_status = '';
+			$s_status = 0;
 			if(isset($_POST['s_primary_address'])) {
 				$s_status = 1;
-			}
-			else {
-				$s_status = 0;
 			}
 
 			// udpated primary address id

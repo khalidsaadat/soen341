@@ -1,9 +1,9 @@
 <?php
     namespace App;
 
-    class Cart {
-        public float $price;
-        public static float $tax = 1.2;
+    class Payment {
+        public static string $cc_number;
+        public  static string $expiry_date;
 
         protected function getPdo(): \PDO {
             if ($this->pdo === null) {
@@ -20,20 +20,15 @@
             return $this->pdo;
         }
 
-        public function getNetPrice() {
-            return $this->price * self::$tax;
+        public function correct_username_and_password() {
+            
         }
 
-        public function fetchBabyRegisteries(): array {
+        public function fetchUsers(): array {
             dd("this is inside fetchusers method");
             
-            return $this->getPdo()->prepare("SELECT * FROM cart where baby_reg_flag = 1 AND status = 0")->fetchAll(\PDO::FETCH_ASSOC);
+            return $this->getPdo()->prepare("SELECT * FROM user")->fetchAll(\PDO::FETCH_ASSOC);
         }
 
-        public function fetchRegularProducts(): array {
-            dd("this is inside fetchusers method");
-            
-            return $this->getPdo()->prepare("SELECT * FROM cart where baby_reg_flag = 0 AND status = 0")->fetchAll(\PDO::FETCH_ASSOC);
-        }
     }
 ?>

@@ -27,7 +27,7 @@
         public function fetchUsers(): array {
             dd("this is inside fetchusers method");
             
-            return $this->getPdo()->prepare("SELECT * FROM user")->fetchAll(\PDO::FETCH_ASSOC);
+            return $this->getPdo()->prepare("SELECT * FROM user WHERE user_id = '1'")->fetchAll(\PDO::FETCH_ASSOC);
         }
 
     }

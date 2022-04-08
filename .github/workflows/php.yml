@@ -23,5 +23,8 @@ jobs:
     - name: Run phpstan on Views
       run: vendor/bin/phpstan analyse app/views
 
-    - name: PHPUnit testing
+    - name: PHPUnit Login Testing
       run: php vendor/bin/phpunit tests/LoginTest.php
+
+    - name: PHPUnit Cart Testing
+      run: php vendor/bin/phpunit tests/CartTest.php

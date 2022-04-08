@@ -70,7 +70,7 @@
             $incorrect_baby_reg = $mockData['incorrect_baby_registry'];
 
             // check if the item in the cart belongs to a baby registry
-            $this->assertContains($incorrect_baby_reg, $baby_registeries, 'Item in the cart is not a baby registry');
+            $this->assertNotContains($incorrect_baby_reg, $baby_registeries, 'Item in the cart is not a baby registry');
         }
 
         public function testCorrectRegularProduct() {
@@ -91,7 +91,7 @@
 
             $incorrect_regular_product = $mockData['incorrect_regular_product'];
 
-            $this->assertContains($incorrect_regular_product, $regular_products, 'Item in the cart is not a regular product');
+            $this->assertNotContains($incorrect_regular_product, $regular_products, 'Item in the cart is not a regular product');
 
         }
     }

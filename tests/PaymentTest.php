@@ -38,7 +38,7 @@ use PHPUnit\Framework\TestCase;
             $entered_visa_number = '41111111111111111';
             $visa_length = strlen($entered_visa_number);
 
-            $this->assertEquals($visa_length, $correct_visa_length, 'Invalid credit card number');
+            $this->assertNotEquals($visa_length, $correct_visa_length, 'Invalid credit card number');
         }
     }
 

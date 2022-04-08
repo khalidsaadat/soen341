@@ -62,7 +62,7 @@ use PHPUnit\Framework\TestCase;
             $mockUsernames = $mockData['usernames'];
             $incorrect_test_username = 'siar@gmail.com';
             
-            $this->assertContains($incorrect_test_username, $mockUsernames, 'Invalid username.');
+            $this->assertNotContains($incorrect_test_username, $mockUsernames, 'Invalid username.');
         }
 
         // Test#4: Correct password
@@ -80,7 +80,7 @@ use PHPUnit\Framework\TestCase;
             $correct_test_user = $mockData['correct_test_user'];
             $incorrect_test_password = 'Siar';
 
-            $this->assertEquals($incorrect_test_password, $correct_test_user['password'], 'Invalid password.');
+            $this->assertNotEquals($incorrect_test_password, $correct_test_user['password'], 'Invalid password.');
         }
     }
 ?>

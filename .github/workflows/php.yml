@@ -32,8 +32,8 @@ jobs:
     - name: PHPUnit Payment Testing
       run: php vendor/bin/phpunit tests/PaymentTest.php
 
-    - name: PHP MD Account Controller (Design)
-      run: vendor/bin/phpmd app/controllers/AccountController.php xml rulesets/design.xml
+    # - name: PHP MD Account Controller (Design)
+    #   run: vendor/bin/phpmd app/controllers/AccountController.php xml rulesets/design.xml
 
     - name: PHP MD Admin Controller (Clean Code)
       run: vendor/bin/phpmd app/controllers/AdminController.php xml rulesets/cleancode.xml
@@ -44,8 +44,8 @@ jobs:
     - name: PHP MD Default Controller (Unused Code)
       run: vendor/bin/phpmd app/controllers/DefaultController.php xml rulesets/unusedcode.xml
 
-    - name: PHP MD Product Controller (Clean Code)
-      run: vendor/bin/phpmd app/controllers/ProductController.php xml rulesets/cleancode.xml
+    - name: PHP MD Product Controller (Design)
+      run: vendor/bin/phpmd app/controllers/ProductController.php xml rulesets/design.xml
 
     - name: PHP MD Shop Controller (Naming)
       run: vendor/bin/phpmd app/controllers/ShopController.php xml rulesets/naming.xml

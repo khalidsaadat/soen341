@@ -28,3 +28,14 @@ jobs:
 
     - name: PHPUnit Cart Testing
       run: php vendor/bin/phpunit tests/CartTest.php
+
+    - name: PHP MD Account Controller (Design)
+      run: vendor/bin/phpmd app/controllers/AccountController.php xml rulesets/design.xml
+
+    - name: PHP MD Admin Controller (Clean Code)
+      run: vendor/bin/phpmd app/controllers/AdminController.php xml rulesets/cleancode.xml
+
+    - name: PHP MD Baby Registry Controller (Naming)
+      run: vendor/bin/phpmd app/controllers/BabyRegistryController.php xml rulesets/naming.xml
+
+    

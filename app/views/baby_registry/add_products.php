@@ -140,7 +140,7 @@
                                                                         if($product_exist_flag == 1) {
                                                                             // remove the item from the cart
                                                                             echo "
-                                                                                <a href='/babyregistry/remove_from_cart/$token/$product_id' style='color: #fff;'>Remove from registry</a>
+                                                                                <a href='/babyregistry/remove_from_registry/$token/$product_id' style='color: #fff;'>Remove from registry</a>
                                                                             ";
                                                                         }
                                                                         else {

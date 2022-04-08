@@ -78,11 +78,11 @@ class BabyRegistryController extends Controller{
 
 		// addresses
 		$user_primary_address = $this->model('Address')->getPrimaryAddress($_SESSION['user_id']);
-		$user_secondary_address = $this->model('Address')->getSecondaryAddress($_SESSION['user_id']);
+		$user_sec_address = $this->model('Address')->getSecondaryAddress($_SESSION['user_id']);
            
 		// if the create_Registry button is clicked 
 		if(!isset($_POST['create_registry'])) {
-			$this->view('baby_registry/add', ['primary_address'=>$user_primary_address, 'secondary_address'=>$user_secondary_address]);			
+			$this->view('baby_registry/add', ['primary_address'=>$user_primary_address, 'secondary_address'=>$user_sec_address]);			
 		}
 		else {
 			$name = $_POST['title'];
@@ -208,25 +208,25 @@ class BabyRegistryController extends Controller{
 			$baby_registry = $this->model('BabyRegistry')->find($baby_reg_id);
 
 			// update baby registry to add the new product
-			$baby_reg_product_ids_serialized = $baby_registry->product_ids; 
-			$baby_reg_product_ids_unserialized = unserialize($baby_reg_product_ids_serialized); 
+			$baby_ids_serialized = $baby_registry->product_ids; 
+			$baby_reg_ids = unserialize($baby_ids_serialized); 
 
 			// if baby reg product ids is emtpy, add a new; otherwise, append to the existing array
-			if($baby_reg_product_ids_unserialized == false) {
+			if($baby_reg_ids == false) {
 				// product ids field is empty
-				$serialized_product_id_array = explode(',', $product_id);
-				$updated_baby_reg_product_ids = serialize($serialized_product_id_array);
+				$ids_serialized = explode(',', $product_id);
+				$updated_ids = serialize($ids_serialized); // updated product ids
 			}
 			else {
 				// append to array
-				array_push($baby_reg_product_ids_unserialized, $product_id);
+				array_push($baby_reg_ids, $product_id);
 
 				// serialize the product ids array
-				$updated_baby_reg_product_ids = serialize($baby_reg_product_ids_unserialized);
+				$updated_ids = serialize($baby_reg_ids);
 			}
 
 			// update baby registry with the new product ids
-			$baby_registry->product_ids = $updated_baby_reg_product_ids;
+			$baby_registry->product_ids = $updated_ids;
 			$baby_registry->updateProductIds();
 			
 			return header('location:/babyregistry/add_products/' . $token);
@@ -253,15 +253,21 @@ class BabyRegistryController extends Controller{
 			$baby_registry = $this->model('BabyRegistry')->find($baby_reg_id);
 
 			// update baby registry to add the new product
-			$baby_reg_product_ids_serialized = $baby_registry->product_ids; 
-			$baby_reg_product_ids_unserialized = unserialize($baby_reg_product_ids_serialized); 
+			$baby_ids_serialized = $baby_registry->product_ids; 
+			$baby_reg_ids = unserialize($baby_ids_serialized); 
 
+			// loop through the array and delete the product id
+			foreach (array_keys($baby_reg_ids, $product_id) as $key) {
+				unset($baby_reg_ids[$key]);
+			}
+
+			$updated_ids = serialize($baby_reg_ids);
 			
-			// // append to array
-			// array_push($baby_reg_product_ids_unserialized, $product_id);
-
-			// // serialize the product ids array
-			// $updated_baby_reg_product_ids = serialize($baby_reg_product_ids_unserialized);
+			// update baby registry with the new product ids
+			$baby_registry->product_ids = $updated_ids;
+			$baby_registry->updateProductIds();
+			
+			return header('location:/babyregistry/add_products/' . $token);
 		}
 	}
 

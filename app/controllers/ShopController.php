@@ -23,10 +23,10 @@ class ShopController extends Controller{
 		$all_categories = $this->model('Category')->getAll();
 
 		// Colors for sidebar
-		$all_colors_serialized = $this->model('Product')->getAllColors();
+		$colors_serialized = $this->model('Product')->getAllColors();
 		
 		$all_colors_str = '';
-		foreach($all_colors_serialized as $color) {
+		foreach($colors_serialized as $color) {
 			$color_array = (array) $color; // array of serialized colors
 			$unserialized_color = unserialize($color_array['colors']); //--> red, blue, yellow
 
@@ -56,10 +56,10 @@ class ShopController extends Controller{
 		$all_size = array_unique(array_map('trim', explode(',', $size)));
 		
 		// TAGS for sidebar
-		$all_keywords_serialized = $this->model('Product')->getAllKeywords();
+		$keywords_serialized = $this->model('Product')->getAllKeywords();
 		
 		$all_keywords_str = '';
-		foreach($all_keywords_serialized as $keyword) {
+		foreach($keywords_serialized as $keyword) {
 			$keyword_array = (array) $keyword; // array of serialized colors
 			$unserialized_keyword = unserialize($keyword_array['keywords']); //--> red, blue, yellow
 
@@ -227,7 +227,7 @@ class ShopController extends Controller{
 		
 		// addresses
 		$user_primary_address = $this->model('Address')->getPrimaryAddress($_SESSION['user_id']);
-		$user_secondary_address = $this->model('Address')->getSecondaryAddress($_SESSION['user_id']);
+		$user_sec_address = $this->model('Address')->getSecondaryAddress($_SESSION['user_id']);
 
 		if(isset($_SESSION['user_id'])) {
 
@@ -236,7 +236,7 @@ class ShopController extends Controller{
 			$redirect_condition = '';
 
 			$existing_baby_reg = $this->model('Cart')->getExistingBabyRegProducts();
-			$existing_baby_reg_flag = ($existing_baby_reg) ? 1 : 0;
+			$existing_baby_flag = ($existing_baby_reg) ? 1 : 0;
 			if($existing_baby_reg) {
 				$baby_registry = $this->model('BabyRegistry')->find($existing_baby_reg->baby_reg_id);
 
@@ -276,7 +276,7 @@ class ShopController extends Controller{
 
 			// review and place order
 			if(!isset($_POST['review_cart'])) {
-				$this->view('shop/checkout', ['cart_items'=>$cart_items, 'primary_address'=>$user_primary_address, 'secondary_address'=>$user_secondary_address, 'existing_baby_reg'=>$existing_baby_reg_flag]);
+				$this->view('shop/checkout', ['cart_items'=>$cart_items, 'primary_address'=>$user_primary_address, 'secondary_address'=>$user_sec_address, 'existing_baby_reg'=>$existing_baby_flag]);
 			}
 			else {
 				// redirect condition
@@ -352,14 +352,14 @@ class ShopController extends Controller{
 				}
 				else {
 					// credit card detail wrong
-					$this->view('shop/checkout', ['cart_items'=>$cart_items, 'primary_address'=>$user_primary_address, 'secondary_address'=>$user_secondary_address, 'existing_baby_reg'=>$existing_baby_reg_flag, 'ccError'=>$ccResult, 'cvvError'=>$cvvResult, 'expError'=>$expResult]);
+					$this->view('shop/checkout', ['cart_items'=>$cart_items, 'primary_address'=>$user_primary_address, 'secondary_address'=>$user_sec_address, 'existing_baby_reg'=>$existing_baby_flag, 'ccError'=>$ccResult, 'cvvError'=>$cvvResult, 'expError'=>$expResult]);
 				}
 	
 			}
 		}
 		else {
 			$cart_items = '';
-			$this->view('shop/checkout', ['cart_items'=>$cart_items, 'primary_address'=>$user_primary_address, 'secondary_address'=>$user_secondary_address, 'existing_baby_reg'=>$existing_baby_reg_flag, ]);
+			$this->view('shop/checkout', ['cart_items'=>$cart_items, 'primary_address'=>$user_primary_address, 'secondary_address'=>$user_sec_address, 'existing_baby_reg'=>$existing_baby_flag, ]);
 		}
 	}
 

@@ -37,5 +37,14 @@ jobs:
 
     - name: PHP MD Baby Registry Controller (Naming)
       run: vendor/bin/phpmd app/controllers/BabyRegistryController.php xml rulesets/naming.xml
+      
+    - name: PHP MD Default Controller (Unused Code)
+      run: vendor/bin/phpmd app/controllers/DefaultController.php xml rulesets/unusedcode.xml
+
+    - name: PHP MD Product Controller (Clean Code)
+      run: vendor/bin/phpmd app/controllers/ProductController.php xml rulesets/cleancode.xml
+
+    - name: PHP MD Shop Controller (Naming)
+      run: vendor/bin/phpmd app/controllers/ShopController.php xml rulesets/naming.xml
 
     

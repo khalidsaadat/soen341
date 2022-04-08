@@ -147,9 +147,6 @@ class ProductController extends Controller{
         if(!isset($_POST['update'])) {
             $this->view('product/edit_product', ['brands'=>$brands, 'categories'=>$categories, 'product'=>$product]);
         }
-        else {
-
-        }
     }
 
 

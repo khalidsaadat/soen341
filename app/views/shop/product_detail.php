@@ -252,7 +252,10 @@
                                     </div>
                                     <?php
 
-                                        $role = $_SESSION['role'];
+                                        $role = '';
+                                        if(isset($_SESSION['role'])) {
+                                            $role = $_SESSION['role'];
+                                        }
 
                                         // admin should not be able to buy products
                                         if($role != 'admin') {
